@@ -1,0 +1,11 @@
+- title: hello
+  url: /blog/hello
+- title: hello2
+  url: /blog/hello2
+  sublinks:
+    - title: subhello3
+      url: /blog/subhello3
+    - title: subhello4
+      url: /blog/subhello4
+
+# https://mycyberuniverse.com/jekyll-bootstrap-dynamic-navigation-highlighting-active-element.html
