@@ -21,7 +21,7 @@ year = {2022}}
 
 
 [github]: https://github.com/till2
-[linkedin]: https://www.linkedin.com/in/till-zemann-a93524230/
+[linkedin]: https://www.linkedin.com/in/tillzemann/
 [myreference-1]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 <!-- hosted at: till2.github.io -->
