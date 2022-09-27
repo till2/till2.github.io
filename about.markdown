@@ -7,7 +7,7 @@ permalink: /about/
 ### Hi there! - Till here,
 #### Reinforcement Learning geek and BSc. student at Uni Potsdam.
 
-#### You can find my projects on [GitHub][github] and contact me at [LinkedIn][linkedin]!
+#### You can find my projects on [GitHub][github] and contact me via [LinkedIn][linkedin]!
 
 <br>
 

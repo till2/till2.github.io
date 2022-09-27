@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Mutual Information"
+title:  "Mutual Information (Test)"
 date:   2018-10-17 14:00:00 +0200
 categories: information_theory
 math: true

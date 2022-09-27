@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to win in Kaggle Competitions"
+title:  "Kaggle Tricks"
 date:   2022-09-20 20:36:41 +0200
 categories: jekyll update
 math: true
@@ -8,7 +8,7 @@ math: true
 
 ## Introduction
 [Kaggle](https://www.kaggle.com/) is an online platform that hosts Machine Learning competitions.
-There are [ranks](https://www.kaggle.com/rankings) on Kaggle. They have the following distribution:
+The Kaggle [ranks](https://www.kaggle.com/rankings) are distributed according to:
 
 <div class="table-wrap">
     <table class="prob-table">
@@ -60,11 +60,11 @@ There are [ranks](https://www.kaggle.com/rankings) on Kaggle. They have the foll
     - Extract a lot (>70) of different features from just a date or timestamp, such as the season (summer/winter), if it's weekday or weekend, also merging with other data such as events (holiday or not?)
 - Appropriate and rich __image augmentation__ for computer vision (CV) tasks
 
-## Reinforcement Learning in Kaggle
-Kaggle now also invests into Reinforcement Learning, there are some open simulation-based competitions.
+### Reinforcement Learning in Kaggle
+Kaggle now also invests into Reinforcement Learning through simulation-based competitions.
 
 ## References
-A lot of info from this blogpost comes from [this interview][anthony-goldbloom-how-to-win-kaggle-competitions] with Anthony Goldbloom, founder of Kaggle. He presents which approaches are commonly used by winning competetors and how submissions evolved over the years as Deep Learning entered the field and Data Science matured as a field. 
+A lot of info from this blogpost comes an [interview with Anthony Goldbloom][anthony-goldbloom-how-to-win-kaggle-competitions], founder of Kaggle. He talks about approaches that are commonly used by winning competetors and how submissions evolved over the years as Data Science matured and Deep Learning entered the field as another competitive approach. 
 
 <!-- Normal Text and Highlights -->
 <!-- Text with Colors -->
