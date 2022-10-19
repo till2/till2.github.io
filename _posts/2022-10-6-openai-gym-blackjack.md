@@ -63,7 +63,7 @@ Other possible environment configurations:
 ``env = gym.make('Blackjack-v1', natural=False, sab=False)``
  
 
-
+<br>
 
 # Basics: Interacting with the environment
 
@@ -379,10 +379,11 @@ Barto`][sab], section
 Best of fun!
 
 
-## References
+# References
 1. [OpenAI-Gym][gym-github].
 2. [OpenAI-Gym docs and tutorials][gym-docs]
 3. [Farama-Foundation][Farama-Foundation]
+4. [Sutton & Barto][sab]
 
 <!-- Ressources -->
 [sab]: http://incompleteideas.net/book/the-book-2nd.html
