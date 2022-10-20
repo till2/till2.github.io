@@ -4,8 +4,15 @@ title: About 🌿
 permalink: /about/
 ---
 
+
 ### Hi there! - Till here,
+
+<div class="img-block" style="width: 420px;">
+    <img src="/images/ghpb2.png"/>
+</div>
+
 #### Reinforcement Learning geek and BSc. student at Uni Potsdam.
+
 
 #### You can find my projects on [GitHub][github] and contact me via [LinkedIn][linkedin]!
 
@@ -14,9 +21,10 @@ permalink: /about/
 ```
 @Misc{zemann2022,
 author = {Till Zemann},
-title = {Tills Notebook},
-howpublished = {\textsc{url:}~\url{https://till2.github.io}},
-year = {2022}}
+title = {Till's Notebook},
+howpublished = {\url{https://till2.github.io}}
+year = {2022},
+}
 ```
 
 
