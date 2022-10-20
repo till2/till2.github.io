@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Solving Blackjack with Q Learning"
-date:   2022-10-20 01:17:00 +0200
+date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
 math: true
 ---
@@ -14,7 +14,7 @@ math: true
 </div>
 
 
-# Intro
+# Introduction
 
 In this tutorial, we’ll explore and solve the *Blackjack-v1* environment.
  

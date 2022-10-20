@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kaggle Tricks"
+title:  "Kaggle"
 date:   2022-09-20 20:36:41 +0200
 categories: jekyll update
 math: true
