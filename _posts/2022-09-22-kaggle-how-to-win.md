@@ -59,6 +59,8 @@ The Kaggle [ranks](https://www.kaggle.com/rankings) are distributed according to
     with $A$ and $B$ being the same sentence in different languages.
     - Extract a lot (>70) of different features from just a date or timestamp, such as the season (summer/winter), if it's weekday or weekend, also merging with other data such as events (holiday or not?)
 - Appropriate and rich __image augmentation__ for computer vision (CV) tasks
+- For Reinforcement Learning competitions with a simulator that only offers a couple of testruns a day, an excellent strategy is to actually rebuild the simulator (mimick the rewards and structure as close as possible within reasonable timespans) to have a local evaluation tool available for tuning
+
 
 ### Reinforcement Learning in Kaggle
 Kaggle now also invests into Reinforcement Learning through simulation-based competitions.
