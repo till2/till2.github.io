@@ -7,8 +7,8 @@ permalink: /about/
 
 ### Hi there! - Till here,
 
-<div class="img-block" style="width: 420px;">
-    <img src="/images/ghpb2.png"/>
+<div class="img-block" style="width: 300px;">
+    <img src="/images/ghpb1.png"/>
 </div>
 
 #### Reinforcement Learning geek and BSc. student at Uni Potsdam.
