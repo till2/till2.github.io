@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Solving Blackjack with Q Learning"
+author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
 math: true
