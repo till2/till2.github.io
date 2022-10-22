@@ -24,18 +24,7 @@ Common assumptions are:
 
 - the environment is __discrete__
 - an agent executes one action per timestep
-- an agent occupies one vertex/node per timestep 
-
-
-
-We assume that the environment is __discrete__ and __2-dimensional__, e.g. robots moving in a warehouse are modelled as points in a grid.
-There probably are good algorithms for finding solutions in more complex scenarios, such as:
-
-- 3d spaces
-- continuous environments
-- probabilistic environment dynamics
-
-but we will stick to the easier problems in our MAPF course.
+- an agent occupies one vertex/node per timestep
 
 
 ## Input
@@ -69,8 +58,8 @@ To properly define a MAPF problem, you should cover which of the following confl
 
 __Conflict types__:
 
-![](/images/conflict-types.png "img1")  <!-- For pandoc (md to pdf) -->
-![](images/conflict-types.png "img2") 	<!-- For the website        -->
+![](images/conflict-types.png "img1")  <!-- For pandoc (md to pdf) -->
+![](/images/conflict-types.png "img2") <!-- For the website        -->
 
 
 ## Objectives and Constraints
