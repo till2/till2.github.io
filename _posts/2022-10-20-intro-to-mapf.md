@@ -105,8 +105,8 @@ This takes the MAPF problem to a __state-based__ problem, where the state encode
 
 A (not comprehensive) list of other extensions of MAPF includes
 
-- MAPF with Large agents
-- MAPF with Kinematic constraints
+- MAPF with large agents
+- MAPF with kinematic constraints
 - Anonymous MAPF
 - Colored MAPF
 - Online-MAPF.
