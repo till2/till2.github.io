@@ -23,7 +23,8 @@ Multi-Agent Pathfinding (__MAPF__) is the problem of planning paths for multiple
 Common assumptions are:
 
 - the environment is __discrete__
-- an agent takes
+- an agent executes one action per timestep
+- an agent occupies one vertex/node per timestep 
 
 
 
@@ -66,7 +67,7 @@ We can also ask, where an agent $i$ is positioned after timestep $x$ (equivalent
 
 To properly define a MAPF problem, you should cover which of the following conflicts are allowed and which can not appear in a solution $\pi$.
 
-#### Conflict types:
+__Conflict types__:
 
 ![](/images/conflict-types.png "img1")  <!-- For pandoc (md to pdf) -->
 ![](images/conflict-types.png "img2") 	<!-- For the website        -->
@@ -113,7 +114,7 @@ Note, that diagonal moves in euclidian space are possible and have an execution 
 
 This takes the MAPF problem to a __state-based__ problem, where the state encodes information like position, orientation and velocity. AN edge between two state configurations can be seen as planning movement (or kinematic motion). If kinematic constraints are added to the MAPF problem, the graph becomes __directed__.
 
-Other noteworthy extensions of MAPF include
+A (not comprehensive) list of other extensions of MAPF includes
 
 - MAPF with Large agents
 - MAPF with Kinematic constraints
