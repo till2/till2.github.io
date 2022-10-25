@@ -18,6 +18,11 @@ math: true
 Multi-Agent Pathfinding (__MAPF__) is the problem of planning paths for multiple agents without colliding.
 
 
+## Applications
+
+It seems to me that MAPF performs better than Multi-agent Reinforcement Learning in restrictive, discrete situations. State-of-the-art MAPF can usually solve up to a low four digit number of agents. 
+The classical MAPF application is logistic warehouses, so we might just be working for free for Amazon. 😃
+
 ## Assumptions
 
 Common assumptions are:
@@ -58,9 +63,13 @@ To properly define a MAPF problem, you should cover which of the following confl
 
 __Conflict types__:
 
-![](images/conflict-types.png "img1")  <!-- For pandoc (md to pdf) -->
-![](/images/conflict-types.png "img2") <!-- For the website        -->
+<!-- -->
+![](https://www.researchgate.net/profile/Roni-Stern-3/publication/336611576/figure/fig1/AS:1143398773866496@1649618919566/Illustration-of-different-types-of-conflicts-taken-from-Stern-et-al-37-a-a-vertex.png)
 
+a) Vertex conflict
+b) Swapping conflict
+c) Following conflict
+d) Circle conflict
 
 ## Objectives and Constraints
 
