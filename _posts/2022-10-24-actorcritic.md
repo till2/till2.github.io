@@ -23,7 +23,7 @@ The TD Error <strong style="color: #ED412D">$\delta^{\pi_{\theta}}$</strong> is 
 
 Short and sweet, here it is.
 
-$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] Q^{\pi_{\theta}}(s,a)$.
+$$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \underbrace{\pi_{\theta}(s,a)}_\text{actor} ] \overbrace{Q^{\pi_{\theta}}(s,a)}^\text{critic}$$.
 
 $R^s_a$ is the step reward for taking action $a$ in state $s$.
 
@@ -38,7 +38,6 @@ Note, that it is common to use a shared body neural net that learns useful featu
 
 <div class="img-block" style="width: 500px;">
     <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
-    <span><strong>Fig. 1: </strong>Actor Critic network with body</span>
 </div>
 
 ## Gradient of the objective function
@@ -48,11 +47,15 @@ The objective function $J(\theta)$ gives us the future return. We want to find p
 $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] * A^{\pi_{\theta}}(s,a)$
 
 
-## Advantage Actor Critic (A2C) Algorithm
+## Actor Critic Algorithm
 
+<div class="img-block" style="width: 500px;">
+    <img src="/images/actionvalue-actor-critic-code.png"/>
+</div>
 
-
-## Evaluation and tradeoffs
+## Todo
+- Advantage Actor Critic (A2C) Algorithm
+- Evaluation and tradeoffs
 
 
 
@@ -104,14 +107,14 @@ AAABC `ASDF` __some bold text__
 The <strong style="color: #1E72E7">joint distribution</strong> of $X$ and $Y$ is written as $P(X, Y)$.
 The <strong style="color: #ED412D">marginal distribution</strong> on the other hand can be written out as a table.
 
-<!-- Math Text -->
-We can write a formula into text: $V(S_t) \gets V(S_t) + \alpha [ V(S_{t+1}) - V(S_t) ]$.
-
-
 ## References
 1. Picture taken from [here][datahubbs-pic-link].
-2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c]
+2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
+3. Code taken from [here][code].
+4. PyTorch Actor Critic code [here][torch-actor-critic-code].
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
 [datahubbs-a2c]: https://www.datahubbs.com/policy-gradients-and-advantage-actor-critic/
+[code]: https://lilianweng.github.io/posts/2018-04-08-policy-gradient/
+[torch-actor-critic-code]: https://github.com/pytorch/examples/blob/main/reinforcement_learning/actor_critic.py
