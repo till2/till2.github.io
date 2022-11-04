@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Solving Blackjack with Q Learning"
+title:  "Learning to play Blackjack optimally"
 author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
@@ -17,7 +17,12 @@ math: true
 
 # Introduction
 
-In this tutorial, we’ll explore and solve the *Blackjack-v1* environment.
+In this tutorial, we’ll explore and solve the *Blackjack-v1* environment \
+(this means we'll have an agent learn an optimal strategy).
+
+This tutorial is part of the [`Gymnasium` documentation](https://gymnasium.farama.org/tutorials/blackjack_tutorial/). A more detailed version with training plots can be found on the Gymnasium website.
+
+The documentation for the blackjack environment is available [here](https://gymnasium.farama.org/environments/toy_text/blackjack/).
  
 **Blackjack** is one of the most popular casino card games that is also
 infamous for being beatable under certain conditions. This version of
@@ -38,7 +43,7 @@ favorite discrete RL algorithm. The presented solution uses *Q-learning*
 # Author: Till Zemann
 # License: MIT License
 
-import gym
+import gymnasium as gym
 import numpy as np
 import matplotlib
 import seaborn as sns

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Multi-Agent Pathfinding"
+title:  "Multi-Agent Pathfinding [MAPF]"
 author: "Till Zemann"
 date:   2022-10-20 15:57:00 +0200
 categories: jekyll update

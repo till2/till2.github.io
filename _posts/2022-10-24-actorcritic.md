@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critic"
+title:  "Actor Critic (wip)"
 author: "Till Zemann"
 date:   2022-10-24 20:36:41 +0200
 categories: jekyll update
@@ -57,15 +57,10 @@ $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] 
 - Advantage Actor Critic (A2C) Algorithm
 - Evaluation and tradeoffs
 
-
-
-<!-- Code Box -->
-{% highlight python %}
-@jit
-def f(x)
-    print("hi")
-# does cool stuff
-{% endhighlight %}
+- look at:
+- [1](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
+- [2](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
+- [3](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
 
 
 <!-- In-Text Citing -->
@@ -77,15 +72,16 @@ You can...
 3. lists
 
 
-do $X$ math
+-- Math --
+$\hat{s} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \mu)^2$ 
 
-embed images:
+-- Images --
 <div class="img-block" style="width: 800px;">
     <img src="/images/lofi_art.png"/>
     <span><strong>Fig 1.1.</strong> Agent and Environment interactions</span>
 </div>
 
-refer to links:
+-- Links --
 [(k-fold) Cross-Validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 
 {% highlight python %}
@@ -94,18 +90,18 @@ def f(x)
     print("hi")
 # does cool stuff
 {% endhighlight %}
+
+-- Highlights --
+AAABC `ASDF` __some bold text__
+
+-- Colors --
+The <strong style="color: #1E72E7">joint distribution</strong> of $X$ and $Y$ is written as $P(X, Y)$.
+The <strong style="color: #ED412D">marginal distribution</strong> on the other hand can be written out as a table.
 -->
 
 
 <!-- Ressources -->
 [myreference-1]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
-<!-- Normal Text and Highlights -->
-AAABC `ASDF` __some bold text__
-
-<!-- Text with Colors -->
-The <strong style="color: #1E72E7">joint distribution</strong> of $X$ and $Y$ is written as $P(X, Y)$.
-The <strong style="color: #ED412D">marginal distribution</strong> on the other hand can be written out as a table.
 
 ## References
 1. Picture taken from [here][datahubbs-pic-link].
