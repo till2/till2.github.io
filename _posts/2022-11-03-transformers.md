@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Transformers (wip)"
+title:  "Transformers (work in progress 👷)"
 author: "Till Zemann"
 date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
@@ -9,9 +9,17 @@ math: true
 * TOC
 {:toc}
 
+<!-- builder image -->
+<div class="img-block" style="width: 500px;">
+    <img src="/images/builder_one.png"/>
+</div>
+<center>Site under construction. 👷</center>
 
 ## Todo
 
+- watch and write down notes for:
+1. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
+2. [Transformer (Aleksa Gordić)](https://www.youtube.com/watch?v=cbYxHkgkSVs) <- and part 2
 
 <!-- In-Text Citing -->
 <!-- 

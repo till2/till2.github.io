@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critic (wip)"
+title:  "Actor Critic (work in progress 👷)"
 author: "Till Zemann"
 date:   2022-10-24 20:36:41 +0200
 categories: jekyll update
