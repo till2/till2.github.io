@@ -259,6 +259,10 @@ train(agent, n_episodes)
 {% endhighlight %}
 
 
+<div class="img2" style="width: 600px;">
+    <img src="/images/blackjack_training_plots.png"/>
+</div>
+
 
 # Visualizing the results
 
@@ -341,7 +345,7 @@ plt.show()
 
 
 <div class="img2" style="width: 600px;">
-    <img src="/images/with_usable_ace.png"/>
+    <img src="/images/blackjack_with_usable_ace.png"/>
 </div>
 
 <!-- Code Box -->
@@ -354,7 +358,7 @@ plt.show()
 
 
 <div class="img3" style="width: 600px;">
-    <img src="/images/without_usable_ace.png"/>
+    <img src="/images/blackjack_without_usable_ace.png"/>
 </div>
 
 It's good practice to call env.close() at the end of your script,
@@ -366,7 +370,7 @@ env.close()
 {% endhighlight %}
 
 # Optimal policy
-Here are the optimal policy and value function for reference (taken from [`Sutton & Barto`][sab]): 
+For reference, here the optimal policy and value function, which we were able to achieve <:) (taken from [`Sutton & Barto`][sab]): 
 <div class="img3" style="width: 600px;">
     <img src="/images/suttonfig_blackjack_optimal.png"/>
 </div>
