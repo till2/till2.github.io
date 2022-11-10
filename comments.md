@@ -14,6 +14,10 @@ permalink: /comments/
 
 <br>
 
+<!-- Upgrade comment system to embedded GitHub comments: 
+	https://aristath.github.io/blog/static-site-comments-using-github-issues-api 
+-->
+
 <!-- Comment section-->
 {% if page.comments %}
 <div id="disqus_thread"></div>
