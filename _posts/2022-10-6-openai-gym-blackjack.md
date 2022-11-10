@@ -16,7 +16,7 @@ math: true
 </div>
 
 
-# Introduction
+### Introduction
 
 In this tutorial, we’ll explore and solve the *Blackjack-v1* environment \
 (this means we'll have an agent learn an optimal strategy).
@@ -72,9 +72,9 @@ Other possible environment configurations:
 
 <br>
 
-# Basics: Interacting with the environment
+### Basics: Interacting with the environment
 
-### Observing the environment
+#### Observing the environment
 
 First of all, we call ``env.reset()`` to start an episode. This function
 resets the environment to a starting position and returns an initial
@@ -103,7 +103,7 @@ Note that our observation is a 3-tuple consisting of 3 discrete values:
 
 
 
-### Executing an action
+#### Executing an action
 
 After receiving our first observation, we are only going to use the
 ``env.step(action)`` function to interact with the environment. This
@@ -163,7 +163,7 @@ responds but the output won’t be useful for training (it might even be
 harmful if the agent learns on invalid data).
 
 
-### Building an agent
+#### Building an agent
 
 Let’s build a ``Q-learning agent`` to solve *Blackjack-v1*! We’ll need
 some functions for picking an action and updating the agents action

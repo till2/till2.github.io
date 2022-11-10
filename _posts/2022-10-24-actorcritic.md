@@ -7,6 +7,11 @@ categories: jekyll update
 math: true
 ---
 
+<div class="img-block" style="width: 300px;">
+    <img src="/images/robot-2.png"/>
+</div>
+
+
 ### Contents
 * TOC
 {:toc}

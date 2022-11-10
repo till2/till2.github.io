@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 
-### Hi there! - Till here,
+### <em> Hi there! I'm Till,</em>
 
 <div class="img-block" style="width: 300px;">
     <img src="/images/ghpb1.png"/>
