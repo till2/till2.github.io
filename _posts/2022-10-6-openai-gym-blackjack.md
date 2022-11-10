@@ -7,6 +7,7 @@ categories: jekyll update
 math: true
 ---
 
+### Contents
 * TOC
 {:toc}
 
@@ -73,7 +74,7 @@ Other possible environment configurations:
 
 # Basics: Interacting with the environment
 
-## Observing the environment
+### Observing the environment
 
 First of all, we call ``env.reset()`` to start an episode. This function
 resets the environment to a starting position and returns an initial
@@ -102,7 +103,7 @@ Note that our observation is a 3-tuple consisting of 3 discrete values:
 
 
 
-## Executing an action
+### Executing an action
 
 After receiving our first observation, we are only going to use the
 ``env.step(action)`` function to interact with the environment. This
@@ -162,7 +163,7 @@ responds but the output won’t be useful for training (it might even be
 harmful if the agent learns on invalid data).
 
 
-## Building an agent
+### Building an agent
 
 Let’s build a ``Q-learning agent`` to solve *Blackjack-v1*! We’ll need
 some functions for picking an action and updating the agents action
@@ -264,7 +265,7 @@ train(agent, n_episodes)
 </div>
 
 
-# Visualizing the results
+### Visualizing the results
 
 <!-- Code Box -->
 {% highlight python %}
@@ -369,7 +370,7 @@ so that any used ressources by the environment will be closed.
 env.close()
 {% endhighlight %}
 
-# Optimal policy
+### Optimal policy
 For reference, here the optimal policy and value function, which we were able to achieve <:) (taken from [`Sutton & Barto`][sab]): 
 <div class="img3" style="width: 600px;">
     <img src="/images/suttonfig_blackjack_optimal.png"/>
@@ -389,7 +390,7 @@ Barto`][sab], section
 Best of fun!
 
 
-# References
+### References
 1. [OpenAI-Gym][gym-github].
 2. [OpenAI-Gym docs and tutorials][gym-docs]
 3. [Farama-Foundation][Farama-Foundation]

@@ -10,20 +10,21 @@ math: true
 <!-- Execute in /_posts/: -->
 <!-- pandoc -o first_paper_summary.pdf 2022-09-27-intro-to-mapf.md -->
 
+### Contents
 * TOC
 {:toc}
 
-## The Multi-Agent Pathfinding Problem
+### The Multi-Agent Pathfinding Problem
 
 Multi-Agent Pathfinding (__MAPF__) is the problem of planning paths for multiple agents without colliding.
 
-
+#
 ## Applications
 
 It seems to me that MAPF performs better than Multi-agent Reinforcement Learning in restrictive, discrete situations. State-of-the-art MAPF can usually solve up to a low four digit number of agents. 
 The classical MAPF application is logistic warehouses, so we might just be working for free for Amazon. 😃
 
-## Assumptions
+### Assumptions
 
 Common assumptions are:
 
@@ -32,7 +33,7 @@ Common assumptions are:
 - an agent occupies one vertex/node per timestep
 
 
-## Input
+### Input
 
 The input to a MAPF problem is a triple <strong style="color: #1E72E7">$<G,s,t>$</strong> consisting of:
 
@@ -45,7 +46,7 @@ The input to a MAPF problem is a triple <strong style="color: #1E72E7">$<G,s,t>$
 <strong style="color: #1E72E7">$t: [1,\dots,k] \to V$</strong>
 
 
-## Solution
+### Solution
 
 The solution of a MAPF problem is a set <strong style="color: #039947">$\pi$</strong> of single-agent plans without conflicts: 
 <strong style="color: #039947">$\pi$ = {$\pi_1, \pi_2, \dots, \pi_k$}</strong> where $\pi_i$ denotes the single-agent plan for agent $i$. 
@@ -57,7 +58,7 @@ Instead, the first entry in $\pi$ is the action that performed on the first time
 We can also ask, where an agent $i$ is positioned after timestep $x$ (equivalent to asking which node an agent occupies). We would write this as <strong style="color: #039947">$\pi_i[x]$</strong>.
 
 
-## Conflicts
+### Conflicts
 
 To properly define a MAPF problem, you should cover which of the following conflicts are allowed and which can not appear in a solution $\pi$.
 
@@ -71,7 +72,7 @@ b) Swapping conflict
 c) Following conflict
 d) Circle conflict
 
-## Objectives and Constraints
+### Objectives and Constraints
 
 The two most used objective functions are the __Makespan__ and __Sum of costs__.
 
@@ -94,14 +95,14 @@ Typical hard constraints that are additionally added are __k-robustness__ (an ag
 The __k-robustness__ adresses the possiblity of delays that could result in agents colliding at execution. The goal is to be within a probabilistic margin for conflicts or have a policy that can deal with delays at execution time to prevent conflicts.
 __Formation rules__ enforce a specific formation of agents, e.g. to allow communication chains via neighboring agents.
 
-## Target behaviors
+### Target behaviors
 
 If an agent that already arrived at its target position doesn't plan on moving away from the target while waiting for other agents to reach their goals it is common to not count the waiting moves towards the sum of cost. 
 
 There are two possibilities of handling agents that reach their target. The agent can either __stay at the target__ or __disappear at the target__. The stay at target behavior is more commonly used because it doesn't assume that the environment has a special mechanism for handling the transportation of the agent (e.g. to a fixed starting position) upon arriving at the target.
 
 
-## Special MAPF problems
+### Special MAPF problems
 
 #### Weighted Actions
 
@@ -150,7 +151,7 @@ def f(x)
 {% endhighlight %}
 -->
 
-## References
+### References
 1. Stern, R., Sturtevant, N., Felner, A., Koenig, S., Ma, H., Walker, T., ... & Boyarski, E. (2019). Multi-agent pathfinding: Definitions, variants, and benchmarks. In AAAI/ACM Conference on AI, Mobility, and Autonomous Systems (pp. 75-82). 
 ([arXiv][marl-defs-variants-benchmarks])
 2. Kaduri, Omri: From A* to MARL ([5 part blogpost series][kaduri-mapf-to-marl])

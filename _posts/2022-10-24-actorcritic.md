@@ -7,10 +7,11 @@ categories: jekyll update
 math: true
 ---
 
+### Contents
 * TOC
 {:toc}
 
-## Temporal Difference (TD) Error
+### Temporal Difference (TD) Error
 
 We can calculate the TD error as the difference between the new and old estimates of a state value:
 
@@ -19,7 +20,7 @@ We can calculate the TD error as the difference between the new and old estimate
 The TD Error <strong style="color: #ED412D">$\delta^{\pi_{\theta}}$</strong> is an unbiased estimate for the advantage <strong style="color: #ED412D">$A^{\pi_{\theta}(s,a)}$</strong>, meaning $\mathbb{E}[\delta^{\pi_{\theta}}] = A^{\pi_{\theta}(s,a)}$. This property will be helpful later.
 
 
-## Policy gradient theorem
+### Policy gradient theorem
 
 Short and sweet, here it is.
 
@@ -27,7 +28,7 @@ $$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)]
 
 $R^s_a$ is the step reward for taking action $a$ in state $s$.
 
-## What are Actor and Critic?
+### What are Actor and Critic?
 
 In Deep Reinforcement Learning, an actor refers to the policy network while the critic represents a value network that is used to calculate either state-action values <strong style="color: #1E72E7">$Q^{\pi_{\theta}}(s,a)$</strong>, state values <strong style="color: #1E72E7">$V^{\pi_{\theta}}(s)$</strong> or an advantage value <strong style="color: #ED412D">$A^{\pi_{\theta}}(s,a)$</strong>. We will take a closer look at the advantage value that is used in the `Advantage Actor Critic (A2C)` algorithm. The advantage intuitively describes how much better or worse an action's value is compared to the current state value (How much advantage can i gain from taking this action in comparison to other actions?) and can be calculated using the advantage function as follows: <strong style="color: #ED412D">$A^{\pi_{\theta}}(s,a) = Q^{\pi_{\theta}}(s,a) - V^{\pi_{\theta}}(s)$</strong>
 
@@ -40,20 +41,20 @@ Note, that it is common to use a shared body neural net that learns useful featu
     <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
 </div>
 
-## Gradient of the objective function
+### Gradient of the objective function
 
 The objective function $J(\theta)$ gives us the future return. We want to find parameters $\theta$ that maximize $J(\theta)$ by gradient ascent. For that, we need the gradient of the objective function $J(\theta)$ w.r.t. $\theta$.
 
 $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] * A^{\pi_{\theta}}(s,a)$
 
 
-## Actor Critic Algorithm
+### Actor Critic Algorithm
 
 <div class="img-block" style="width: 500px;">
     <img src="/images/actionvalue-actor-critic-code.png"/>
 </div>
 
-## Todo
+### Todo
 - Advantage Actor Critic (A2C) Algorithm
 - Evaluation and tradeoffs
 
@@ -103,7 +104,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Ressources -->
 [myreference-1]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-## References
+### References
 1. Picture taken from [here][datahubbs-pic-link].
 2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 3. Code taken from [here][code].

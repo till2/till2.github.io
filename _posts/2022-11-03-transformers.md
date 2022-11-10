@@ -6,6 +6,8 @@ date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
 math: true
 ---
+
+### Contents
 * TOC
 {:toc}
 
@@ -15,7 +17,7 @@ math: true
 </div>
 <center>Site under construction. 👷</center>
 
-## Todo
+### Todo
 
 - watch and write down notes for:
 1. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
@@ -58,7 +60,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 -->
 
 
-## References
+### References
 1. [Kaggle - Transformers from Scratch][kaggle-transformer-from-scratch]
 
 <!-- Ressources -->
