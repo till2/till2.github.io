@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Comments 💬
+comments: true
 permalink: /comments/
 ---
 
