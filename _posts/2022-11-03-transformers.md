@@ -20,8 +20,9 @@ math: true
 ### Todo
 
 - watch and write down notes for:
-1. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
-2. [Transformer (Aleksa Gordić)](https://www.youtube.com/watch?v=cbYxHkgkSVs) <- and part 2
+1. [11-785 Deep Learning Recitation 11: Transformers Part 1](https://www.youtube.com/watch?v=X2nUH6fXfbc) <- implementation
+2. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
+3. [Transformer (Aleksa Gordić)](https://www.youtube.com/watch?v=cbYxHkgkSVs) <- and part 2
 
 <!-- In-Text Citing -->
 <!-- 
