@@ -4,6 +4,7 @@ title:  "Transformers (work in progress 👷)"
 author: "Till Zemann"
 date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
+comments: true
 math: true
 ---
 
@@ -66,3 +67,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 <!-- Ressources -->
 [kaggle-transformer-from-scratch]: https://www.kaggle.com/code/arunmohan003/transformer-from-scratch-using-pytorch/notebook
+
+
+<!-- Optional Comment Section-->
+{% if page.comments %}
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}

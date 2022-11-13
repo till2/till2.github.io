@@ -4,6 +4,7 @@ title:  "Kaggle"
 author: "Till Zemann"
 date:   2022-09-20 20:36:41 +0200
 categories: jekyll update
+comments: true
 math: true
 ---
 
@@ -81,3 +82,10 @@ A lot of info from this blogpost comes an [interview with Anthony Goldbloom][ant
 [anthony-goldbloom-how-to-win-kaggle-competitions]: https://www.youtube.com/watch?v=0ZJQ2Vsgwf0
 [aladdin-persson-top-1-percent-no-ensemble]: https://www.youtube.com/watch?v=MOnk75_8b9M
 [how-to-win-kaggle-competition-master-advice]: https://www.youtube.com/watch?v=in0miFAiwZA
+
+
+<!-- Optional Comment Section-->
+{% if page.comments %}
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}

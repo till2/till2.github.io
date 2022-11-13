@@ -4,6 +4,7 @@ title:  "Learning to play Blackjack optimally"
 author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
+comments: true
 math: true
 ---
 
@@ -402,3 +403,10 @@ Best of fun!
 [gym-github]: https://github.com/openai/gym
 [gym-docs]: https://www.gymlibrary.dev/
 [Farama-Foundation]: https://github.com/Farama-Foundation
+
+
+<!-- Optional Comment Section-->
+{% if page.comments %}
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}

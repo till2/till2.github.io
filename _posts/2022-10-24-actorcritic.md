@@ -4,6 +4,7 @@ title:  "Actor Critic (work in progress 👷)"
 author: "Till Zemann"
 date:   2022-10-24 20:36:41 +0200
 categories: jekyll update
+comments: true
 math: true
 ---
 
@@ -122,3 +123,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [torch-actor-critic-code]: https://github.com/pytorch/examples/blob/main/reinforcement_learning/actor_critic.py
 [actor-critic-TD0-code]: https://github.com/chengxi600/RLStuff/blob/master/Actor-Critic/Actor-Critic_TD_0.ipynb
 [actor-critic-blogpost]: https://medium.com/geekculture/actor-critic-value-function-approximations-b8c118dbf723
+
+
+<!-- Optional Comment Section-->
+{% if page.comments %}
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}

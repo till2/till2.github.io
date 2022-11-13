@@ -4,6 +4,7 @@ title:  "Multi-agent pathfinding (MAPF)"
 author: "Till Zemann"
 date:   2022-10-20 15:57:00 +0200
 categories: jekyll update
+comments: true
 math: true
 ---
 
@@ -160,3 +161,10 @@ def f(x)
 <!-- Ressources -->
 [marl-defs-variants-benchmarks]: https://arxiv.org/abs/1906.08291
 [kaduri-mapf-to-marl]: https://omrikaduri.github.io/
+
+
+<!-- Optional Comment Section-->
+{% if page.comments %}
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}
