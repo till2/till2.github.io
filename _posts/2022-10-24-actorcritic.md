@@ -27,8 +27,6 @@ The TD Error <strong style="color: #ED412D">$\delta^{\pi_{\theta}}$</strong> is 
 
 ### Policy gradient theorem
 
-Short and sweet, here it is.
-
 $$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \underbrace{\pi_{\theta}(s,a)}_\text{actor} ] \overbrace{Q^{\pi_{\theta}}(s,a)}^\text{critic}$$.
 
 $R^s_a$ is the step reward for taking action $a$ in state $s$.
@@ -67,7 +65,8 @@ $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] 
 - [1](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
 - [2](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
 - [3](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
-
+- [Actor Critic blogpost][actor-critic-blogpost]
+- [TD0 Actor Critic code][actor-critic-TD0-code]
 
 <!-- In-Text Citing -->
 <!-- 
@@ -113,10 +112,13 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 1. Picture taken from [here][datahubbs-pic-link].
 2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 3. Code taken from [here][code].
-4. PyTorch Actor Critic code [here][torch-actor-critic-code].
+4. PyTorch Actor Critic [implementation][torch-actor-critic-code].
+5. TD0 Actor Critic [implementation][[actor-critic-TD0-code]]
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
 [datahubbs-a2c]: https://www.datahubbs.com/policy-gradients-and-advantage-actor-critic/
 [code]: https://lilianweng.github.io/posts/2018-04-08-policy-gradient/
 [torch-actor-critic-code]: https://github.com/pytorch/examples/blob/main/reinforcement_learning/actor_critic.py
+[actor-critic-TD0-code]: https://github.com/chengxi600/RLStuff/blob/master/Actor-Critic/Actor-Critic_TD_0.ipynb
+[actor-critic-blogpost]: https://medium.com/geekculture/actor-critic-value-function-approximations-b8c118dbf723

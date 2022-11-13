@@ -10,15 +10,16 @@ math: true
 <!-- Execute in /_posts/: -->
 <!-- pandoc -o first_paper_summary.pdf 2022-09-27-intro-to-mapf.md -->
 
+<!--
 ### Contents
 * TOC
 {:toc}
+-->
 
 ### The Multi-Agent Pathfinding Problem
 
 Multi-Agent Pathfinding (__MAPF__) is the problem of planning paths for multiple agents without colliding.
 
-#
 ## Applications
 
 It seems to me that MAPF performs better than Multi-agent Reinforcement Learning in restrictive, discrete situations. State-of-the-art MAPF can usually solve up to a low four digit number of agents. 
