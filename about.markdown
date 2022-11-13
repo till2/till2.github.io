@@ -11,7 +11,7 @@ permalink: /about/
     <img src="/images/ghpb1.png"/>
 </div>
 
-#### Reinforcement Learning geek and BSc. student at Uni Potsdam.
+#### Reinforcement Learning geek and B.Sc. student at Uni Potsdam.
 
 
 #### You can find my projects on [GitHub][github] and contact me via [LinkedIn][linkedin]!

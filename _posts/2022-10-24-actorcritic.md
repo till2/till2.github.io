@@ -60,12 +60,14 @@ $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] 
 
 ### Todo
 - Advantage Actor Critic (A2C) Algorithm
+- implement it
+- clean implementation
 - Evaluation and tradeoffs
 
-- look at:
-- [1](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
-- [2](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
-- [3](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
+Look at:
+- [towardsdatascience blogpost](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
+- [berkeley lecture slides](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
+- [CS885 Lecture 7b: Actor Critic](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
 - [Actor Critic blogpost][actor-critic-blogpost]
 - [TD0 Actor Critic code][actor-critic-TD0-code]
 
@@ -114,7 +116,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 3. Code taken from [here][code].
 4. PyTorch Actor Critic [implementation][torch-actor-critic-code].
-5. TD0 Actor Critic [implementation][[actor-critic-TD0-code]]
+5. TD0 Actor Critic [implementation][actor-critic-TD0-code]
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -128,5 +130,5 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/"> Post a comment.</a> <!-- role="button"  -->
 {% endif %}
