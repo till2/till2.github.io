@@ -19,13 +19,22 @@ permalink: /comments/
 -->
 
 
-<!-- temporary google form comment system-->
+<!-- google form comment system-->
 
+<!-- Write a comment -->
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffgbz62IXFH2LeJq0TMwksW2PREpnzJEo2S9UqT_Zf-tuQBg/viewform?embedded=true" width="750" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading comment form...</iframe>
+
+
+<!-- Show comments -->
+<div class="google-docs-iframe">
+	<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRt4RuNwIJMHBAylVNmTExiS2ZhIkRRJ9TiupbnOsUCCbnMQdLXmFZJ8904sOYakAFJEduVMrnwQlIJ/pubhtml?gid=555107094&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+</div>
+
+
 
 <!-- width="640" height="438" frameborder="0" marginheight="0" marginwidth="0" -->
 
-<!-- Comment section-->
+<!-- Old Comment section with data collection :( -->
 <!--
 {% if page.comments %}
 <div id="disqus_thread"></div>
