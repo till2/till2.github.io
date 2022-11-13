@@ -24,6 +24,8 @@ permalink: /comments/
 <!-- Write a comment -->
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffgbz62IXFH2LeJq0TMwksW2PREpnzJEo2S9UqT_Zf-tuQBg/viewform?embedded=true" width="750" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading comment form...</iframe>
 
+<em>Note: It might take a little bit until your comment is displayed.</em>
+
 
 <!-- Show comments -->
 <div class="google-docs-iframe">
