@@ -12,7 +12,7 @@ math: true
 * TOC
 {:toc}
 
-<div class="img1" style="width: 600px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/rl_loop.jpg"/>
 </div>
 
@@ -39,7 +39,7 @@ favorite discrete RL algorithm. The presented solution uses *Q-learning*
 (a model-free RL algorithm).
  
 <!-- Code Box -->
-{% highlight python %}
+```py
 # Imports and Environment Setup
 
 # Author: Till Zemann
@@ -61,7 +61,7 @@ plt.rcParams['text.usetex'] = True
 # Other versions of the game can be found below for you to experiment.
 
 env = gym.make('Blackjack-v1', sab=True)
-{% endhighlight %}
+```
 
 
 Other possible environment configurations:
@@ -87,13 +87,13 @@ on.
 
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 # reset the environment to get the first observation
 done = False
 observation, info = env.reset()
 
 print(observation)
-{% endhighlight %}
+```
 
 
 Note that our observation is a 3-tuple consisting of 3 discrete values:
@@ -142,7 +142,7 @@ training by a lot. Rather try to build an extra loop to evaluate and
 showcase the agent after training.
  
 <!-- Code Box -->
-{% highlight python %}
+```py
 # sample a random action from all valid actions
 action = env.action_space.sample()
 
@@ -154,7 +154,7 @@ print('reward:', reward)
 print('terminated:', terminated)
 print('truncated:', truncated)
 print('info:', info)
-{% endhighlight %}
+```
 
 
 Once ``terminated = True`` or ``truncated=True``, we should stop the
@@ -175,7 +175,7 @@ valued as the best) ``1 - epsilon``.
 
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 class BlackjackAgent():
     
     def __init__(self, lr=1e-3, epsilon=0.1, epsilon_decay=1e-4):
@@ -213,7 +213,7 @@ class BlackjackAgent():
     
     def decay_epsilon(self):
         self.epsilon = self.epsilon - epsilon_decay
-{% endhighlight %}
+```
 
 
 
@@ -225,7 +225,7 @@ explore the environment sufficiently.
 Now we should be ready to build the training loop.
  
 <!-- Code Box -->
-{% highlight python %}
+```py
 # hyperparameters
 epsilon = 0.6
 n_episodes = 300_000
@@ -249,19 +249,19 @@ def train(agent, n_episodes):
             state = next_state
 
         agent.update(state, action, reward, next_state, done)
-{% endhighlight %}
+```
 
 
 Great, let’s train!
 
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 train(agent, n_episodes)
-{% endhighlight %}
+```
 
 
-<div class="img2" style="width: 600px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/blackjack_training_plots.png"/>
 </div>
 
@@ -269,7 +269,7 @@ train(agent, n_episodes)
 ### Visualizing the results
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 def create_grids(agent, usable_ace=False):
     
     # convert our state-action values to state values 
@@ -295,11 +295,11 @@ def create_grids(agent, usable_ace=False):
         lambda obs: policy[(obs[0], obs[1], usable_ace)], axis=2, arr=np.dstack([X, Y])
         )
     return value_grid, policy_grid
-{% endhighlight %}
+```
 
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 def create_plots(value_grid, policy_grid, title='N/A'):
     
     # create a new figure with 2 subplots (left: state values, right: policy)
@@ -334,32 +334,32 @@ def create_plots(value_grid, policy_grid, title='N/A'):
                        Patch(facecolor='grey', edgecolor='black', label='Stick')]
     ax2.legend(handles=legend_elements, bbox_to_anchor=(1.3, 1))
     return fig
-{% endhighlight %}
+```
 
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 # state values & policy with usable ace (ace counts as 11)
 value_grid, policy_grid = create_grids(agent, usable_ace=True)
 fig1 = create_plots(value_grid, policy_grid, title='With usable ace')
 plt.show()
-{% endhighlight %}
+```
 
 
-<div class="img2" style="width: 600px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/blackjack_with_usable_ace.png"/>
 </div>
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 # state values & policy without usable ace (ace counts as 1)
 value_grid, policy_grid = create_grids(agent, usable_ace=False)
 fig2 = create_plots(value_grid, policy_grid, title='Without usable ace')
 plt.show()
-{% endhighlight %}
+```
 
 
-<div class="img3" style="width: 600px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/blackjack_without_usable_ace.png"/>
 </div>
 
@@ -367,13 +367,13 @@ It's good practice to call env.close() at the end of your script,
 so that any used ressources by the environment will be closed.
 
 <!-- Code Box -->
-{% highlight python %}
+```py
 env.close()
-{% endhighlight %}
+```
 
 ### Optimal policy
 For reference, here the optimal policy and value function, which we were able to achieve <:) (taken from [`Sutton & Barto`][sab]): 
-<div class="img3" style="width: 600px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/suttonfig_blackjack_optimal.png"/>
 </div>
 

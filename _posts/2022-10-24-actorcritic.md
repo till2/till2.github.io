@@ -114,7 +114,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 ### References
 1. Picture taken from [here][datahubbs-pic-link].
 2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
-3. Code taken from [here][code].
+3. Pseudocode Image taken from [here][code].
 4. PyTorch Actor Critic [implementation][torch-actor-critic-code].
 5. TD0 Actor Critic [implementation][actor-critic-TD0-code]
 
