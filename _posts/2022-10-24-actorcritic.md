@@ -39,7 +39,7 @@ In Deep Reinforcement Learning, an actor refers to the policy network while the 
 I guess the advantage will converge to be sligtly negative or zero with time as <strong style="color: #1E72E7">$V^{\pi_{\theta}}(s)$</strong> should converge towards <strong style="color: #1E72E7">$\max_a Q^{\pi_{\theta}}(s,a)$</strong>. For an optimal policy it should be zero. `[Not tested yet.]`
 
 
-Note, that it is common to use a shared body neural net that learns useful features from the input and then put two seperate networks (called `policy head` and `value head`) representing the actor and critic on top as follows:
+<em>Note, that it is common to use a shared neural network body. This is practical for learning features only once and not individually for both networks. The last layer of the body network connected to both the `policy head` and the `value head`), representing the actor and critic respectively, as follows:</em>
 
 <div class="img-block" style="width: 500px;">
     <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
@@ -60,7 +60,6 @@ $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] 
 
 ### Todo
 - Advantage Actor Critic (A2C) Algorithm
-- implement it
 - clean implementation
 - Evaluation and tradeoffs
 
