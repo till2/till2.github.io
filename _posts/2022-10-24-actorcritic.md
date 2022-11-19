@@ -5,6 +5,7 @@ author: "Till Zemann"
 date:   2022-10-24 20:36:41 +0200
 categories: jekyll update
 comments: true
+back_to_top_button: true
 math: true
 ---
 
@@ -129,5 +130,15 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/"> Post a comment.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+{% endif %}
+
+<!-- Optional Back to Top Button -->
+{% if page.back_to_top_button %}
+<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop({
+  diameter: 45,
+  backgroundColor: 'rgb(30,144,255, 0.7)',
+  textColor: '#fff'
+})</script>
 {% endif %}
