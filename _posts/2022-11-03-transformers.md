@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Transformers (work in progress 👷)"
+title:  "Transformers (👷)"
 author: "Till Zemann"
 date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
@@ -80,8 +80,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 {% if page.back_to_top_button %}
 <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop({
-  diameter: 45,
-  backgroundColor: 'rgb(30,144,255, 0.7)',
-  textColor: '#fff'
+  diameter: 40,
+  backgroundColor: 'rgb(255, 255, 255, 0.7)', /* 30,144,255, 0.7 */
+  textColor: '#4a4946'
 })</script>
 {% endif %}

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Learning to play Blackjack optimally"
+title:  "Blackjack: Learning an optimal strategy"
 author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
@@ -9,11 +9,13 @@ back_to_top_button: true
 math: true
 ---
 
+<!--
 ### Contents
 * TOC
 {:toc}
+-->
 
-<div class="img-block" style="width: 600px;">
+<div class="img-block" style="width: 600px; margin: 45px">
     <img src="/images/rl_loop.jpg"/>
 </div>
 
@@ -416,8 +418,8 @@ Best of fun!
 {% if page.back_to_top_button %}
 <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop({
-  diameter: 45,
-  backgroundColor: 'rgb(30,144,255, 0.7)',
-  textColor: '#fff'
+  diameter: 40,
+  backgroundColor: 'rgb(255, 255, 255, 0.7)', /* 30,144,255, 0.7 */
+  textColor: '#4a4946'
 })</script>
 {% endif %}
