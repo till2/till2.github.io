@@ -9,18 +9,36 @@ back_to_top_button: true
 math: true
 ---
 
+<!--
 ### Contents
 * TOC
 {:toc}
+-->
 
 <!-- builder image -->
-<div class="img-block" style="width: 500px;">
+<div class="img-block" style="width: 450px;">
     <img src="/images/builder_one.png"/>
 </div>
 <center>Site under construction. 👷</center>
 
-### Todo
+### Introduction
 
+Transformers are one of the coolest inventions of recent years in Natural Language Processing (NLP) and Machine Learning in general. This technology is a combination of neural networks, basic database concepts and attention with energy-functions and they parallelize amazingly well (one part that contributes to this is the "multi-headed attention 🐲🐲", but more on that later).
+
+
+### Attention
+
+### Positional encoding
+
+### Architecture
+
+<div class="img-block" style="width: 1000px;">
+    <img src="/images/transformers/transformer.png"/>
+</div>
+
+### Todo
+- add lecture slide notes/ handwritten drawings
+- add notes from: [self-attention video](https://youtu.be/yGTUuEx3GkA)
 - watch and write down notes for:
 1. [11-785 Deep Learning Recitation 11: Transformers Part 1](https://www.youtube.com/watch?v=X2nUH6fXfbc) <- implementation
 2. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
@@ -64,10 +82,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 
 ### References
-1. [Kaggle - Transformers from Scratch][kaggle-transformer-from-scratch]
+1. [Transformer architecture image][transformer-img].
 
 <!-- Ressources -->
-[kaggle-transformer-from-scratch]: https://www.kaggle.com/code/arunmohan003/transformer-from-scratch-using-pytorch/notebook
+[transformer-img]: https://deepfrench.gitlab.io/deep-learning-project/resources/transformer.png
 
 
 <!-- Optional Comment Section-->
