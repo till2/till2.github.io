@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /mdp/
-title: markov decision process
+title: Markov decision process
 ---
 
 Hello, traveler! <br>
