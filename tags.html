@@ -1,0 +1,40 @@
+---
+layout: page
+permalink: /tags.html
+title: tags
+back_to_top_button: true
+---
+
+{% for tag in site.tags %}
+
+  <!-- go to the first post with that tag if the tag header is clicked-->
+  <h3 class="category-head"><a class="category-head" href="{{tag[1][0].url }}">{{ tag[0] }}</a></h3>
+
+  <ul class="tags-expo-posts">
+    {% for post in tag[1] %}
+
+      <article class="archive-item">
+        <li>
+          <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
+        </li>
+      </article>
+
+
+    {% endfor %}
+  </ul>
+
+{% endfor %}
+
+<!-- Back to main button-->
+<p class="vspace"></p>
+<a class="commentlink" role="button" style="color:lightslategrey; box-shadow: rgba(156, 148, 242, 0.3) 10px 10px;" href="/">Back to main.</a>
+
+<!-- Optional Back to Top Button -->
+{% if page.back_to_top_button %}
+<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop({
+  diameter: 40,
+  backgroundColor: 'rgb(255, 255, 255, 0.7)', /* 30,144,255, 0.7 */
+  textColor: '#4a4946'
+})</script>
+{% endif %}
