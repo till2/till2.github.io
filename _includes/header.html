@@ -8,6 +8,9 @@
     {% assign page_paths = site.header_pages | default: default_paths %}
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
+
+
+
     {% if page_paths %}
       <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -44,5 +47,37 @@
 
       </nav>
     {% endif %}
+
+    <!-- REWARD HANDLING -->
+    <script src="{{site.baseurl}}/reward_handling.js"></script>
+
+    <!--
+    <button onclick="updateAccReward(1)">Update Reward</button>
+    <button onclick="resetMDP()" href="/">Reset MDP</button>
+    -->
+
+    <!-- Textfield for showing the reward -->
+    <div class="acc_reward"> <!-- also blue on hover -->
+      <a class="acc_reward_text" href="/mdp">Accumulated reward:</a>
+      <a class="acc_reward" id="reward_field"><b></b></a>
+    </div>
+
+    <script defer>
+    var accumulated_reward = 0; 
+    updateAccReward(0);
+
+    /* color acc_reward number green/red depending on value */
+    var content = document.getElementById("reward_field").innerHTML;
+    if(!isNumeric(content)) content = 0;
+    if (content >= 0){
+      document.getElementById("reward_field").style.color = "#01cc65";
+    }
+    else {
+      document.getElementById("reward_field").style.color = "#f77272";
+    }
+
+    </script>
+    <!-- END OF REWARD HANDLING -->
+
   </div>
 </header>

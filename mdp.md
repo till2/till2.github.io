@@ -10,6 +10,12 @@ This site acts as a markov decision process (MDP), for human agents to pick post
 - diagram of automaton (with rewards etc.)
 - value function
 
+
+<!-- REWARD HANDLING -->
+<!-- <button onclick="updateAccReward(Math.floor(Math.random() * 10)-4)">Add random reward</button>-->
+ <!-- [-4, ... , 5]-->
+
+
 <!-- Back to main button-->
 <p class="vspace"></p>
-<a class="commentlink" role="button" style="color:lightslategrey; box-shadow: rgba(156, 148, 242, 0.3) 10px 10px;" href="/">Back to main.</a>
+<a class="reset_mpd_button" role="button" onclick="resetMDP()" href="/">Reset MDP.</a>

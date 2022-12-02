@@ -20,10 +20,10 @@ permalink: /about/
 
 ```
 @Misc{zemann2022,
-author = {Till Zemann},
-title = {Till's Notebook},
-howpublished = {\url{https://till2.github.io}}
-year = {2022},
+  author = {Till Zemann},
+  title = {Till's Notebook},
+  howpublished = {\url{https://till2.github.io}},
+  year = {2022},
 }
 ```
 
