@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /mdp.html
+permalink: /mdp/
 title: markov decision process
 ---
 
