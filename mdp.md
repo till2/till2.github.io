@@ -5,7 +5,10 @@ title: Markov decision process
 ---
 
 Hello, traveler! <br>
-This site acts as a markov decision process (MDP), for human agents to pick posts and collect rewards.
+This site acts as a [markov decision process (MDP),](https://en.wikipedia.org/wiki/Markov_decision_process) for human agents to pick posts and collect rewards in a typical RL setting. Can you figure out what the optimal policy is?
+Hint: You might want to explore the site first and then commit to an answer.
+
+Afterwards, you can check the optimal policy and value functions for this site here. <!-- maybe add links for "here" -->
 
 - diagram of automaton (with rewards etc.)
 - value function
