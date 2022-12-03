@@ -36,31 +36,22 @@
             </div>
           <!-- <a class="page-link" href="/entrypoints">Entrypoints</a> -->
           <a class="page-link" href="/about">About 🌿</a>
-
-<!--           {% for path in page_pa ths %}
-            {% assign my_page = site.pages | where: "path", path | first %}
-            {% if my_page.title %}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-            {% endif %}
-          {% endfor %} -->
         </div>
 
       </nav>
     {% endif %}
 
-    <!-- REWARD HANDLING -->
-    <script src="{{site.baseurl}}/reward_handling.js"></script>
 
-    <!--
-    <button onclick="updateAccReward(1)">Update Reward</button>
-    <button onclick="resetMDP()" href="/">Reset MDP</button>
-    -->
+    <!-- REWARD HANDLING -->
+    <!--  <script src="{{site.baseurl}}/reward_handling.js"></script>  -->
 
     <!-- Textfield for showing the reward -->
-    <div class="acc_reward"> <!-- also blue on hover -->
+    <!--
+    <div class="acc_reward">
       <a class="acc_reward_text" href="/mdp">Accumulated reward:</a>
       <a class="acc_reward" id="reward_field"><b></b></a>
     </div>
+    
 
     <script defer>
     var accumulated_reward = 0; 
@@ -77,7 +68,9 @@
     }
 
     </script>
-    <!-- END OF REWARD HANDLING -->
+  -->
+  <!-- END OF REWARD HANDLING -->
+  
 
   </div>
 </header>
