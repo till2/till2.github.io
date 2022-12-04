@@ -482,17 +482,6 @@ a.category-head
   user-select: none; /* Standard */
 }
 
-h3.category-head:hover
-{
-  text-decoration: none;
-
-  background-color: #4fc0f0;
-  color: white;
-
-  transform: translateZ(0) scale(1.02);
-  transition: transform .2s;
-}
-
 div.acc_reward
 {
   float:right;
