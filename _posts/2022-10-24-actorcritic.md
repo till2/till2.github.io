@@ -10,6 +10,7 @@ math: true
 positive_reward: true
 reward: 2
 tags: [reinforcement learning]
+thumbnail: "/images/robot-2.png"
 ---
 
 <div class="img-block" style="width: 300px;">

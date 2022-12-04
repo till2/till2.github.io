@@ -10,6 +10,7 @@ math: true
 positive_reward: true
 reward: 2
 tags: [machine learning, nlp]
+thumbnail: "/images/transformers/transformer.png"
 ---
 
 <!--
