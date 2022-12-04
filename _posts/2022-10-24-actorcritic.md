@@ -35,7 +35,7 @@ The TD Error <strong style="color: #ED412D">$\delta^{\pi_{\theta}}$</strong> is 
 
 $$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \underbrace{\pi_{\theta}(s,a)}_\text{actor} ] \overbrace{Q^{\pi_{\theta}}(s,a)}^\text{critic}$$.
 
-$R^s_a$ is the step reward for taking action $a$ in state $s$.
+$R^s_a$ is the expected reward signal that the agent receives taking action $a$ in state $s$.
 
 ### What are Actor and Critic?
 
