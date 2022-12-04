@@ -22,6 +22,18 @@ thumbnail: "/images/robot-2.png"
 * TOC
 {:toc}
 
+### Introduction
+
+When combining value-based with policy-based methods, we arrive at the popular actor-critic architecture:
+<div class="img-block" style="width: 400px;">
+    <img src="/images/actor-critic/venn-simple.jpg"/>
+</div>
+
+A more comprehensive venn diagram for the RL-algorithm taxonomy (now we also distinguish between model-based and model-free algorithms):
+<div class="img-block" style="width: 700px">
+    <img src="/images/actor-critic/venn-diagram-rl-algos-detailed.png"/>
+</div>
+
 ### Temporal Difference (TD) Error
 
 We can calculate the TD error as the difference between the new and old estimates of a state value:
