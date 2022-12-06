@@ -10,7 +10,7 @@ back_to_top_button: true
 {% for tag in site.tags %}
 
   <!-- go to the first post with that tag if the tag header is clicked-->
-  <h3 ><a class="category-head" href="{{tag[1][0].url }}">{{ tag[0] }}</a></h3>
+  <h3 ><a class="category-head" name="{{tag[0]}}" href="{{tag[1][0].url }}">{{ tag[0] }}</a></h3>
 
   <ul class="tags-expo-posts">
     {% for post in tag[1] %}
