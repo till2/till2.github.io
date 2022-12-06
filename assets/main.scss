@@ -482,6 +482,19 @@ a.category-head
   user-select: none; /* Standard */
 }
 
+
+a.category-head:hover{
+  background-color: #4fc0f0;
+  color: white;
+  transition: 0.3s;
+}
+
+a.category-head:focus{
+  background-color: #4fc0f0;
+  color: white;
+  transition: color 0.7s ease-out, background-color 0.5s ease-out;
+}
+
 div.acc_reward
 {
   float:right;
