@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Blackjack: Learning an optimal strategy"
+title:  "Blackjack: Learning an optimal policy"
 author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
@@ -27,7 +27,7 @@ thumbnail: "/images/rl_loop.jpg"
 ### Introduction
 
 In this tutorial, we’ll explore and solve the *Blackjack-v1* environment \
-(this means we'll have an agent learn an optimal strategy).
+(this means we'll have an agent learn an optimal policy).
 
 This tutorial is part of the [`Gymnasium` documentation](https://gymnasium.farama.org/tutorials/blackjack_tutorial/). A more detailed version with training plots can be found on the Gymnasium website.
 
