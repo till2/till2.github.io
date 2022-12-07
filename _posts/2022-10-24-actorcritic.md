@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critic (👷)"
+title:  "Actor-Critics (👷)"
 author: "Till Zemann"
 date:   2022-10-24 20:36:41 +0200
 categories: jekyll update
@@ -12,6 +12,8 @@ reward: 2
 tags: [reinforcement learning]
 thumbnail: "/images/robot-2.png"
 ---
+
+<!-- add the actor-critic diagram from Prof. Sutton.! -->
 
 <div class="img-block" style="width: 300px;">
     <img src="/images/robot-2.png"/>
@@ -76,6 +78,7 @@ $\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] 
 </div>
 
 ### Todo
+- [Richard Sutton: Actor-Critic Methods](http://incompleteideas.net/book/ebook/node66.html) !!! The inventoooor.
 - Advantage Actor Critic (A2C) Algorithm
 - clean implementation
 - Evaluation and tradeoffs

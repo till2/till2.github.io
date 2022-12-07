@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Blackjack: Learning an optimal policy"
+title:  "Solving Blackjack"
 author: "Till Zemann"
 date:   2022-10-19 23:59:59 +0200
 categories: jekyll update
