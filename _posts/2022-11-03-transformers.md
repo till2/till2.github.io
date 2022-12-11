@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Transformers (👷)"
+title:  "The Transformer (...)"
 author: "Till Zemann"
 date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
