@@ -2,7 +2,7 @@
 layout: post
 title:  "Actor-Critics (👷)"
 author: "Till Zemann"
-date:   2022-10-24 20:36:41 +0200
+date:   2022-12-13 00:32:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
@@ -12,6 +12,9 @@ reward: 2
 tags: [reinforcement learning]
 thumbnail: "/images/robot-2.png"
 ---
+
+<em>First draft: 2022-10-24</em><br>
+<em>Major rewrite and additions on: 2022-12-12</em>
 
 <!-- add the actor-critic diagram from Prof. Sutton.! -->
 
@@ -26,15 +29,79 @@ thumbnail: "/images/robot-2.png"
 
 ### Introduction
 
-When combining value-based with policy-based methods, we arrive at the popular actor-critic architecture:
+Let's start by looking at the REINFORCE algorithm, a method for training reinforcement learning (RL) agents. It is a policy gradient method, which means that it uses gradient ascent to adjust the parameters of the policy in order to maximize the expected reward. It does this by computing the gradient of the performance (goal) $J(\theta) \stackrel{.}{=} V^{\pi_\theta}(s_0)$ with respect to the policy parameters, and then updating the policy in the direction of this gradient. This update rule is known as the policy gradient update rule, and it ensures that the policy is always moving in the direction that will increase the expected future reward (=return). Because we need the entire return $G_t$ for the update at timestep $t$, REINFORCE is a Monte-Carlo method and theirfore only well-defined for episodic cases.
+
+By using a baseline $b(S_t)$, we can reduce the variance of the gradients and improve the stability of the learning process. The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses a value function as a baseline to improve the stability of the learning process. This baseline also needs to be learned (we have to approximate $V(s)$, usually using a Deep Neural Network), theirfore Actor-Critics are a combination of value-based and policy-based methods.
+
 <div class="img-block" style="width: 400px;">
     <img src="/images/actor-critic/venn-simple.jpg"/>
 </div>
 
-A more comprehensive venn diagram for the RL-algorithm taxonomy (now we also distinguish between model-based and model-free algorithms):
+The image below depicts a more comprehensive venn diagram for the RL-algorithm taxonomy (which also distinguish between model-based and model-free algorithms).
 <div class="img-block" style="width: 700px">
     <img src="/images/actor-critic/venn-diagram-rl-algos-detailed.png"/>
 </div>
+
+
+### From Policy-Gradient-Theorem to REINFORCE update rule
+
+
+The policy gradient theorem (for the episodic case) states that:
+
+$$
+\begin{align*}
+\nabla_{\theta} J(\theta) &\propto \sum_s \mu(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta) \\
+                          &= \mathbb{E_\pi}[ \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta) ]
+\end{align*}
+$$
+
+where $\mu(s)$ is the on-policy distribution over all states (included in $\mathbb{E}_\pi$). (From S&B [[6]][sab], Chapter 13). \\
+We can extend it further by <strong style="color: #ED412D">multiplying and deviding by $\pi(a|S_t, \theta)$ to get the expression $\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. This is a common trick using the logarithm, where you can rewrite the gradient of $\log x$ with $\nabla \log x = \frac{1}{x} \nabla x = \frac{\nabla x}{x}$ (just using the chain rule). In our specific case, we can use this as  <strong style="color: #1E72E7">$\nabla \log \pi(a|S_t, \theta)$</strong> $=$ <strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. 
+
+Performing all of the steps above:
+
+$$
+\nabla_{\theta} J(\theta)   \propto \mathbb{E_\pi}[ \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta)]
+$$
+
+<center>
+<!-- with multiplied and devided by pi(a|S_t,\theta) -->
+$
+= \mathbb{E_\pi}[ \sum_a 
+$
+<strong style="color: #ED412D">$\pi(a|S_t, \theta)$</strong>
+$Q^\pi(s,a)$
+<strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>$]$ <br><br>
+</center>
+
+We can just replace 
+$
+\sum_a 
+$
+<strong style="color: #ED412D">$\pi(a|S_t, \theta)$</strong>
+$= 1$ and use the log-trick (rewrite the gradient of $\log x$ as the fraction described in the section above).
+
+<!-- rewritten as gradient of log -->
+<center>
+$
+= \mathbb{E_\pi}[Q^\pi(s,a)
+$
+<strong style="color: #1E72E7">$\nabla \log \pi(a|S_t, \theta)$</strong>$]$
+<br><br>
+$
+= \mathbb{E_\pi}[G_t
+$
+<strong style="color: #1E72E7">$\nabla \log \pi(a|S_t, \theta)$</strong>$]$
+
+</center>
+<br>
+
+<!-- Gradient for the actor critic -->
+<!--
+$$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \underbrace{\pi_{\theta}(s,a)}_\text{actor} ] \overbrace{Q^{\pi_{\theta}}(s,a)}^\text{critic}$$.
+
+$R^s_a$ is the expected reward signal that the agent receives taking action $a$ in state $s$.
+-->
 
 ### Temporal Difference (TD) Error
 
@@ -45,11 +112,6 @@ We can calculate the TD error as the difference between the new and old estimate
 The TD Error <strong style="color: #ED412D">$\delta^{\pi_{\theta}}$</strong> is an unbiased estimate for the advantage <strong style="color: #ED412D">$A^{\pi_{\theta}(s,a)}$</strong>, meaning $\mathbb{E}[\delta^{\pi_{\theta}}] = A^{\pi_{\theta}(s,a)}$. This property will be helpful later.
 
 
-### Policy gradient theorem
-
-$$\nabla_{\theta} J(\theta) = \mathbb{E}[\nabla_{\theta} \log \pi_{\theta}(s,a)] R^s_a = \mathbb{E}[\nabla_{\theta} \log \underbrace{\pi_{\theta}(s,a)}_\text{actor} ] \overbrace{Q^{\pi_{\theta}}(s,a)}^\text{critic}$$.
-
-$R^s_a$ is the expected reward signal that the agent receives taking action $a$ in state $s$.
 
 ### What are Actor and Critic?
 
@@ -135,7 +197,9 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 3. Pseudocode Image taken from [here][code].
 4. PyTorch Actor Critic [implementation][torch-actor-critic-code].
-5. TD0 Actor Critic [implementation][actor-critic-TD0-code]
+5. TD(0) Actor Critic [implementation][actor-critic-TD0-code]
+6. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
+
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -144,7 +208,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [torch-actor-critic-code]: https://github.com/pytorch/examples/blob/main/reinforcement_learning/actor_critic.py
 [actor-critic-TD0-code]: https://github.com/chengxi600/RLStuff/blob/master/Actor-Critic/Actor-Critic_TD_0.ipynb
 [actor-critic-blogpost]: https://medium.com/geekculture/actor-critic-value-function-approximations-b8c118dbf723
-
+[sab]: http://incompleteideas.net/book/the-book-2nd.html
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

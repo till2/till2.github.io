@@ -48,6 +48,8 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 2. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
 3. [Transformer (Aleksa Gordić)](https://www.youtube.com/watch?v=cbYxHkgkSVs) <- and part 2
 
+- https://blog.tensorflow.org/2019/05/transformer-chatbot-tutorial-with-tensorflow-2.html
+
 <!-- In-Text Citing -->
 <!-- 
 You can...

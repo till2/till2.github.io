@@ -38,7 +38,7 @@ Replay buffers resemble some similarity to humans learning in their sleep by rep
 <div class="img-block" style="width: 900px;">
     <img src="/images/experience-replay/experience-replay-buffer.png"/>
 </div>
-<center>Using a replay buffer (usually implemented as a deque) for off-policy learning.</center>
+<center>Illustration of the replay buffer (usually implemented as a deque) interface for off-policy learning.</center>
 
 ### Discussion
 
@@ -60,7 +60,7 @@ For that to work, we need to ensure that old (long-term) knowledge isn't forgott
 
 ### Proposed solutions
 
-We can achieve this goal by compressing old experiences into new (much fewer!) experiences that the agents relearns from (if we compress multiple experiences into one and learn from this single datapoint multiple times, we have to be really careful of overfitting to this single point), or we could introduce a new parameter to balance the tradeoff between throwing out old actions and having a diverse buffer (dataset).
+We can achieve this goal by compressing old experiences into new (much fewer!) experiences that the agents relearns from (if we compress multiple experiences into one and learn from this single datapoint multiple times, we have to be really careful about not overfitting to this single point), or we could introduce a new parameter to balance the tradeoff between throwing out old actions and having a diverse buffer (dataset).
 
 - when learning from old policies, we have to use the probability of taking that action of current policy.
 
