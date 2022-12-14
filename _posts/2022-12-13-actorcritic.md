@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor-Critics (👷)"
+title:  "Actor Critics (👷)"
 author: "Till Zemann"
 date:   2022-12-13 00:32:41 +0200
 categories: jekyll update
@@ -50,7 +50,7 @@ The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses 
 </div> 
 <br>
 
-### From Policy-Gradient-Theorem to REINFORCE update rule
+### From the Policy-Gradient-Theorem to REINFORCE
 
 
 The policy gradient theorem (for the episodic case) states that:
@@ -134,6 +134,8 @@ $$A(s_t,a) = G_t - V(s)$$
 
 2) You could also estimate the advantage by using a critic Neural Network that estimates $V(s)$ and $Q(s,a)$ at the same time, and you just use $A(s,a) = Q(s,a) - V(s)$.
 
+Overview of the Actor-Critic variations:
+
 <div class="img-block" style="width: 500px;">
     <img src="/images/actor-critic/policy-gradient-variationen.png"/>
 </div>
@@ -142,28 +144,58 @@ $$A(s_t,a) = G_t - V(s)$$
 
 ### What are Actor and Critic?
 
-The main idea is that we update the actor parameters in the direction of the critic parameters. This makes sense because the critic is better able to evaluate the actual value of a state.
+The main idea is that we update the actor parameters in the direction of a value that is estimated by the critic, e.g. the advantage. This makes sense because the critic is better able to evaluate the actual value of a state.
 
 As already mentioned, the actor is responsible for learning a policy $\pi(a\|s)$, which is a function that determines the next action to take in a given state. The critic, on the other hand, is responsible for learning a value function $V(s)$ or $Q(s,a)$, which estimates the future rewards that can be obtained by following the policy. The actor and critic work together to improve the policy and value function over time, with the goal of maximizing the overall rewards obtained by the system.
 
 <em>Note, that it is common to use a shared neural network body. This is practical for learning features only once and not individually for both networks. The last layer of the body network connected to both the `policy head` and the `value head`), representing the actor and critic respectively, as follows:</em>
 
-<div class="img-block" style="width: 500px;">
+<div class="img-block" style="width: 350px;">
     <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
 </div>
 
 
 ### Actor Critic Algorithm
 
-<div class="img-block" style="width: 500px;">
-    <img src="/images/actionvalue-actor-critic-code.png"/>
-</div>
+The following algorithm for an Actor Critic in the episodic case, we are calculating the TD-Error as $\delta \leftarrow R + \gamma \hat{V}(S',w) - \hat{V}(S,w)$, using our parameterized state-value function (the critic). This means that all bootstrappinging of the TD-Error depends on our current set of parameters, which can introduce a bias. Theirfore, the updates only include a part of the true gradient. These methods are called `semi-gradient` methods.
+
+
+__Actor Critic algorithm (episodic):__
+
+<hr>
+
+__Input:__ 
+policy parameterization $\pi(a|s,\theta)$  <em>(e.g. a Deep Neural Network)</em>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+state-value function parameterization $\hat{V}(s,\textbf{w})$ <em>(e.g. a Deep Neural Network)</em>,<br>
+
+__Parameters:__ learning rates for the actor: $\alpha_\theta$, and for the critic :$\alpha_\textbf{w}$ <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+discount-factor $\gamma$ 
+
+0. Initialize the parameters in $\theta$ and $\textbf{w}$ arbitrarily (e.g. to 0) 
+1. While True:<br>
+    1. &nbsp; $S \leftarrow \text{env.reset()}$ &nbsp; // random state from starting distribution <br>
+    2. &nbsp; $t \leftarrow 0$
+    3. While S is not terminal:
+        1. &nbsp; $A \sim \pi(\cdot\|S,\theta)$ <br>
+        2. &nbsp; $S', R \leftarrow \text{env.step}(A)$ <br>
+        3. &nbsp; $\delta \leftarrow R + \gamma \hat{V}(S',w) - \hat{V}(S,w)$ <br>
+        4. &nbsp; $\textbf{w} = \textbf{w} + \alpha_\textbf{w} \delta \nabla_\textbf{w} \hat{V}(S,\textbf{w})$ &nbsp; // update critic <br>
+        5. &nbsp; $\theta = \theta + \alpha_\theta \gamma^t \delta \nabla_\theta \log \pi(A\|S,\theta)$ &nbsp; // update actor <br>
+        6. &nbsp; $t \leftarrow t + 1$ <br>
+        7. &nbsp; $S \leftarrow S'$ <br>
+
+__Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
+<hr>
+- this implementation uses $\delta$ as an Advantage estimate (high variance)
+- $\delta$ can be replaced by one of the variations discussed in the sections above
+- pseudocode modified from Sutton&Barto [[6]][sab], Chapter 13
+- great [Stackexchange post][why-gamma] for why we are using decay in the update of the actors parameters $\theta$.
 
 ### Todo
 
-- algorithm pseudocode
 - actor-critic in our brain
-
 
 
 - [Richard Sutton: Actor-Critic Methods](http://incompleteideas.net/book/ebook/node66.html) !!! The inventoooor.
@@ -178,10 +210,9 @@ Look at:
 
 
 
-### What i learned from writing this post
+### Final remark: Clean formalism
 
-Reinforcement learning formalism can get really messy and unpleasent to look at, so it can sometimes get hard to absorb the important pieces of information. For this reason it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
-
+Reinforcement learning formalism sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
 
 
@@ -241,7 +272,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 5. TD(0) Actor Critic [implementation][actor-critic-TD0-code]
 6. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
 7. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
-
+8. HHU-Lecture slides: Approximate solution methods (for the semi-gradient definition)
+9. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -252,6 +284,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [actor-critic-blogpost]: https://medium.com/geekculture/actor-critic-value-function-approximations-b8c118dbf723
 [sab]: http://incompleteideas.net/book/the-book-2nd.html
 [hadovanhasselt]: https://hadovanhasselt.files.wordpress.com/2016/01/pg1.pdf
+[semi-gradient]: https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Dialog_Systems_and_Machine_Learning/Lectures_RL/L4.pdf
+[why-gamma]: https://ai.stackexchange.com/questions/10531/in-online-one-step-actor-critic-why-does-the-weights-update-become-less-signifi
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
