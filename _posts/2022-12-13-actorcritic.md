@@ -197,16 +197,7 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 
 - actor-critic in our brain
 
-
-- [Richard Sutton: Actor-Critic Methods](http://incompleteideas.net/book/ebook/node66.html) !!! The inventoooor.
 - clean implementation
-
-Look at:
-- [towardsdatascience blogpost](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
-- [berkeley lecture slides](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
-- [CS885 Lecture 7b: Actor Critic](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
-- [Actor Critic blogpost][actor-critic-blogpost]
-- [TD0 Actor Critic code][actor-critic-TD0-code]
 
 
 
@@ -266,14 +257,23 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 ### References
 1. Illustration of the Neural Net architecture with a shared body taken from [here][datahubbs-pic-link].
-2. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
-3. Pseudocode Image taken from [here][code].
-4. PyTorch Actor Critic [implementation][torch-actor-critic-code].
-5. TD(0) Actor Critic [implementation][actor-critic-TD0-code]
-6. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
-7. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
-8. HHU-Lecture slides: Approximate solution methods (for the semi-gradient definition)
-9. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
+2. Pseudocode Image taken from [here][code].
+3. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
+4. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
+5. [HHU-Lecture slides:][semi-gradient] Approximate solution methods (for the semi-gradient definition)
+6. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
+
+
+### Pointers to other ressources
+1. [Chris Yoon: Understanding Actor Critic Methods and A2C](https://towardsdatascience.com/understanding-actor-critic-methods-931b97b6df3f)
+2. [Richard Sutton: Actor-Critic Methods](http://incompleteideas.net/book/ebook/node66.html)
+3. [Berkeley lecture slides](http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf)
+4. [CS885 Lecture 7b: Actor Critic](https://www.youtube.com/watch?v=5Ke-d1Itk3k)
+5. [Actor Critic blogpost with illustrations and eligibility traces][actor-critic-blogpost]
+6. [TD(0) Actor Critic code][actor-critic-TD0-code]
+7. PyTorch Actor Critic [implementation][torch-actor-critic-code].
+8. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
+
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
