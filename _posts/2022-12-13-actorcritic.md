@@ -146,13 +146,13 @@ Overview of the Actor-Critic variations:
 
 The main idea is that we update the actor parameters in the direction of a value that is estimated by the critic, e.g. the advantage. This makes sense because the critic is better able to evaluate the actual value of a state.
 
+<div class="img-block" style="width:350px;float:right;margin-left:20px">
+    <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
+</div>
+
 As already mentioned, the actor is responsible for learning a policy $\pi(a\|s)$, which is a function that determines the next action to take in a given state. The critic, on the other hand, is responsible for learning a value function $V(s)$ or $Q(s,a)$, which estimates the future rewards that can be obtained by following the policy. The actor and critic work together to improve the policy and value function over time, with the goal of maximizing the overall rewards obtained by the system.
 
 <em>Note, that it is common to use a shared neural network body. This is practical for learning features only once and not individually for both networks. The last layer of the body network connected to both the `policy head` and the `value head`), representing the actor and critic respectively, as follows:</em>
-
-<div class="img-block" style="width: 350px;">
-    <img src="https://www.datahubbs.com/wp-content/uploads/2018/08/two_headed_network.png"/>
-</div>
 
 
 ### Actor Critic Algorithm
@@ -203,8 +203,7 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 
 ### Final remark: Clean formalism
 
-Reinforcement learning formalism sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
-
+Reinforcement learning notation sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason i think it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
 
 
@@ -251,9 +250,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
     <img src="/images/actor-critic/venn-diagram-rl-algos-detailed.png"/>
 </div>
 
-
-<!-- Ressources -->
-[myreference-1]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+-->
 
 ### References
 1. Illustration of the Neural Net architecture with a shared body taken from [here][datahubbs-pic-link].
