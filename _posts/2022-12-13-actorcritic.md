@@ -195,10 +195,28 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 
 ### Todo
 
-- actor-critic in our brain
+- the discounting problem (+ paper from discord)
 
 - clean implementation
 
+
+### Corresponding neuroanatomic structures for the Actor Critic mechanism
+
+The functions of the two parts of the stratium (dorsal stratium -> action selection, ventral stratium -> reward processing) suggest that Actor Critic mechanism is used for learning in our brains, where both the actor and critic learn from the TD-Error $\delta$, which is produced by the critic. A TD-Error $\delta > 0$ would mean that the selected action led to a state with a better than expected value and if $\delta < 0$, it led to a state with a worse than average value. Both the actor and critic learn from the TD-Error, which corresponds to a pattern of dopamine neuron activations in the brain. These dopamine neurons modulate the updates of synapses in the actor and critic structures.
+
+$$
+\text{TD-Error} \delta \hat{=} \text{Activation pattern of dopamine neurons}
+$$
+
+The following image shows the corresponding structures in mammalian brains and how they interact.
+
+<div class="img-block" style="width: 500px;">
+    <img src="/images/actor-critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation
+"/>
+</div>
+<center>Illustration from Massimiliano Patacchiola's blog [9]</center>
+
+Experiments show that when the dopamine signal from the critic is distorted, e.g. by the use of cocain, the subjects could not learn the presented task (because the dopamine/error signal for the actor is too noisy).
 
 
 ### Final remark: Clean formalism
@@ -273,7 +291,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 6. [TD(0) Actor Critic code][actor-critic-TD0-code]
 7. PyTorch Actor Critic [implementation][torch-actor-critic-code].
 8. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
-
+9. [Massimiliano Patacchiola: ][awesome-well-written-rl-blog-series]
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -286,6 +304,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [hadovanhasselt]: https://hadovanhasselt.files.wordpress.com/2016/01/pg1.pdf
 [semi-gradient]: https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Dialog_Systems_and_Machine_Learning/Lectures_RL/L4.pdf
 [why-gamma]: https://ai.stackexchange.com/questions/10531/in-online-one-step-actor-critic-why-does-the-weights-update-become-less-signifi
+[awesome-well-written-rl-blog-series]: https://mpatacchiola.github.io/blog/2017/02/11/dissecting-reinforcement-learning-4.html
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
