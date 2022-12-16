@@ -2,12 +2,40 @@
 ---
 @import "minima";
 
+@font-face {
+  font-family: "wigendatypewrite";
+  src: url("../assets/fonts/WigendaTypewrite.ttf");
+}
+
+@font-face {
+  font-family: "wigendatypewrite-semibold";
+  src: url("../assets/fonts/WigendaTypewrite-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "wigendatypewrite-bold";
+  src: url("../assets/fonts/WigendaTypewrite-Bold.ttf");
+}
+
+h1 {
+    font-family: "wigendatypewrite-semibold";
+}
 
 h2 {
+    font-family: "wigendatypewrite-semibold";
     margin-top: 20px;
 }
 
-p, li {
+h3 {
+    font-family: "wigendatypewrite-semibold";
+}
+
+h4 {
+    font-family: "wigendatypewrite-semibold";
+}
+
+p, li, a {
+    /* font-family: "wigendatypewrite";*/  /* using a custom font here, otherwise just delete*/
     text-align: justify;
 }
 
@@ -55,7 +83,8 @@ img.home{
 }
 
 code {
-  background-color: #abf5df; /* a3f7de clinical green */
+  background-color: rgba(247,193,224,0.5); /*  #f7c1e0 -> pink, #abf5df a3f7de -> clinical green */
+  /* box-shadow: 5px 3px 18px 3px rgba(247,193,224,0.5); */
 }
 
 pre.highlight code{
@@ -296,6 +325,11 @@ div.output:before {
 
 
 /* CSS */
+a.post-link {
+    font-family: "wigendatypewrite-bold";
+}
+
+
 a.commentlink {
 
   background: #fff;

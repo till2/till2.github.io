@@ -1,0 +1,12 @@
+/* Webfont: TypewriterInked-Italic */@font-face {
+    font-family: 'TypewriterInked';
+    src: url('TypewriterInked-Italic.eot'); /* IE9 Compat Modes */
+    src: url('TypewriterInked-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('TypewriterInked-Italic.woff') format('woff'), /* Modern Browsers */
+         url('TypewriterInked-Italic.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('TypewriterInked-Italic.svg#TypewriterInked-Italic') format('svg'); /* Legacy iOS */
+    font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

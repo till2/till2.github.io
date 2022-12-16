@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critics (👷)"
+title:  "Actor Critics"
 author: "Till Zemann"
 date:   2022-12-13 00:32:41 +0200
 categories: jekyll update
@@ -202,21 +202,20 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 
 ### Corresponding neuroanatomic structures for the Actor Critic mechanism
 
-The functions of the two parts of the stratium (dorsal stratium -> action selection, ventral stratium -> reward processing) suggest that Actor Critic mechanism is used for learning in our brains, where both the actor and critic learn from the TD-Error $\delta$, which is produced by the critic. A TD-Error $\delta > 0$ would mean that the selected action led to a state with a better than expected value and if $\delta < 0$, it led to a state with a worse than average value. Both the actor and critic learn from the TD-Error, which corresponds to a pattern of dopamine neuron activations in the brain. These dopamine neurons modulate the updates of synapses in the actor and critic structures.
+The functions of the two parts of the stratium (dorsal stratium -> action selection, ventral stratium -> reward processing) suggest that an Actor Critic mechanism is used for learning in our brains, where both the actor and the critic learn from the TD-Error $\delta$, which is produced by the critic. A TD-Error $\delta > 0$ would mean that the selected action led to a state with a better than expected value and if $\delta < 0$, it led to a state with a worse than average value. An important insight from Neuroscience is that the TD-Error corresponds to a pattern of dopamine neuron activations in the brain, rather than being just a scalar signal (in our brain, you could look at it as a vector of dopamine-neuron activity). These dopamine neurons modulate the updates of synapses in the actor and critic structures.
 
 $$
-\text{TD-Error} \delta \hat{=} \text{Activation pattern of dopamine neurons}
+\text{TD-Error} \; \delta \; \hat{=} \; \text{Activation pattern of dopamine neurons}
 $$
 
 The following image shows the corresponding structures in mammalian brains and how they interact.
 
 <div class="img-block" style="width: 500px;">
-    <img src="/images/actor-critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation
-"/>
+    <img src="/images/actor-critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation.png"/>
 </div>
 <center>Illustration from Massimiliano Patacchiola's blog [9]</center>
 
-Experiments show that when the dopamine signal from the critic is distorted, e.g. by the use of cocain, the subjects could not learn the presented task (because the dopamine/error signal for the actor is too noisy).
+Experiments show that when the dopamine signal from the critic is distorted, e.g. by the use of cocaine, the subject was not able to learn the task (because the dopamine/error signal for the actor is too noisy).
 
 
 ### Final remark: Clean formalism
@@ -224,6 +223,7 @@ Experiments show that when the dopamine signal from the critic is distorted, e.g
 Reinforcement learning notation sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason i think it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
 
+<!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
 
 <!-- In-Text Citing -->
 <!-- 

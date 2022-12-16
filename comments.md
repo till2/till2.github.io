@@ -6,8 +6,8 @@ permalink: /comments/
 ---
 
 
-### <em> This is the place for suggestions, questions, exchange of ideas and more. </em>
-
+### <em> Constructive critism, ideas, and other comments are always welcome :) </em>
+<!-- This is the place for suggestions, questions, exchange of ideas and more. -->
 <div class="img-block" style="width: 300px;">
     <img src="/images/cozy-wall.png"/>
 </div>
