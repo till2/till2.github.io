@@ -2,7 +2,7 @@
 layout: post
 title:  "Actor Critics"
 author: "Till Zemann"
-date:   2022-12-13 00:32:41 +0200
+date:   2022-12-16 00:32:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
@@ -20,7 +20,8 @@ thumbnail: "/images/robot-2.png"
 </div>
 
 <em style="float:right">First draft: 2022-10-24</em><br>
-<em style="float:right">Second draft: 2022-12-12</em>
+<em style="float:right">Second draft: 2022-12-12</em><br>
+<em style="float:right">Third draft: 2022-12-15</em>
 
 <!--
 ### Contents
@@ -29,6 +30,8 @@ thumbnail: "/images/robot-2.png"
 -->
 
 ### Introduction
+
+The Actor Critic is a powerful and beautiful method for learning, with surprising similarities to our dopaminergic learning circuits.
 
 Let's start by looking at the REINFORCE algorithm, a method for training reinforcement learning (RL) agents. It is a policy gradient method, which means that it uses gradient ascent to adjust the parameters of the policy in order to maximize the expected reward. It does this by computing the gradient of the performance (goal) $J(\theta) \stackrel{.}{=} V^{\pi_\theta}(s_0)$ with respect to the policy parameters, and then updating the policy in the direction of this gradient. This update rule is known as the policy gradient update rule, and it ensures that the policy is always moving in the direction that will increase the expected future reward (=return). Because we need the entire return $G_t$ for the update at timestep $t$, REINFORCE is a Monte-Carlo method and theirfore only well-defined for episodic cases. 
 
@@ -288,7 +291,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 6. [TD(0) Actor Critic code][actor-critic-TD0-code]
 7. PyTorch Actor Critic [implementation][torch-actor-critic-code].
 8. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
-9. [Massimiliano Patacchiola: ][awesome-well-written-rl-blog-series]
+9. [Massimiliano Patacchiola: Dissecting Reinforcement Learning-Part.4: Actor-Critic (AC) methods][awesome-well-written-rl-blog-series] (+ Correlations to Neuroanatomy)
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/

@@ -31,7 +31,7 @@ TODO:
 
 ### Intro
 
-Prioritized Experience Replay (PER) is a technique that was introduced by [[5]][prioritized-experience-replay] Schaul et al. in 2015. The method aims to improve the performance of the Experience Replay (ER) buffer that lets Reinforcement Learning agents learn quicker by replaying transitions that were observed by another (old) policy (=off-policy learning). The idea is to sample experiences in the buffer with a probability that is proportional to the TD-error of the experience, because we can learn the most from transitions that have a high TD-error (where the agent was the wrong-est).
+Prioritized Experience Replay (PER) is a technique that was introduced by [[5]][prioritized-experience-replay] Schaul et al. in 2015. The method aims to improve the performance of the Experience Replay (ER) buffer that lets Reinforcement Learning agents learn quicker by replaying transitions that were observed by another (old) policy (=off-policy learning). The idea is to sample experiences in the buffer with a probability that is proportional to the TD-error of the experience, because we can learn the most from transitions that have a high TD-error (where the agents prediction was the most off the target).
 
 Replay buffers resemble some similarity to humans learning in their sleep by replaying important series of transitions (=dreaming) that were experienced during the day to consolidate them into long-term memory [[7]][wiki-sleep-learning] and learn from them to develop problem-solving skills [[8]][wiki-dreams].
 

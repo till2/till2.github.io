@@ -36,7 +36,9 @@ layout: default
 
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    <h2 class="post-list-heading" style="font-size: 1px">{{ page.list_title | default: "" }}</h2>
+    <!-- -.-- --- ..-  .- .-. .  .- .-- . ... --- -- . (you are awesome)-->
+    <!-- .-- .... .- - -.. .. -.. -.-- --- ..- . -..- .--. . -.-. - ..--.. (what did you expect?) -->
     <ul class="post-list">
       {%- for post in site.posts -%}
 
