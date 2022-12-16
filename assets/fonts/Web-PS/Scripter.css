@@ -1,9 +1,0 @@
-/* Webfont: Scripter-Regular */@font-face {
-    font-family: 'Scripter';
-    src: url('Scripter.woff2') format('woff2'), /* Modern Browsers */
-         url('Scripter.otf') format('opentype'); /* Safari, Android, iOS */
-             font-style: normal;
-    font-weight: normal;
-    text-rendering: optimizeLegibility;
-}
-
