@@ -11,7 +11,8 @@ permalink: /about/
     <img src="/images/ghpb1.png"/>
 </div>
 
-#### Reinforcement Learning geek and B.Sc. student at Uni Potsdam.
+
+#### [Reinforcement Learning][why-rl] geek and B.Sc. student at Uni Potsdam.
 
 
 #### You can find my projects on [GitHub][github] and contact me via [LinkedIn][linkedin]!
@@ -27,7 +28,7 @@ permalink: /about/
 }
 ```
 
-
+[why-rl]: /why-rl
 [github]: https://github.com/till2
 [linkedin]: https://www.linkedin.com/in/tillzemann/
 [myreference-1]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
