@@ -25,7 +25,8 @@ The potential of RL extends further to creative solutions that can emerge for ex
 
 <p class="vspace"></p>
 
-#### __A few examples of where creative solutions emerged through RL:__
+#### __A few examples of creative solutions that emerged through RL:__
+
 
 - OpenAI hide and seek (agents learned to abuse the physics engine)
 <!-- width: 560, height: 315-->
@@ -33,8 +34,8 @@ The potential of RL extends further to creative solutions that can emerge for ex
 
 <iframe width="355" height="200" src="https://www.youtube.com/embed/kopoLzvh5jY?start=110" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<em>Videos are playing from the timestamps where the agents discover interesting bugs.</em>
-
+<em>Videos are playing from the timestamps that show the strategies that emerged to exploit physics bugs.</em>
+<p class="vspace"></p>
 
 - OpenAI gym ant walking upside down
 
@@ -50,15 +51,19 @@ __Left:__ normal walking gate [[2]][ant-walking-gate]<br>
 __Right:__ something similar to the discovered <br>head-walking gate (read text below) [[3]][ant-headspins]
 
 OpenAI gym coupled with the MuJoCo simulator offers realistic physics simulation, so you can try to train agents to walk or do all kinds of stunts. Usually when learning a walking gate, you want to give some additional reward when the agent is walking smoothly (because otherwise it often jitters and looks really weird). So in one example someone wanted to make the ant jump forward instead of walking, and theirfore gave it negative reward for touching the ground. But instead of jumping, it discovered to walk on its head and moved forward on the knees, so the feet didn't touch the ground. Unfortunately I couldn't find the video for this, but the clip on the right should give you the gist of how that would look like. 
+<p class="vspace"></p>
 
 
 - Breakout tunnel
 
+<em> Below, I have linked to the specific parts of the following videos that correspond to the text. However, if you find the video interesting, I highly recommend watching the entire thing. </em> 
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/d-bvsJWmqlc?start=913" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <em>Agent discovering a creative strategy (tunnel digging) to beat breakout quickly. <br> (Wait for it.)</em>
+<p class="vspace"></p>
 
 
-- The creative move 37 from AlphaGo, refuting thousands of years of Go theory
+- The creative move 37 from AlphaGo, playing an unthinkable move after thousands of years of Go theory
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WXuK6gekU1Y?start=2974" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
