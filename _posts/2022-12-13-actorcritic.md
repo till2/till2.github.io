@@ -31,13 +31,13 @@ thumbnail: "/images/robot-2.png"
 
 ### Introduction
 
-The Actor Critic is a powerful and beautiful method for learning, with surprising similarities to our dopaminergic learning circuits.
+The Actor Critic is a powerful and beautiful method of learning, with surprising similarities to our dopaminergic learning circuits.
 
 Let's start by looking at the REINFORCE algorithm, a method for training reinforcement learning (RL) agents. It is a policy gradient method, which means that it uses gradient ascent to adjust the parameters of the policy in order to maximize the expected reward. It does this by computing the gradient of the performance (goal) $J(\theta) \stackrel{.}{=} V^{\pi_\theta}(s_0)$ with respect to the policy parameters, and then updating the policy in the direction of this gradient. This update rule is known as the policy gradient update rule, and it ensures that the policy is always moving in the direction that will increase the expected future reward (=return). Because we need the entire return $G_t$ for the update at timestep $t$, REINFORCE is a Monte-Carlo method and theirfore only well-defined for episodic cases. 
 
 One drawback of the pure REINFORCE algorithm is, that it has a really high variance and could be unstable as a result. The baseline $b(S_t)$ has to be independent of the action. A good idea is to use state-values as a baseline, which reduce the magnitude of the expected reward (it has the effect of "shrinking" the estimated rewards towards the baseline value). Reducing the magnitude of the estimated rewards can help to reduce the variance of the algorithm. This is because the updates that the algorithm makes to the policy are based on the estimated rewards. If the magnitude of the rewards is large, the updates will also be large, which can cause the learning process to be unstable and can result in high variance. By reducing the magnitude of the rewards, the updates are also reduced, which can help to reduce the variance and thus stabilize the learning process.
 
-The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses a value function as a baseline to improve the stability of the learning process. This baseline also needs to be learned (we have to approximate $V(s)$, usually using a Deep Neural Network), theirfore Actor-Critics are a combination of value-based and policy-based methods:
+The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses a value function as a baseline to improve the stability of the learning process. This baseline also needs to be learned (we have to approximate $V(s)$, usually using a _Deep Neural Network_), theirfore Actor-Critics are a combination of value-based and policy-based methods:
 
 
 <!-- new -->
@@ -208,7 +208,10 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 The functions of the two parts of the stratium (dorsal stratium -> action selection, ventral stratium -> reward processing) suggest that an Actor Critic mechanism is used for learning in our brains, where both the actor and the critic learn from the TD-Error $\delta$, which is produced by the critic. A TD-Error $\delta > 0$ would mean that the selected action led to a state with a better than expected value and if $\delta < 0$, it led to a state with a worse than average value. An important insight from Neuroscience is that the TD-Error corresponds to a pattern of dopamine neuron activations in the brain, rather than being just a scalar signal (in our brain, you could look at it as a vector of dopamine-neuron activity). These dopamine neurons modulate the updates of synapses in the actor and critic structures.
 
 $$
-\text{TD-Error} \; \delta \; \hat{=} \; \text{Activation pattern of dopamine neurons}
+\begin{align*}
+\text{TD-Error} \; \delta \; &\hat{=} \; \text{Activation pattern of dopamine neurons} \\
+                             &\hat{=} \; \text{experience - expectated experience}
+\end{align*}
 $$
 
 The following image shows the corresponding structures in mammalian brains and how they interact.
@@ -275,11 +278,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 ### References
 1. Illustration of the Neural Net architecture with a shared body taken from [here][datahubbs-pic-link].
-2. Pseudocode Image taken from [here][code].
+2. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
 3. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
 4. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
 5. [HHU-Lecture slides:][semi-gradient] Approximate solution methods (for the semi-gradient definition)
-6. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
 
 
 ### Pointers to other ressources
