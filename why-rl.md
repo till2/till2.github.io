@@ -34,7 +34,7 @@ The potential of RL extends further to creative solutions that can emerge for ex
 
 <iframe width="355" height="200" src="https://www.youtube.com/embed/kopoLzvh5jY?start=110" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<em>Videos are playing from the timestamps that show the strategies that emerged to exploit physics bugs.</em>
+<em>Videos are playing from the timestamps that show the strategies to exploit physics bugs.</em>
 <p class="vspace"></p>
 
 - OpenAI gym ant walking upside down
@@ -77,7 +77,11 @@ By examining the learning systems, we can gain insights into the underlying mech
 1. design more intelligent systems in the future <br>
 2. understand ourselves better
 
-Overall, the study of reinforcement learning is a fascinating and awe-inspiring field that has the potential to shape the future of artificial intelligence and the way we interact with machines. So i'm in.
+Overall, the study of reinforcement learning is a fascinating and awe-inspiring field that has the potential to shape the future of artificial intelligence and the way we interact with machines. 
+
+And its results are sometimes just plain beautiful.
+
+So i'm in.
 
 ### Todo
 
