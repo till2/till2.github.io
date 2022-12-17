@@ -10,7 +10,7 @@ permalink: /why-rl/
 
 <em style="float:right">First draft: 2022-12-16</em><br>
 
-Reinforcement learning (RL) is a fascinating and awe-inspiring subject to study because it represents a significant step forward in our ability to create intelligent machines.
+Reinforcement learning (RL) is a fascinating subject to study because it represents a significant step forward in our ability to create intelligent machines.
 
 One of the primary reasons that reinforcement learning is so fascinating is that it allows machines to learn through trial and error, much like a human would. Instead of being explicitly programmed with a set of rules or instructions, a reinforcement learning agent is given a goal and a set of possible actions, and it learns to achieve that goal through interaction with an environment. Through learning the agent can adapt and improve its performance over time, as it gathers more experiences and learns how to chose good actions to achieve tasks.
 
@@ -63,7 +63,7 @@ OpenAI gym coupled with the MuJoCo simulator offers realistic physics simulation
 <p class="vspace"></p>
 
 
-- The creative move 37 from AlphaGo, playing an unthinkable move after thousands of years of Go theory
+- The creative move 37 from AlphaGo, refuting thousands of years of Go theory
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WXuK6gekU1Y?start=2974" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -115,7 +115,7 @@ Ressources:
 - AlphaGo (Deepmind-Go)
 - AlphaZero (Deepmind-Any 2 player game)
 - Google Datacenters (Deepmind)
-- learning to drive in a 
+- learning to drive in a day
 - AlphaStar
 - walking robodogs
 

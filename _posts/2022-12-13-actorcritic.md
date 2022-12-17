@@ -35,7 +35,7 @@ The Actor Critic is a powerful and beautiful method of learning, with surprising
 
 Let's start by looking at the REINFORCE algorithm, a method for training reinforcement learning (RL) agents. It is a policy gradient method, which means that it uses gradient ascent to adjust the parameters of the policy in order to maximize the expected reward. It does this by computing the gradient of the performance (goal) $J(\theta) \stackrel{.}{=} V^{\pi_\theta}(s_0)$ with respect to the policy parameters, and then updating the policy in the direction of this gradient. This update rule is known as the policy gradient update rule, and it ensures that the policy is always moving in the direction that will increase the expected future reward (=return). Because we need the entire return $G_t$ for the update at timestep $t$, REINFORCE is a Monte-Carlo method and theirfore only well-defined for episodic cases. 
 
-One drawback of the pure REINFORCE algorithm is, that it has a really high variance and could be unstable as a result. The baseline $b(S_t)$ has to be independent of the action. A good idea is to use state-values as a baseline, which reduce the magnitude of the expected reward (it has the effect of "shrinking" the estimated rewards towards the baseline value). Reducing the magnitude of the estimated rewards can help to reduce the variance of the algorithm. This is because the updates that the algorithm makes to the policy are based on the estimated rewards. If the magnitude of the rewards is large, the updates will also be large, which can cause the learning process to be unstable and can result in high variance. By reducing the magnitude of the rewards, the updates are also reduced, which can help to reduce the variance and thus stabilize the learning process.
+One drawback of the pure REINFORCE algorithm is that it has a really high variance and could be unstable as a result. To lower the variance, we can substract a baseline $b(S_t)$, which has to be independent of the action. A good idea is to use state-values as a baseline, which reduce the magnitude of the expected reward (it has the effect of "shrinking" the estimated rewards towards the baseline value). Reducing the magnitude of the estimated rewards can help to reduce the variance of the algorithm. This is because the updates that the algorithm makes to the policy are based on the estimated rewards. If the magnitude of the rewards is large, the updates will also be large, which can cause the learning process to be unstable and can result in high variance. By reducing the magnitude of the rewards, the updates are also reduced, which can help to reduce the variance and thus stabilize the learning process.
 
 The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses a value function as a baseline to improve the stability of the learning process. This baseline also needs to be learned (we have to approximate $V(s)$, usually using a _Deep Neural Network_), theirfore Actor-Critics are a combination of value-based and policy-based methods:
 
@@ -66,7 +66,9 @@ $$
 $$
 
 where $\mu(s)$ is the on-policy distribution over all states (included in $\mathbb{E}_\pi$). (From S&B [[6]][sab], Chapter 13). \\
-We can extend it further by multiplying and deviding by <strong style="color: #ED412D">$\pi(a|S_t, \theta)$</strong> to get the expression <strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. This is a common trick using the logarithm, where you can rewrite the gradient of $\log x$ with $\nabla \log x = \frac{1}{x} \nabla x = \frac{\nabla x}{x}$ (just using the chain rule). In our specific case, we can use this as  <strong style="color: #1E72E7">$\nabla \log \pi(a|S_t, \theta)$</strong> $=$ <strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. 
+As a sidenote, $a(x) \propto b(x)$ states that a is proportional to b, meaning $a(x) = c \cdot b(x)$. This notation is sometimes useful for talking about gradients, because the factor $c$ is absorbed in the learning rate anyway.
+
+We can extend the formula further by multiplying and deviding by <strong style="color: #ED412D">$\pi(a|S_t, \theta)$</strong> to get the expression <strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. This is a common trick using the logarithm, where you can rewrite the gradient of $\log x$ with $\nabla \log x = \frac{1}{x} \nabla x = \frac{\nabla x}{x}$ (just using the chain rule). In our specific case, we can use this as  <strong style="color: #1E72E7">$\nabla \log \pi(a|S_t, \theta)$</strong> $=$ <strong style="color: #ED412D">$\frac{\nabla \pi(a|S_t, \theta)}{\pi(a|S_t, \theta)}$</strong>. 
 
 Performing all of the steps above:
 
@@ -133,7 +135,7 @@ $$
 
 1) If we want to get less variance and thus more stable updates, we could also calculate the advantage as the return $G_t \stackrel{.}{=} R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=t+1}^{\infty} \gamma^k R_{t+k+1}$ minus the state-value. For this variation of the actor-critic algorithm, we can only do updates after each episode (because we need to calculate the return $G_t$).
 
-$$A(s_t,a) = G_t - V(s)$$
+$$A(s,a) = G - V(s)$$
 
 2) You could also estimate the advantage by using a critic Neural Network that estimates $V(s)$ and $Q(s,a)$ at the same time, and you just use $A(s,a) = Q(s,a) - V(s)$.
 
@@ -172,7 +174,7 @@ policy parameterization $\pi(a|s,\theta)$  <em>(e.g. a Deep Neural Network)</em>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 state-value function parameterization $\hat{V}(s,\textbf{w})$ <em>(e.g. a Deep Neural Network)</em>,<br>
 
-__Parameters:__ learning rates for the actor: $\alpha_\theta$, and for the critic :$\alpha_\textbf{w}$ <br>
+__Parameters:__ learning rates for the actor: $\alpha_\theta$, and for the critic: $\alpha_\textbf{w}$ <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 discount-factor $\gamma$ 
 
@@ -196,14 +198,36 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 - pseudocode modified from Sutton&Barto [[6]][sab], Chapter 13
 - great [Stackexchange post][why-gamma] for why we are using decay in the update of the actors parameters $\theta$.
 
-### Todo
+### Implementation
 
-- the discounting problem (+ paper from discord)
-
-- clean implementation
+First, we need to rewrite the updates in terms of losses $\mathcal{L}_{\text{critic/actor}}$ that can be backpropagated in order to use modern Deep Learning libraries. 
 
 
-### Corresponding neuroanatomic structures for the Actor Critic mechanism
+For the critic, we just want to approximate the true state-values. To do that, we move them closer to the observed return $G_t$:
+
+$$
+\begin{align*}
+\mathcal{L}_{\text{critic}} &= (G_t - \hat{V}(S_t,\textbf{w}))^2
+\end{align*}
+$$
+
+For the actor, we are using the advantage $A(s, a)$ instead of $\delta$ now, which is one of the shown variations. To get our loss, we can just pull in the factor $A(S,A,\textbf{w})$ like this: $a \nabla_x f(x) = \nabla_x a f(x)$ (the factor $A(S,A,\textbf{w})$ doesn't depend on $\theta$, otherwise this wouldn't be valid). 
+
+Also note that $\gamma^t$ is already baked into the discounted return $G_t$.
+For readability, i'll leave out the $t$ in the subscript in the following formulas, but all $S$, $A$ and $G$ are in timestep $t$. Lastly notice that we'll have to negate the entire term to get a loss function, because now instead of maximizing the term, we minimize the negative term (which is the same).
+
+$$
+\begin{align*}
+\theta                                  &= \theta + \alpha_\theta A(S,A,\textbf{w}) \nabla_\theta \log \pi(A|S,\theta) \\
+                                        &= \theta + \alpha_\theta \nabla_\theta A(S,A,\textbf{w}) \log \pi(A|S,\theta) \\ \\
+\Rightarrow \mathcal{L}_{\text{actor}}  &= - A(S,A,\textbf{w}) \log \pi(A|S,\theta) \\
+                                        &= - [G - \hat{V}(S,\textbf{w})] \log \pi(A|S,\theta)
+\end{align*}
+$$
+
+Another choice that we'll have to make after letting the episode play out is whether we want to update the networks for each timestep or only once. If you chose the latter, you can just sum over all the individual losses to get one loss for the episode.
+
+### Corresponding neuroanatomic structures to Actor and Critic
 
 The functions of the two parts of the stratium (dorsal stratium -> action selection, ventral stratium -> reward processing) suggest that an Actor Critic mechanism is used for learning in our brains, where both the actor and the critic learn from the TD-Error $\delta$, which is produced by the critic. A TD-Error $\delta > 0$ would mean that the selected action led to a state with a better than expected value and if $\delta < 0$, it led to a state with a worse than average value. An important insight from Neuroscience is that the TD-Error corresponds to a pattern of dopamine neuron activations in the brain, rather than being just a scalar signal (in our brain, you could look at it as a vector of dopamine-neuron activity). These dopamine neurons modulate the updates of synapses in the actor and critic structures.
 
@@ -228,6 +252,11 @@ Experiments show that when the dopamine signal from the critic is distorted, e.g
 
 Reinforcement learning notation sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason i think it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
+
+### Todo
+
+- the discounting problem (+ paper from discord)
+- clean implementation
 
 <!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
 
