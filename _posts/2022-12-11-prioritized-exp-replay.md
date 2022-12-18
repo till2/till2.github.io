@@ -9,10 +9,11 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 1
-tags: [reinforcement learning, memory, dataset, dreaming]
+tags: [reinforcement learning, dreaming]
 thumbnail: "/images/experience-replay/experience-replay-buffer.png" 
 ---
 
+Complete set of keywords: reinforcement learning, memory, dataset, dreaming.
 
 <!-- for multiple tags use a list: [hello1, hello2] -->
 
