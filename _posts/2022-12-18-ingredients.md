@@ -75,7 +75,11 @@ This list can be treated as an overview and as directions for future research.
   </table>
 </div>
 
+### TODO
 
+- add pointers to research papers for each ingredient
+
+- Curiosity: https://pathak22.github.io/noreward-rl/
 
 <!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
 

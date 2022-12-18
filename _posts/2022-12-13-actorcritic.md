@@ -253,7 +253,7 @@ Experiments show that when the dopamine signal from the critic is distorted, e.g
 Reinforcement learning notation sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason i think it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
 
-### Todo
+### TODO
 
 - the discounting problem (+ paper from discord)
 - clean implementation
