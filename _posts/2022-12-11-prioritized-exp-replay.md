@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 1
-tags: [reinforcement learning, memory, dataset]
+tags: [reinforcement learning, memory, dataset, dreaming]
 thumbnail: "/images/experience-replay/experience-replay-buffer.png" 
 ---
 
@@ -38,6 +38,15 @@ TODO:
 Prioritized Experience Replay (PER) is a technique that was introduced by [[5]][prioritized-experience-replay] Schaul et al. in 2015. The method aims to improve the performance of the Experience Replay (ER) buffer that lets Reinforcement Learning agents learn quicker by replaying transitions that were observed by another (old) policy (=off-policy learning). The idea is to sample experiences in the buffer with a probability that is proportional to the TD-error of the experience, because we can learn the most from transitions that have a high TD-error (where the agents prediction was the most off the target).
 
 Replay buffers resemble some similarity to humans learning in their sleep by replaying important series of transitions (=dreaming) that were experienced during the day to consolidate them into long-term memory [[7]][wiki-sleep-learning] and learn from them to develop problem-solving skills [[8]][wiki-dreams].
+
+$$
+\begin{align*}
+\text{Experience Replay} \; 	&\hat{=} \; \text{Dreaming} \\
+                             	&\hat{=} \; \text{Consolidation of new knowledge into long-term memory (and quicker learning)}
+\end{align*}
+$$
+
+Right now, the long term memory is only represented by the Neural Network, but maybe we can mimick a long-term memory by compressing experiences into a seperate long-term memory buffer that the Neural Network relearns from.
 
 <div class="img-block" style="width: 900px;">
     <img src="/images/experience-replay/experience-replay-buffer.png"/>
