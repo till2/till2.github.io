@@ -241,6 +241,8 @@ $$
 \end{align*}
 $$
 
+<em>Note: Implementing GAE isn't that easy, so if you just want something that works ok, Mnih et. al. used 5-step rollouts in their [async methods paper][async-methods-mnihetal] (the easiest implementation is of course just using the actual returns, but this has a high variance, as discussed above). </em>
+
 
 ### Implementation
 
@@ -374,6 +376,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 6. [Pieter Abbeel: L3 Policy Gradients and Advantage Estimation (Foundations of Deep RL Series)][pieter-abbeel-discounting]
 7. [Daniel Takeshi's blog: Notes on the Generalized Advantage Estimation Paper][gae-danieltakeshi-blog]
 8. [PyTorch docs: HuberLoss][torch-huber-loss]
+9. [Mnih et. al. : Asynchronous Methods for Deep Reinforcement Learning][async-methods-mnihetal]
 
 
 ### Pointers to other ressources
@@ -403,6 +406,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [td-lambda-post]: /blog/2022/12/07/td_lambda
 [gae-danieltakeshi-blog]: https://danieltakeshi.github.io/2017/04/02/notes-on-the-generalized-advantage-estimation-paper/
 [torch-huber-loss]: https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html
+[async-methods-mnihetal]: https://arxiv.org/abs/1602.01783
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
