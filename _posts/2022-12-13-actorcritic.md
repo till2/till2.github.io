@@ -131,23 +131,8 @@ $$
 \end{align*}
 $$
 
-### Variations 
 
-1) If we want to get less variance and thus more stable updates, we could also calculate the advantage as the return $G_t \stackrel{.}{=} R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=t+1}^{\infty} \gamma^k R_{t+k+1}$ minus the state-value. For this variation of the actor-critic algorithm, we can only do updates after each episode (because we need to calculate the return $G_t$).
-
-$$A(s,a) = G - V(s)$$
-
-2) You could also estimate the advantage by using a critic Neural Network that estimates $V(s)$ and $Q(s,a)$ at the same time, and you just use $A(s,a) = Q(s,a) - V(s)$.
-
-Overview of the Actor-Critic variations:
-
-<div class="img-block" style="width: 500px;">
-    <img src="/images/actor-critic/policy-gradient-variationen.png"/>
-</div>
-
-
-
-### What are Actor and Critic?
+### Actor and Critic as Deep Neural Networks
 
 The main idea is that we update the actor parameters in the direction of a value that is estimated by the critic, e.g. the advantage. This makes sense because the critic is better able to evaluate the actual value of a state.
 
@@ -157,7 +142,7 @@ The main idea is that we update the actor parameters in the direction of a value
 
 As already mentioned, the actor is responsible for learning a policy $\pi(a\|s)$, which is a function that determines the next action to take in a given state. The critic, on the other hand, is responsible for learning a value function $V(s)$ or $Q(s,a)$, which estimates the future rewards that can be obtained by following the policy. The actor and critic work together to improve the policy and value function over time, with the goal of maximizing the overall rewards obtained by the system.
 
-<em>Note, that it is common to use a shared neural network body. This is practical for learning features only once and not individually for both networks. The last layer of the body network connected to both the `policy head` and the `value head`), representing the actor and critic respectively, as follows:</em>
+<em>Note, that it is common to use a shared neural network body. This is practical for learning features only once and not individually for both networks. The last layer of the body network connected to both the `policy head` and the `value head`), producing the outputs for actor and critic, respectively.</em>
 
 
 ### Actor Critic Algorithm
@@ -198,34 +183,109 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 - pseudocode modified from Sutton&Barto [[6]][sab], Chapter 13
 - great [Stackexchange post][why-gamma] for why we are using decay in the update of the actors parameters $\theta$.
 
+
+
+### Variations 
+
+1) If we want to get less variance and thus more stable updates, we could also calculate the advantage as the return $G_t \stackrel{.}{=} R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=t+1}^{\infty} \gamma^k R_{t+k+1}$ minus the state-value. For this variation of the actor-critic algorithm, we can only do updates after each episode (because we need to calculate the return $G_t$).
+
+$$
+\begin{align*}
+A(s,a)  &= Q(s,a) - V(s) \\
+            &= r + \gamma V(s') - V(s)
+\end{align*}
+$$
+
+2) You could also estimate the advantage by using a critic Neural Network that estimates $\hat{V}(s)$ and $\hat{Q}(s,a)$ at the same time, and you just use $A(s,a) = Q(s,a) - V(s)$.
+
+Overview of the Actor-Critic variations:
+
+<div class="img-block" style="width: 500px;">
+    <img src="/images/actor-critic/policy-gradient-variationen.png"/>
+</div>
+
+
+### Variance vs. Bias tradeoff for semi-gradient methods (using Function Approximation)
+
+When estimating $Q(s,a)$ with semi-gradient methods, we have to trade of bias and variance. We can either use our observed rollout to calculate $Q(s,a)$, or use our state-value-function $V(s)$ (=our critic Neural Network):
+
+$$
+\begin{align*}
+\hat{Q}(s_t,a_t)  &= \mathbb{E}[ r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots ]          \;\; (\text{ entire rollout}) \\
+            &= \mathbb{E}[ r_{t+1} + \gamma V(s_{t+1}) ]                            \;\; (\text{ short rollout}) \\
+            &= \mathbb{E}[ r_{t+1} + \gamma r_{t+2} + \dots + \gamma^k V(s_{t+k}) ] \;\; (\text{ k-step rollout}) \\
+\end{align*}
+$$
+
+__For shorter k-step rollouts:__
+- lower variance because the estimated state-value $\hat{V}(s)$ is an estimate based on lots of experience (=estimated average return).
+- higher bias, because the estimate is produced by the Neural Net
+
+__For longer k-step rollouts:__
+- higher variance, because the return is only one observed monte-carlo rollout
+- low bias, because we use the actual return (no bias if we use the complete rollout)
+
+### Generalized Advantage Estimation (GAE)
+
+Generalized Advantage Estimation (GAE) is a method for estimating the advantages. It is an extension of the standard advantage function, which is calculated as the difference between the expected return of an action and the expected return of the current state. GAE uses a discount factor (lambda) to weight the different k-step rollouts for estimating Q.
+
+By weighting the different k-step rollouts, we try to optimize the variance vs. bias tradeoff without having to search for a good hyperparameter k (the length of the rollouts). Again, we assume that the influence of an action decreases exponentially with a parameter $\lambda \in [0,1]$ over time (be careful with this assumption, depending on the environment!).
+The idea is pretty much the exact same as in TD($\lambda$).
+
+- see my [TD($\lambda$) post][td-lambda-post] for more details.
+
+$$
+\begin{align*}
+\hat{Q}_t^\text{GAE}  &= (1 - \lambda) (\hat{Q}_t^{(k=1)} + \lambda \hat{Q}_{t}^{(k=2)} + \lambda^2 \hat{Q}_{t}^{(k=3)} + \dots) \\
+                      &= (1 - \lambda) \sum_{k=0}^{T} \lambda^k \hat{Q}_{t}^{(k)}
+\end{align*}
+$$
+
+
 ### Implementation
 
 First, we need to rewrite the updates in terms of losses $\mathcal{L}_{\text{critic/actor}}$ that can be backpropagated in order to use modern Deep Learning libraries. 
 
 
-For the critic, we just want to approximate the true state-values. To do that, we move them closer to the observed return $G_t$:
+For the critic, we just want to approximate the true state-values. To do that, we move them closer to the observed return $G_t$, using either a squared error or the [Huber-loss][torch-huber-loss], that doesn't put as much weight on outliers. We can also use some $L_2$ regularization on the Delta of parameters $\Delta \textbf{w} = \textbf{w}_{\text{new}} - \textbf{w}$ to ensure that we don't update our parameters too much (this is always a good idea in Reinforcement Leraning, because bad policy leads to bad data in the future):
 
 $$
 \begin{align*}
-\mathcal{L}_{\text{critic}} &= (G_t - \hat{V}(S_t,\textbf{w}))^2
+\mathcal{L}_{\text{critic}} &= \| \hat{Q}(s_t,a_t) - \hat{V}(S_t,\textbf{w}) \|_2^2 + \kappa \| \textbf{w}_{\text{new}} - \textbf{w} \|_2^2
 \end{align*}
 $$
 
+<em>I didn't add the regularization to the implementation yet, because i couldn't figure out how to implement it in PyTorch so far (you would have to backpropagate the loss first and then calculate the squared $L_2$ norm of the new and old parameters), so treat it as if we set $\kappa=0$ :-( </em>.
+
 For the actor, we are using the advantage $A(s, a)$ instead of $\delta$ now, which is one of the shown variations. To get our loss, we can just pull in the factor $A(S,A,\textbf{w})$ like this: $a \nabla_x f(x) = \nabla_x a f(x)$ (the factor $A(S,A,\textbf{w})$ doesn't depend on $\theta$, otherwise this wouldn't be valid). 
 
-Also note that $\gamma^t$ is already baked into the discounted return $G_t$.
-For readability, i'll leave out the $t$ in the subscript in the following formulas, but all $S$, $A$ and $G$ are in timestep $t$. Lastly notice that we'll have to negate the entire term to get a loss function, because now instead of maximizing the term, we minimize the negative term (which is the same).
+Also note that $\gamma^t$ is already baked into the discounted return $G_t$. Discounting makes a lot of sense for many environments, because the action probably has a higher effect short-term and doesn't matter that much long-term. You should consider your environment carefully here though, because in some cases, for example the game Go, action might have a long-term influence/effect. 
+[[6]][pieter-abbeel-discounting]
+
+For readability, i'll leave out the $t$ in the subscript in the following formulas, but all $S$, $A$ and $Q$ are in timestep $t$. Lastly notice that we'll have to negate the entire term to get a loss function, because now instead of maximizing the term, we minimize the negative term (which is the same).
 
 $$
 \begin{align*}
 \theta                                  &= \theta + \alpha_\theta A(S,A,\textbf{w}) \nabla_\theta \log \pi(A|S,\theta) \\
                                         &= \theta + \alpha_\theta \nabla_\theta A(S,A,\textbf{w}) \log \pi(A|S,\theta) \\ \\
 \Rightarrow \mathcal{L}_{\text{actor}}  &= - A(S,A,\textbf{w}) \log \pi(A|S,\theta) \\
-                                        &= - [G - \hat{V}(S,\textbf{w})] \log \pi(A|S,\theta)
+                                        &= - [\hat{Q}(s,a) - V(S,\textbf{w})] \log \pi(A|S,\theta)
 \end{align*}
 $$
 
-Another choice that we'll have to make after letting the episode play out is whether we want to update the networks for each timestep or only once. If you chose the latter, you can just sum over all the individual losses to get one loss for the episode.
+<em> Note that $\hat{Q}(s,a)$ is estimated with a k-step rollout (see section: "Variance vs. Bias tradeoff"). </em>
+Another choice that we'll have to make after letting the episode play out is whether we want to update the networks for each timestep or only once. If you chose the latter, you can just sum over all the individual losses to get one loss for the episode:
+
+$$
+\begin{align*}
+\mathcal{L}_{\text{actor}}  &= - \sum_{t=1}^{T} A(S_t,A_t,\textbf{w}) \log \pi(A_t|S_t,\theta) \\
+                            &= - \textbf{advantages}^\top \textbf{logprobs}
+
+\end{align*}
+$$
+
+
+
 
 ### Corresponding neuroanatomic structures to Actor and Critic
 
@@ -311,6 +371,9 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 3. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
 4. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
 5. [HHU-Lecture slides:][semi-gradient] Approximate solution methods (for the semi-gradient definition)
+6. [Pieter Abbeel: L3 Policy Gradients and Advantage Estimation (Foundations of Deep RL Series)][pieter-abbeel-discounting]
+7. [Daniel Takeshi's blog: Notes on the Generalized Advantage Estimation Paper][gae-danieltakeshi-blog]
+8. [PyTorch docs: HuberLoss][torch-huber-loss]
 
 
 ### Pointers to other ressources
@@ -336,6 +399,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [semi-gradient]: https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Dialog_Systems_and_Machine_Learning/Lectures_RL/L4.pdf
 [why-gamma]: https://ai.stackexchange.com/questions/10531/in-online-one-step-actor-critic-why-does-the-weights-update-become-less-signifi
 [awesome-well-written-rl-blog-series]: https://mpatacchiola.github.io/blog/2017/02/11/dissecting-reinforcement-learning-4.html
+[pieter-abbeel-discounting]: https://youtu.be/AKbX1Zvo7r8?t=1872
+[td-lambda-post]: /blog/2022/12/07/td_lambda
+[gae-danieltakeshi-blog]: https://danieltakeshi.github.io/2017/04/02/notes-on-the-generalized-advantage-estimation-paper/
+[torch-huber-loss]: https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

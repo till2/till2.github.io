@@ -32,6 +32,7 @@ TODO:
 
 ### Todo 
 
+- read Daniel Takeshis [blogpost about Understanding Prioritized Experience Replay](https://danieltakeshi.github.io/2019/07/14/per/)
 - read the [catastrophic inference wiki article](https://en.wikipedia.org/wiki/Catastrophic_interference) for pointers to other research on how to prevent it
 
 ### Intro

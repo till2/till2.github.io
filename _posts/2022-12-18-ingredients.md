@@ -29,9 +29,27 @@ thumbnail: "/images/pillars/intelligence-coverart.png"
 
 ### Introduction
 
-This post includes what I believe is a somewhat comprehensive recipe for building intelligent systems, but surely some important ingredients are missing. I'll update the list when I notice that an important concept is not included. 
+I recognize that the title sounds catchy, but being catchy is not the intention of this post. This is supposed to be a serious list of directions for future research (you can also just treat it as an overview).
 
-This list can be treated as an overview and as directions for future research.
+This post includes what I believe is a somewhat comprehensive recipe for building intelligent systems, but surely some important ingredients are missing. Of course this list will be updated when I notice that an important concept is not included. 
+
+
+### Definition
+
+Before we get to the list, let's start by defining a measure for intelligence.
+
+For that, i think the definition from [Shane Legg and Marcus Hutter][legg-hutter-intelligence] is nice (appropriate), because it makes general capability central:
+
+$$
+\begin{align*}
+\Upsilon(\pi)   &\dot{=} \sum_{\mu \in E} 2^{-K(\mu)} V_\mu^\pi \\
+                &\dot{=} \sum_{\mu \in E} 2^{-K(\mu)} \frac{1}{\Gamma} \mathbb{E}[ \sum_{i=1}^{\infty} \gamma^i r_i ] \\
+                &\dot{=} \sum_{\mu \in E} 2^{-K(\mu)} \frac{1}{\sum_{i=1}^{\infty} \gamma^i} \mathbb{E}[ \sum_{i=1}^{\infty} \gamma^i r_i ]
+\end{align*}
+$$
+
+where $\Upsilon(\pi)$ measures the universal intelligence of an agent with policy $\pi$. This universal intelligence is determined by the added performance (=value of the starting state in an environment) of different environments $\mu \in E$, with a weighting factor $2^{-K(\mu)}$ that weights the performance in simpler environments (=low [Kolmogorov complexity][wiki-kolmogorov-complexity]) higher.
+
 
 ### The list
 
@@ -43,14 +61,14 @@ This list can be treated as an overview and as directions for future research.
             <td><strong>Implementation</strong></td>
         </tr>
         <tr>
-          <td>Learning</td>
+          <td>Learning <br><em>(the most important one!)</em></td>
           <td>Aquiring new knowledge by updating your beliefs when your experience deviates from your expectation.</td>
           <td>Reinforcement Learning, Unsupervised Learning, Supervised Learning</td>
         </tr>
         <tr>
           <td>Curiosity</td>
           <td>Efficient Exploration.</td>
-          <td>Curiosity baked into the objective-function.</td>
+          <td>e.g. Feature-Space Curiosity</td>
         </tr>
         <tr>
           <td>Dreaming</td>
@@ -80,6 +98,8 @@ This list can be treated as an overview and as directions for future research.
 - add pointers to research papers for each ingredient
 
 - Curiosity: https://pathak22.github.io/noreward-rl/
+
+
 
 <!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
 
@@ -128,31 +148,18 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 -->
 
-<!-- 
+
 ### References
-1. Illustration of the Neural Net architecture with a shared body taken from [here][datahubbs-pic-link].
-2. [Stackexchange post][why-gamma]: Why we are using $\gamma$ as discounting to update the actors parameters $\theta$
-3. [Sutton & Barto: Reinforcement Learning, An introduction (second edition)][sab]
-4. [Hado van Hasselt: Lecture 8 - Policy Gradient][hadovanhasselt]
-5. [HHU-Lecture slides:][semi-gradient] Approximate solution methods (for the semi-gradient definition)
--->
+
+1. Shane Legg and Marcus Huttter - [Universal Intelligence: A Definition of Machine Intelligence][legg-hutter-intelligence]
+2. [Wiki: Kolmogorov complexity][wiki-kolmogorov-complexity]
 
 
 <!-- Ressources -->
-<!--
-[datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
-[datahubbs-a2c]: https://www.datahubbs.com/policy-gradients-and-advantage-actor-critic/
-[code]: https://lilianweng.github.io/posts/2018-04-08-policy-gradient/
-[torch-actor-critic-code]: https://github.com/pytorch/examples/blob/main/reinforcement_learning/actor_critic.py
-[actor-critic-TD0-code]: https://github.com/chengxi600/RLStuff/blob/master/Actor-Critic/Actor-Critic_TD_0.ipynb
-[actor-critic-blogpost]: https://medium.com/geekculture/actor-critic-value-function-approximations-b8c118dbf723
-[sab]: http://incompleteideas.net/book/the-book-2nd.html
-[hadovanhasselt]: https://hadovanhasselt.files.wordpress.com/2016/01/pg1.pdf
-[semi-gradient]: https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Dialog_Systems_and_Machine_Learning/Lectures_RL/L4.pdf
-[why-gamma]: https://ai.stackexchange.com/questions/10531/in-online-one-step-actor-critic-why-does-the-weights-update-become-less-signifi
-[awesome-well-written-rl-blog-series]: https://mpatacchiola.github.io/blog/2017/02/11/dissecting-reinforcement-learning-4.html
+[legg-hutter-intelligence]: https://arxiv.org/pdf/0712.3329.pdf
+[wiki-kolmogorov-complexity]: https://en.wikipedia.org/wiki/Kolmogorov_complexity
 
--->
+
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
