@@ -183,7 +183,7 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 - pseudocode modified from Sutton&Barto [[6]][sab], Chapter 13
 - great [Stackexchange post][why-gamma] for why we are using decay in the update of the actors parameters $\theta$.
 
-
+- `Actor Critics work with discrete and continuous action spaces!`
 
 ### Variations 
 
@@ -204,10 +204,12 @@ Overview of the Actor-Critic variations:
     <img src="/images/actor-critic/policy-gradient-variationen.png"/>
 </div>
 
+The most popular variation is the advantage actor critic (A2C).
 
-### Variance vs. Bias tradeoff for semi-gradient methods (using Function Approximation)
 
-When estimating $Q(s,a)$ with semi-gradient methods, we have to trade of bias and variance. We can either use our observed rollout to calculate $Q(s,a)$, or use our state-value-function $V(s)$ (=our critic Neural Network):
+### Variance vs. Bias tradeoff for k-step returns 
+
+When estimating $Q(s,a)$ with semi-gradient methods (semi-gradient, because Function Approximation introduces a bias), we have to trade of bias and variance. We can either use our observed rollout to calculate $Q(s,a)$, or use our state-value-function $V(s)$ (=our critic Neural Network):
 
 $$
 \begin{align*}
@@ -232,7 +234,7 @@ Generalized Advantage Estimation (GAE) is a method for estimating the advantages
 By weighting the different k-step rollouts, we try to optimize the variance vs. bias tradeoff without having to search for a good hyperparameter k (the length of the rollouts). Again, we assume that the influence of an action decreases exponentially with a parameter $\lambda \in [0,1]$ over time (be careful with this assumption, depending on the environment!).
 The idea is pretty much the exact same as in TD($\lambda$).
 
-- see my [TD($\lambda$) post][td-lambda-post] for more details.
+- see my [TD($\lambda$) post][td-lambda-post] or this [blogpost about GAE by Jonathan Hui][jonathan-hui-gae] for more details.
 
 $$
 \begin{align*}
@@ -242,6 +244,21 @@ $$
 $$
 
 <em>Note: Implementing GAE isn't that easy, so if you just want something that works ok, Mnih et. al. used 5-step rollouts in their [async methods paper][async-methods-mnihetal] (the easiest implementation is of course just using the actual returns, but this has a high variance, as discussed above). </em>
+
+
+### Async Advantage Actor Critic (A3C)
+
+<div class="img-block" style="width: 500px;">
+    <img src="/images/actor-critic/a3c.png"/>
+</div>
+<center><a href="https://arxiv.org/pdf/1803.02912v1.pdf">Picture taken from this paper. </a></center>
+<br>
+
+- not implemented yet, but maybe in the future :)
+
+- use python's `multiprocessing` library to have multiple workers (each one running on a thread) collect episodes, calculate the loss and update the master (global) network, before downloading the new updated parameters
+
+- Phil has a good tutorial video [here][phil-multicore-a3c]
 
 
 ### Implementation
@@ -286,7 +303,54 @@ $$
 \end{align*}
 $$
 
+And lastly, we can divide both losses by the length of the episode to get the average loss of the episode.
 
+
+### A2C Code...
+
+<details>
+  <summary style="cursor: pointer">A2C Class</summary>
+  <script src="https://gist.github.com/till2/1ece94e7fe15f78a1de5a00968c0f20b.js"></script>
+</details>
+
+<details>
+  <summary style="cursor: pointer">A2C training loop</summary>
+  <script src="https://gist.github.com/till2/bca3cf6e4499b43b08f88d7082101bcc.js"></script>
+</details>
+
+<p class="vspace"></p>
+
+### Results
+
+#### Learning plots
+
+<div class="img-block" style="width: 800px;">
+    <img src="/images/actor-critic/plots.png"/>
+</div>
+
+#### Learned policy showcase (in the LunarLander-v2 environment)
+
+Watch the learned policy (using the A2C implementation) playing:
+<div class="img-block" style="width: 800px;">
+    <img src="/images/actor-critic/a2c_lunar_lander.gif"/>
+</div>
+
+You can actually try to play it yourself, just copy and paste [these three lines](https://gist.github.com/till2/2febfa43ac167fe55b84e63e015243e5). I tried and it is actually way harder than it looks. One reason is that you can only perform one action at a time. This is me trying to land it:
+
+<div class="img-block" style="width: 800px;">
+    <img src="/images/actor-critic/me_lunar_lander.gif"/>
+</div>
+(Don't trust me with landing your rockets...)
+
+...But trust the AI agents that i build :)
+
+#### Implementation details that i've learned from this
+
+- `retain_graph=True` if you want to backward multiple losses though a shared network
+- `loss = a * loss1 + b * loss2` and then just `loss.backward()` works to update both networks and the shared body at the same time
+- having a shared network is (at least in my implementation) pretty unstable
+- Hubert loss (less weight on outliers) is a nice idea in theory, but didn't really make it better in practice (at least for the environments i tried, here MSE was better)
+- it works faster on CPU - at least for the realatively small Neural Nets that i tested (probably because data structures are constantly moving between CPU-GPU if you use a GPU.) 
 
 
 ### Corresponding neuroanatomic structures to Actor and Critic
@@ -317,10 +381,10 @@ Reinforcement learning notation sometimes gets really messy and unpleasent to lo
 
 ### TODO
 
-- the discounting problem (+ paper from discord)
-- clean implementation
+- k-step returns implementation
+- GAE implementation
+- A3C implementation with multiprocessing
 
-<!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
 
 <!-- In-Text Citing -->
 <!-- 
@@ -377,6 +441,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 7. [Daniel Takeshi's blog: Notes on the Generalized Advantage Estimation Paper][gae-danieltakeshi-blog]
 8. [PyTorch docs: HuberLoss][torch-huber-loss]
 9. [Mnih et. al. : Asynchronous Methods for Deep Reinforcement Learning][async-methods-mnihetal]
+10. [Jonathan Hui: GAE][jonathan-hui-gae]
 
 
 ### Pointers to other ressources
@@ -389,6 +454,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 7. PyTorch Actor Critic [implementation][torch-actor-critic-code].
 8. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 9. [Massimiliano Patacchiola: Dissecting Reinforcement Learning-Part.4: Actor-Critic (AC) methods][awesome-well-written-rl-blog-series] (+ Correlations to Neuroanatomy)
+10. [Machine Learning with Phil:  Multicore Deep Reinforcement Learning - Asynchronous Advantage Actor Critic (A3C) Tutorial (PYTORCH)][phil-multicore-a3c]
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -407,6 +473,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [gae-danieltakeshi-blog]: https://danieltakeshi.github.io/2017/04/02/notes-on-the-generalized-advantage-estimation-paper/
 [torch-huber-loss]: https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html
 [async-methods-mnihetal]: https://arxiv.org/abs/1602.01783
+[jonathan-hui-gae]: https://jonathan-hui.medium.com/rl-actor-critic-methods-a3c-gae-ddpg-q-prop-e1c41f268541
+[phil-multicore-a3c]: https://www.youtube.com/watch?v=OcIx_TBu90Q
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
