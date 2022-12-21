@@ -21,7 +21,7 @@ thumbnail: "/images/robot-2.png"
 
 <em style="float:right">First draft: 2022-10-24</em><br>
 <em style="float:right">Second draft: 2022-12-12</em><br>
-<em style="float:right">Third draft: 2022-12-15</em>
+<em style="float:right">Third draft: 2022-12-15</em><br>
 <em style="float:right">Finished A2C implementation added on: 2022-12-21</em>
 
 <!--
