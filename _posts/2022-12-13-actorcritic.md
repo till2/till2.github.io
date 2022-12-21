@@ -22,6 +22,7 @@ thumbnail: "/images/robot-2.png"
 <em style="float:right">First draft: 2022-10-24</em><br>
 <em style="float:right">Second draft: 2022-12-12</em><br>
 <em style="float:right">Third draft: 2022-12-15</em>
+<em style="float:right">Finished A2C implementation added on: 2022-12-21</em>
 
 <!--
 ### Contents
@@ -342,7 +343,7 @@ You can actually try to play it yourself, just copy and paste [these three lines
 </div>
 (Don't trust me with landing your rockets...)
 
-...But trust the AI agents that i build :)
+...But maybe trust the RL agents that i build :)
 
 #### Implementation details that i've learned from this
 
