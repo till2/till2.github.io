@@ -2,7 +2,7 @@
 layout: post
 title:  "Actor Critics"
 author: "Till Zemann"
-date:   2022-12-16 00:32:41 +0200
+date:   2022-12-21 00:32:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
@@ -276,6 +276,8 @@ $$
 $$
 
 <em>I didn't add the regularization to the implementation yet, because i couldn't figure out how to implement it in PyTorch so far (you would have to backpropagate the loss first and then calculate the squared $L_2$ norm of the new and old parameters), so treat it as if we set $\kappa=0$ :-( </em>.
+
+<em>Note: Every time this happens and you can't add the regularization term, just add clip (4Head) </em>
 
 For the actor, we are using the advantage $A(s, a)$ instead of $\delta$ now, which is one of the shown variations. To get our loss, we can just pull in the factor $A(S,A,\textbf{w})$ like this: $a \nabla_x f(x) = \nabla_x a f(x)$ (the factor $A(S,A,\textbf{w})$ doesn't depend on $\theta$, otherwise this wouldn't be valid). 
 
