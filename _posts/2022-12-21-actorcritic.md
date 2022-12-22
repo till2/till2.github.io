@@ -22,7 +22,6 @@ thumbnail: "/images/robot-2.png"
 <em style="float:right">First draft: 2022-10-24</em><br>
 <em style="float:right">Second draft: 2022-12-12</em><br>
 <em style="float:right">Third draft: 2022-12-15</em><br>
-<em style="float:right">Finished A2C implementation added on: 2022-12-21</em>
 
 <!--
 ### Contents
@@ -308,8 +307,8 @@ $$
 
 And lastly, we can divide both losses by the length of the episode to get the average loss of the episode.
 
-
-### A2C Code...
+<!--
+### Actor Critic Code
 
 <details>
   <summary style="cursor: pointer">A2C Class</summary>
@@ -320,6 +319,7 @@ And lastly, we can divide both losses by the length of the episode to get the av
   <summary style="cursor: pointer">A2C training loop</summary>
   <script src="https://gist.github.com/till2/bca3cf6e4499b43b08f88d7082101bcc.js"></script>
 </details>
+-->
 
 <p class="vspace"></p>
 
