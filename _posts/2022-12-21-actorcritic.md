@@ -188,16 +188,17 @@ __Output:__ parameters for actor: $\theta$, and critic: $\textbf{w}$
 
 ### Variations 
 
-1) If we want to get less variance and thus more stable updates, we could also calculate the advantage as the return $G_t \stackrel{.}{=} R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=t+1}^{\infty} \gamma^k R_{t+k+1}$ minus the state-value. For this variation of the actor-critic algorithm, we can only do updates after each episode (because we need to calculate the return $G_t$).
+1) If we want to have no bias at all, we can calculate the advantage as the return $G_t \stackrel{.}{=} R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=t+1}^{\infty} \gamma^k R_{t+k+1}$ minus the state-value. For this variation of the actor-critic algorithm, we can only do updates after each episode (because we need to calculate the return $G_t$).
 
 $$
 \begin{align*}
 A(s,a)  &= Q(s,a) - V(s) \\
-            &= r + \gamma V(s') - V(s)
+        &= r + \gamma V(s') - V(s) \\
+        &= G_t - V(s)
 \end{align*}
 $$
 
-2) You could also estimate the advantage by using a critic Neural Network that estimates $\hat{V}(s)$ and $\hat{Q}(s,a)$ at the same time, and you just use $A(s,a) = Q(s,a) - V(s)$.
+2) If you want to have less variance, you should use the actual returns (we have access to the entire reward list of an episode after letting it play out), but only for a couple of steps, and then after the k-th step use a state-value estimate produced by the critic network (this estimate is like an average of the previously seen returns from that state, so it will have less variance), but it will have a bias. We'll discuss this tradeoff and solutions for it in the next section.
 
 Overview of the Actor-Critic variations:
 
