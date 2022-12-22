@@ -22,6 +22,7 @@ thumbnail: "/images/robot-2.png"
 <em style="float:right">First draft: 2022-10-24</em><br>
 <em style="float:right">Second draft: 2022-12-12</em><br>
 <em style="float:right">Third draft: 2022-12-15</em><br>
+<em style="float:right">Implementation: 2022-12-20</em><br>
 
 <!--
 ### Contents
@@ -251,14 +252,13 @@ $$
 <div class="img-block" style="width: 500px;">
     <img src="/images/actor-critic/a3c.png"/>
 </div>
-<center><a href="https://arxiv.org/pdf/1803.02912v1.pdf">Picture taken from this paper. </a></center>
+<center>Picture taken from<a href="https://arxiv.org/pdf/1803.02912v1.pdf"> this </a>paper.</center>
 <br>
 
-- not implemented yet, but maybe in the future :)
 
 - use python's `multiprocessing` library to have multiple workers (each one running on a thread) collect episodes, calculate the loss and update the master (global) network, before downloading the new updated parameters
-
 - Phil has a good tutorial video [here][phil-multicore-a3c]
+- will probably not implement this one, because A2C with vectorized environments is just as good.
 
 
 ### Implementation
@@ -384,6 +384,8 @@ Reinforcement learning notation sometimes gets really messy and unpleasent to lo
 
 ### TODO
 
+- read through the post to check for any errors (and compare to [Vanilla Policy Gradient - Pieter Abbeel](https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4))
+- A2C implementation with vectorized environments (on GPU; average over losses) -> gymnasium tutorial
 - k-step returns implementation
 - GAE implementation
 - A3C implementation with multiprocessing
