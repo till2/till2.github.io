@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critics"
+title:  "Actor Critics (and A2C)"
 author: "Till Zemann"
 date:   2022-12-21 00:32:41 +0200
 categories: jekyll update
