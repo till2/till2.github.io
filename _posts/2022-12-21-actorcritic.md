@@ -208,6 +208,11 @@ Overview of the Actor-Critic variations:
 
 The most popular variation is the advantage actor critic (A2C).
 
+### Discrete versus Continuous
+
+A great feature of policy-gradient methods is that they can be used for continuous action spaces. 
+-> Soft Actor Critic (TODO)
+
 
 ### Variance vs. Bias tradeoff for k-step returns 
 
