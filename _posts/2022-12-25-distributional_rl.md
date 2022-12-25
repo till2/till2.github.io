@@ -2,14 +2,14 @@
 layout: post
 title:  "Distributional Reinforcement Learning"
 author: "Till Zemann"
-date:   2022-12-22 16:31:41 +0200
+date:   2022-12-25 20:31:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning]
+tags: [reinforcement learning, stochastics]
 thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
 ---
 

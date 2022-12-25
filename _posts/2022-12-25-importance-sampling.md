@@ -2,14 +2,14 @@
 layout: post
 title:  "Importance Sampling"
 author: "Till Zemann"
-date:   2022-12-22 16:31:41 +0200
+date:   2022-12-25 04:31:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [math]
+tags: [reinforcement learning, stochastics]
 thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
 ---
 
@@ -29,10 +29,12 @@ thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
 
 ### Introduction
 
+This blogpost describes the mathematical background for off-policy policy gradient methods. 
+
 Importance Sampling is a tool for when we have two random variables with the same values (e.g. the values of a die or values for policy gradient estimate samples) and you want to get an expectation with respect to a probability function which you can not sample from (e.g. because it is too expensive in the case of policy gradient estimate samples), but you know the probabiilies of the individual values.
 With importance sampling, we can rewrite the expectation w.r.t. the target random variable into an expectation w.r.t. the random variable that we can sample from.
 
-With this trick, we can use offline RL (replay buffers) for policy gradient methods! This is only possible because we can rewrite the expectation w.r.t. the policy gradient of a target policy into the expectation w.r.t. a behavior policy, which might be an old policy that was used to collect samples which are now stored in a replay buffer. It could also be samples collected from e.g. humans as expert samples for a given task.
+With this trick, we can use offline RL (replay buffers) for policy gradient methods! This is only possible because we can rewrite the expectation w.r.t. the policy gradient of a target policy into the expectation w.r.t. a behavior policy, which might be an old policy that was used to collect samples which are now stored in a replay buffer.
 
 ### Derivation
 
@@ -48,15 +50,15 @@ $$
 $$
 \begin{align*}
 \mathbb{E}_g [x]    &\dot{=} \sum_x g(x) x \\
-                    &= \sum_x \frac{ g(x) x }{ f(x) } f(x)          \;\; (\text{multiply with} \frac{f(x)}{f(x)} = 1 ) \\
-                    &= \mathbb{E}_f [ \frac{g(x) x }{ f(x) } ] \\
+                    &= \sum_x \frac{ g(x) }{ f(x) } x f(x)          \;\; (\text{multiply with} \frac{f(x)}{f(x)} = 1 ) \\
+                    &= \mathbb{E}_f [ \frac{g(x) }{ f(x) } x ] \\
 \end{align*}
 $$
 
-Now we have rewritten the expectation into an expectation with respect to $f$, i.e. the _behavior (sampling) policy_. We can estimate this expectation as usual:
+Now we have rewritten the expectation into an expectation with respect to $f$, the _behavior (sampling) policy_. We can estimate this expectation as usual:
 
 $$
-\mathbb{E}_f [ \frac{g(x) }{ f(x) } x ] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x \\
+\mathbb{E}_f [ \frac{g(x) }{ f(x) } x ] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x
 $$
 
 ### Application to off-policy policy gradient methods <br> (i.e. Actor Critics with a replay buffer)
@@ -65,12 +67,13 @@ Using importance sampling to estimate the policy gradient:
 
 $$
 \begin{align*}
-\nabla J(\pi_\text{target})  &= \mathbb{E}_\pi_\text{target} [ \nabla \log \pi_\text{target}(a|s) A_\text{target}(s,a)] \\
+\nabla J(\pi_\text{target})  
+&= \mathbb{E}_\pi_\text{target} [ \nabla \log \pi_\text{target}(a|s) A_\text{target}(s,a)] \\
 &= \mathbb{E}_\pi_\text{behavior} [ \frac{\pi_\text{target}(a|s)}{\pi_\text{behavior}(a|s)} \nabla \log \pi_\text{behavior}(a|s) A_\text{behavior}(s,a)]
 \end{align*}
 $$
 
-Note that the $importance sampling ratio$ (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_\theta (a|s)}{\pi_\theta_\text{old} (a|s)}$ where $r$ stands for ratio.
+Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_\theta (a\|s)}{\pi_\theta_\text{old} (a\|s)}$ where $r$ stands for ratio.
 
 ### TODO
 
