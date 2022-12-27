@@ -54,7 +54,7 @@ The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses 
 </div> 
 <br>
 
-### From the Policy-Gradient-Theorem to REINFORCE
+### From the Policy-Gradient-Theorem to Vanilla Policy Gradient (also called 'REINFORCE')
 
 
 The policy gradient theorem (for the episodic case) states that:
@@ -391,6 +391,7 @@ Reinforcement learning notation sometimes gets really messy and unpleasent to lo
 ### TODO
 
 - read through the post to check for any errors (and compare to [Vanilla Policy Gradient - Pieter Abbeel](https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4))
+- how would it work for continuous action spaces?
 - A2C implementation with vectorized environments (on GPU; average over losses) -> gymnasium tutorial
 - k-step returns implementation
 - GAE implementation
