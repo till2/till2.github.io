@@ -1,21 +1,21 @@
 ---
 layout: post
-title:  "KL-Divergence"
+title:  "Distributional Reinforcement Learning"
 author: "Till Zemann"
-date:   2022-12-22 06:31:41 +0200
+date:   2022-12-26 20:31:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, 🟢 not finished]
-thumbnail: "/images/kl_divergence/2018-12-27-learning.png"
+tags: [reinforcement learning, stochastics, 🟢 not finished, research]
+thumbnail: "/images/distributional_rl/Fig_00.png"
 ---
 
 
 <div class="img-block" style="width: 500px;">
-    <img src="/images/kl_divergence/2018-12-27-learning.png"/>
+    <img src="/images/distributional_rl/Fig_00.png"/>
 </div>
 
 
@@ -29,13 +29,15 @@ thumbnail: "/images/kl_divergence/2018-12-27-learning.png"
 
 ### Introduction
 
-- divergence not distance, 
-- not a distance because KL(a,b) != KL(b,a)
-- (but usually used as distance -- ok if we use the correct order)
+- introduction to distributional rl paper: [Marc G. Bellemare, Will Dabney, Rémi Munos - A distributional perspective on reinforcement learning (August 2017)][distributional-rl-paper]
+- read the book: ["Distributional RL (2023), MIT Press" -- html variant currently][distributional-rl-book]
+- [Will Dabney, Georg Ostrovski, David Silver, Rémi Munos: Implicit Quantile Networks for Distributional Reinforcement Learning (2018)][will-dabney-deepmind-paper]
+- [WikiDocs: Distributional RL (overview) blogpost][wikidocs]
 
-### Approximating KL Trick
 
-- was in some blog, let me see...
+### Benefits
+
+- safe Reinforcement Learning (?)
 
 
 <!-- In-Text Citing -->
@@ -84,12 +86,18 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 -->
 
 ### References
-1. Thumbnail taken from [Jessica Stringham's KL Divergence blogpost][jessica-stringham-kl-blogpost].
+1. [Marc G. Bellemare, Will Dabney, Rémi Munos - A distributional perspective on reinforcement learning (August 2017)][distributional-rl-paper]
+2. Marc G. Bellemare and Will Dabney and Mark Rowland: [Distributional Reinforcement Learning][distributional-rl-book]
+3. [Will Dabney, Georg Ostrovski, David Silver, Rémi Munos: Implicit Quantile Networks for Distributional Reinforcement Learning (July 2018)][will-dabney-deepmind-paper]
+4. Thumbnail from (and source): [WikiDocs: 34. Distributional RL][wikidocs].
 
 
 <!-- Ressources -->
-[jessica-stringham-kl-blogpost]: https://jessicastringham.net/2018/12/27/KL-Divergence/
-
+[thumbnail-paper]: https://arxiv.org/pdf/2007.04309.pdf
+[distributional-rl-paper]: https://arxiv.org/pdf/1707.06887.pdf
+[distributional-rl-book]: https://www.distributional-rl.org/
+[will-dabney-deepmind-paper]: https://willdabney.com/publication/iqn/
+[wikidocs]: https://wikidocs.net/175856
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

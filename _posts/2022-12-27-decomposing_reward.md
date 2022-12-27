@@ -1,23 +1,23 @@
 ---
 layout: post
-title:  "Trust region methods"
+title:  "Decomposing Reward"
 author: "Till Zemann"
-date:   2022-12-22 16:31:41 +0200
+date:   2022-12-27 15:01:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, 🟢 not finished]
-thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
+tags: [reinforcement learning, 🟢 not finished, research]
+thumbnail: "/images/decomposing_reward/decompose_pic_1.png"
 ---
 
-<!-- add the actor-critic diagram from Prof. Sutton.! -->
 
 <div class="img-block" style="width: 300px;">
-    <img src="/images/trpo-ppo/thumbnail.jpeg"/>
+    <img src="/images/decomposing_reward/decompose_pic_1.png"/>
 </div>
+
 
 <!-- <em style="float:right">First draft: 2022-10-22</em><br> -->
 
@@ -29,30 +29,7 @@ thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
 
 ### Introduction
 
-- Trust region methods: TRPO and PPO
-- bad policy leads to bad data
-- TRPO needs 2nd order derivative, hard to implement (?) -> just use PPO
-- PPO has KL and Clip variants
-- KL divergence approximation trick (see kl, some blogpost)
-- Clip is easier to implement
-- Show clip plots
-
-### Importance Sampling
-
-- see importance sampling post, link
-
-### TRPO
-
-
-### PPO
-
-
-### TODO
-
-- first look at [importance sampling](https://youtu.be/C3p2wI4RAi8)
-- then watch Pieters lecture and take notes
-- then research anything that's unclear
-- implement it
+- see book: "Distributional RL (2023), MIT Press" -- html variant currently
 
 <!-- In-Text Citing -->
 <!-- 
@@ -100,13 +77,12 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 -->
 
 ### References
-1. Thumbnail taken from [here][thumbnail-paper].
-2. [Pieter Abbeel: L4 TRPO and PPO (Foundations of Deep RL Series) ][pieter-abbeel-trpo-ppo-lecture]
+1. Thumbnail taken from [here][thumbnail].
 
 
 <!-- Ressources -->
-[thumbnail-paper]: https://arxiv.org/pdf/2007.04309.pdf
-[pieter-abbeel-trpo-ppo-lecture]: https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4
+[thumbnail]: https://study.com/cimages/multimages/16/decompose_pic_1.png
+
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

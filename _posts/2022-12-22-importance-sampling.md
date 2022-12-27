@@ -2,7 +2,7 @@
 layout: post
 title:  "Importance Sampling"
 author: "Till Zemann"
-date:   2022-12-25 04:31:41 +0200
+date:   2022-12-22 08:31:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
@@ -32,10 +32,18 @@ thumbnail: "/images/importance_sampling/thumbnail.png"
 
 This blogpost describes the mathematical background for off-policy policy gradient methods. 
 
-Importance Sampling is a tool for when we have two random variables with the same values (e.g. the values of a die or values for policy gradient estimate samples) and you want to get an expectation with respect to a probability function which you can not sample from (e.g. because it is too expensive in the case of policy gradient estimate samples), but you know the probabiilies of the individual values.
-With importance sampling, we can rewrite the expectation w.r.t. the target random variable into an expectation w.r.t. the random variable that we can sample from.
+Importance Sampling is a tool for estimating the expectation of a random variable that we can not sample from. It is applicable when the following preconditions are met:
 
-With this trick, we can use offline RL (replay buffers) for policy gradient methods! This is only possible because we can rewrite the expectation w.r.t. the policy gradient of a target policy into the expectation w.r.t. a behavior policy, which might be an old policy that was used to collect samples which are now stored in a replay buffer.
+- we can't sample from the random variable of interest, maybe because it's too expensive <br> (otherwise just sample from it)
+- but we know the probabilities of the individual values of this random variable
+- we have a second random variabe that can take on the same values and that we can sample from.
+
+This is especially useful in Reinforcement Learning if we already have some collected samples from an old policy and we want to update a new policy with them. The goal is to calculate the expectation of the new policy, and all the prerequisites are satisfied because for each collected experience, we can calculate the probability that the new policy would have taken that action.
+
+With importance sampling, we can rewrite the expectation of the target random variable into an expectation with respect to the second random variable that we can sample from.
+
+Using this trick, we can use offline Reinforcement Learning (replay buffers) for policy gradient methods!
+
 
 ### Derivation
 
@@ -82,6 +90,7 @@ Note that the `importance sampling ratio` (the first fraction) is also often wri
 
 ### TODO
 
+- check if math is correct
 - implement an example for a coin toss or better yet a die (one with fair and one with unfair probs)
 - copy the example from "Phil Winder, Ph.D. -- Reinforcement Learning: Industrial Applications of Intelligent Agents" to check if my solution is correct.
 
