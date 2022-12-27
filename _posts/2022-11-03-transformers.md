@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The Transformer (...)"
+title:  "The Transformer"
 author: "Till Zemann"
 date:   2022-11-02 20:36:41 +0200
 categories: jekyll update
@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [machine learning, nlp]
+tags: [machine learning, nlp, 🟢 not finished]
 thumbnail: "/images/transformers/transformer.png"
 ---
 

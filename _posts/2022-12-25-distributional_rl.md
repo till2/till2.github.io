@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, stochastics]
+tags: [reinforcement learning, stochastics, 🟢 not finished, research]
 thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
 ---
 
