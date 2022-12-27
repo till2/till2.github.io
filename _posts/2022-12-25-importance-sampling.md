@@ -10,14 +10,15 @@ math: true
 positive_reward: true
 reward: 2
 tags: [reinforcement learning, stochastics, 🟢 not finished]
-thumbnail: "/images/trpo-ppo/thumbnail.jpeg"
+thumbnail: "/images/importance_sampling/thumbnail.png"
 ---
 
-<!--
-<div class="img-block" style="width: 300px;">
-    <img src="/images/trpo-ppo/thumbnail.jpeg"/>
+
+<div class="img-block" style="width: 500px;">
+    <img src="/images/importance_sampling/thumbnail.png"/>
 </div>
--->
+<center>Image taken from <a href="https://www.semanticscholar.org/paper/Sequential-importance-sampling-for-low-probability-Katayama-Hagiwara/7e8ad118a0c1de96d29147aa58518a2ca161c48e">[2]</a></center>
+
 
 <!-- <em style="float:right">First draft: 2022-10-22</em><br> -->
 
@@ -38,7 +39,7 @@ With this trick, we can use offline RL (replay buffers) for policy gradient meth
 
 ### Derivation
 
-Definition for an expectation $\mathbb{E}$ of a random variable $x$ with regard to a probability function f (and g in the second case):
+Definitions for expectations of a random variable $x$ with regard to a probability function $f$ (and in the second case $g$):
 
 $$
 \begin{align*}
@@ -47,33 +48,37 @@ $$
 \end{align*}
 $$
 
+
+Rewriting the expectation with respect to another function (from $g$ to $f$):
+
 $$
 \begin{align*}
 \mathbb{E}_g [x]    &\dot{=} \sum_x g(x) x \\
-                    &= \sum_x \frac{ g(x) }{ f(x) } x f(x)          \;\; (\text{multiply with} \frac{f(x)}{f(x)} = 1 ) \\
-                    &= \mathbb{E}_f [ \frac{g(x) }{ f(x) } x ] \\
+                    &= \sum_x \frac{ g(x) }{ f(x) } x f(x)          \;\; (\text{multiply with} \frac{f(x)}{f(x)}) \\
+                    &= \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \\
 \end{align*}
 $$
 
 Now we have rewritten the expectation into an expectation with respect to $f$, the _behavior (sampling) policy_. We can estimate this expectation as usual:
 
 $$
-\mathbb{E}_f [ \frac{g(x) }{ f(x) } x ] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x
+\mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x
 $$
 
-### Application to off-policy policy gradient methods <br> (i.e. Actor Critics with a replay buffer)
+### Application to off-policy policy gradient methods
+
+- application for example in PPO (to update from a minibatch of samples) and Actor Critics with Experience Replay (ACER)
 
 Using importance sampling to estimate the policy gradient:
 
 $$
 \begin{align*}
-\nabla J(\pi_\text{target})  
-&= \mathbb{E}_\pi_\text{target} [ \nabla \log \pi_\text{target}(a|s) A_\text{target}(s,a)] \\
-&= \mathbb{E}_\pi_\text{behavior} [ \frac{\pi_\text{target}(a|s)}{\pi_\text{behavior}(a|s)} \nabla \log \pi_\text{behavior}(a|s) A_\text{behavior}(s,a)]
+\nabla J(\pi_\text{target})  &= \mathbb{E}_{\pi_{\text{target}}} \left[ \nabla \log \pi_\text{target}(a|s) A_\text{target}(s,a) \right] \\
+&= \mathbb{E}_{\pi_{\text{behavior}}} \left[ \frac{\pi_\text{target}(a|s)}{\pi_\text{behavior}(a|s)} \nabla \log \pi_\text{behavior}(a|s) A_\text{behavior}(s,a) \right]
 \end{align*}
 $$
 
-Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_\theta (a\|s)}{\pi_\theta_\text{old} (a\|s)}$ where $r$ stands for ratio.
+Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ where $r$ stands for ratio.
 
 ### TODO
 
@@ -129,9 +134,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 ### References
 
 1. Phil Winder, Ph.D. - Reinforcement Learning: Industrial Applications of Intelligent Agents
+2. Thumbnail taken from [Sequential importance sampling for low-probability and high-dimensional SRAM yield analysis][thumbnail].
 
 <!-- Ressources -->
-[thumbnail]: https://arxiv.org/pdf/2007.04309.pdf
+[thumbnail]: https://www.semanticscholar.org/paper/Sequential-importance-sampling-for-low-probability-Katayama-Hagiwara/7e8ad118a0c1de96d29147aa58518a2ca161c48e
 
 
 <!-- Optional Comment Section-->
