@@ -39,9 +39,38 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 - Clip is easier to implement
 - Show clip plots
 
-### Importance Sampling
 
-- see importance sampling post, link
+
+### Derivation of the Surrogate Loss Function
+
+We are starting with the policy gradient (more details in my <a href="/blog/2022/12/20/actorcritic">Actor Critic blogpost</a>), that we want to maximize. Next, we use the log-trick (for more details I also refer to the Actor Critic blogpost), which gets us the policy ratio multiplied with the advantage (I'm not sure why we can use an old policy and get the correct expectation here; researching this further...):
+
+$$
+\begin{align*}
+\nabla J(\theta)	&= \mathbb{E}_{\pi_{\theta}} \left[ \nabla \log \pi_{\theta}(a|s) A_{\text{w}}(s,a) \right] \\
+					&=^{why?} \mathbb{E}_{\pi_{\theta}} \left[ \frac{\nabla \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\text{w}}(s,a) \right] \\
+\end{align*}
+$$
+
+Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ ($r$ stands for ratio).
+
+
+Now we can extract a loss function (that gets minimized!):
+
+$$
+\Rightarrow \mathcal{L}_{\text{actor}} = - \frac{\nabla \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\text{w}}(s,a)
+$$
+
+
+<!--
+$$
+L_{\text{surrogate}} = \text{clip}(\frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)},1-\epsilon,1+\epsilon) \sum_{s \in S} \sum_{a \in A} \pi_\theta(a|s) \log \frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}
+$$
+
+This constraint is controlled by a hyperparameter called epsilon, which determines the maximum allowed difference between the current and previous policies.
+-->
+
+
 
 ### TRPO
 

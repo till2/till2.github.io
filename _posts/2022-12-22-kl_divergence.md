@@ -33,6 +33,14 @@ thumbnail: "/images/kl_divergence/2018-12-27-learning.png"
 - not a distance because KL(a,b) != KL(b,a)
 - (but usually used as distance -- ok if we use the correct order)
 
+### Formula
+
+$$
+KL(\pi_1 || \pi_2) = \sum_{s \in S} \sum_{a \in A} \pi_1(a|s) \log \frac{\pi_1(a|s)}{\pi_2(a|s)}
+$$
+
+
+
 ### Approximating KL Trick
 
 - was in some blog, let me see...

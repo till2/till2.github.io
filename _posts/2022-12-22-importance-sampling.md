@@ -57,7 +57,7 @@ $$
 $$
 
 
-Rewriting the expectation with respect to another function (from $g$ to $f$):
+Rewriting the expectation with respect to another function (from target $g$ to sampling variable $f$):
 
 $$
 \begin{align*}
@@ -73,6 +73,8 @@ $$
 \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x
 $$
 
+<!-- MIGHT BE WRONG!
+
 ### Application to off-policy policy gradient methods
 
 - application for example in PPO (to update from a minibatch of samples) and Actor Critics with Experience Replay (ACER)
@@ -87,6 +89,8 @@ $$
 $$
 
 Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ where $r$ stands for ratio.
+-->
+
 
 ### TODO
 

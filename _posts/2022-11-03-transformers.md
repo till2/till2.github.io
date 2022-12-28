@@ -89,9 +89,11 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 ### References
 1. [Transformer architecture image][transformer-img].
+2. [harvardnlp - The Annotated Transformer][the-annotated-transformer].
 
 <!-- Ressources -->
 [transformer-img]: https://deepfrench.gitlab.io/deep-learning-project/resources/transformer.png
+[the-annotated-transformer]: https://nlp.seas.harvard.edu/2018/04/03/attention.html
 
 
 <!-- Optional Comment Section-->

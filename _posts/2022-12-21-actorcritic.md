@@ -30,6 +30,19 @@ thumbnail: "/images/robot-2.png"
 {:toc}
 -->
 
+### TODO
+
+- sample implementation for actor critic: https://github.com/higgsfield/RL-Adventure-2/blob/master/1.actor-critic.ipynb
+- sample implementation for GAE: https://github.com/higgsfield/RL-Adventure-2/blob/master/2.gae.ipynb
+
+- read through the post to check for any errors (and compare to [Vanilla Policy Gradient - Pieter Abbeel](https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4))
+- how would it work for continuous action spaces?
+- A2C implementation with vectorized environments (on GPU; average over losses) -> gymnasium tutorial
+- k-step returns implementation
+- GAE implementation
+- A3C implementation with multiprocessing
+
+
 ### Introduction
 
 The Actor Critic is a powerful and beautiful method of learning, with surprising similarities to our dopaminergic learning circuits.
@@ -44,11 +57,11 @@ The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses 
 <!-- new -->
  <div class="row">
   <div class="column1">
-    <img src="/images/actor-critic/venn-simple.jpg" style="width:100%">
+    <img src="/images/actor_critic/venn-simple.jpg" style="width:100%">
   </div>
   <!--
   <div class="column2">
-    <img src="/images/actor-critic/venn-diagram-rl-algos-detailed.png" style="width:100%">
+    <img src="/images/actor_critic/venn-diagram-rl-algos-detailed.png" style="width:100%">
   </div>
 -->
 </div> 
@@ -203,7 +216,7 @@ $$
 Overview of the Actor-Critic variations:
 
 <div class="img-block" style="width: 500px;">
-    <img src="/images/actor-critic/policy-gradient-variationen.png"/>
+    <img src="/images/actor_critic/policy-gradient-variationen.png"/>
 </div>
 
 The most popular variation is the advantage actor critic (A2C).
@@ -250,13 +263,19 @@ $$
 \end{align*}
 $$
 
+From the GAE paper:
+<div class="img-block" style="width: 600px;">
+    <img src="/images/actor_critic/GAE.webp"/>
+</div>
+
+
 <em>Note: Implementing GAE isn't that easy, so if you just want something that works ok, Mnih et. al. used 5-step rollouts in their [async methods paper][async-methods-mnihetal] (the easiest implementation is of course just using the actual returns, but this has a high variance, as discussed above). </em>
 
 
 ### Async Advantage Actor Critic (A3C)
 
 <div class="img-block" style="width: 500px;">
-    <img src="/images/actor-critic/a3c.png"/>
+    <img src="/images/actor_critic/a3c.png"/>
 </div>
 <center>Picture taken from<a href="https://arxiv.org/pdf/1803.02912v1.pdf"> this </a>paper.</center>
 <br>
@@ -276,7 +295,8 @@ For the critic, we just want to approximate the true state-values. To do that, w
 
 $$
 \begin{align*}
-\mathcal{L}_{\text{critic}} &= \| \hat{Q}(s_t,a_t) - \hat{V}(S_t,\textbf{w}) \|_2^2 + \kappa \| \textbf{w}_{\text{new}} - \textbf{w} \|_2^2
+\mathcal{L}_{\text{critic}} &= \| \hat{Q}(s_t,a_t) - \hat{V}(S_t,\textbf{w}) \|_2^2 + \kappa \| \textbf{w}_{\text{new}} - \textbf{w} \|_2^2 \\
+                            &= ( \hat{A}(s_t,a_t) )^2 + \kappa \| \textbf{w}_{\text{new}} - \textbf{w} \|_2^2
 \end{align*}
 $$
 
@@ -334,20 +354,20 @@ And lastly, we can divide both losses by the length of the episode to get the av
 #### Learning plots
 
 <div class="img-block" style="width: 800px;">
-    <img src="/images/actor-critic/plots.png"/>
+    <img src="/images/actor_critic/plots.png"/>
 </div>
 
 #### Learned policy showcase (in the LunarLander-v2 environment)
 
 Watch the learned policy (using the A2C implementation) playing:
 <div class="img-block" style="width: 800px;">
-    <img src="/images/actor-critic/a2c_lunar_lander.gif"/>
+    <img src="/images/actor_critic/a2c_lunar_lander.gif"/>
 </div>
 
 You can actually try to play it yourself, just copy and paste [these three lines](https://gist.github.com/till2/2febfa43ac167fe55b84e63e015243e5). I tried and it is actually way harder than it looks. One reason is that you can only perform one action at a time. This is me trying to land it:
 
 <div class="img-block" style="width: 800px;">
-    <img src="/images/actor-critic/me_lunar_lander.gif"/>
+    <img src="/images/actor_critic/me_lunar_lander.gif"/>
 </div>
 (Don't trust me with landing your rockets...)
 
@@ -376,7 +396,7 @@ $$
 The following image shows the corresponding structures in mammalian brains and how they interact.
 
 <div class="img-block" style="width: 500px;">
-    <img src="/images/actor-critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation.png"/>
+    <img src="/images/actor_critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation.png"/>
 </div>
 <center>Illustration from Massimiliano Patacchiola's blog [9]</center>
 
@@ -387,15 +407,6 @@ Experiments show that when the dopamine signal from the critic is distorted, e.g
 
 Reinforcement learning notation sometimes gets really messy and unpleasent to look at, to the point where it can be hard to absorb the important pieces of information. For this reason i think it is usually better to _omit some formalism and instead write clean looking formulas_ for the sake of readability, if the context of writing allows it (i.e. you are not writing a scientific paper). A piece that you can usually leave out if it is clear what we are referring to is $\theta$ in the subscript.
 
-
-### TODO
-
-- read through the post to check for any errors (and compare to [Vanilla Policy Gradient - Pieter Abbeel](https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4))
-- how would it work for continuous action spaces?
-- A2C implementation with vectorized environments (on GPU; average over losses) -> gymnasium tutorial
-- k-step returns implementation
-- GAE implementation
-- A3C implementation with multiprocessing
 
 
 <!-- In-Text Citing -->
@@ -438,7 +449,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 ### Rl-Algorithms-Taxonomy in a Venn-Diagram
 
 <div class="img-block" style="width: 700px;">
-    <img src="/images/actor-critic/venn-diagram-rl-algos-detailed.png"/>
+    <img src="/images/actor_critic/venn-diagram-rl-algos-detailed.png"/>
 </div>
 
 -->
