@@ -29,6 +29,8 @@ thumbnail: "/images/distributional_rl/Fig_00.png"
 
 ### Introduction
 
+- [ A Distributional Perspective on Reinforcement Learning - Marc Bellemare (Video)][marc-bellemare-video]
+- [Podcast episode with Marc Bellemare](https://thegradientpub.substack.com/p/marc-bellemare-distributional-reinforcement#details)
 - introduction to distributional rl paper: [Marc G. Bellemare, Will Dabney, Rémi Munos - A distributional perspective on reinforcement learning (August 2017)][distributional-rl-paper]
 - read the book: ["Distributional RL (2023), MIT Press" -- html variant currently][distributional-rl-book]
 - [Will Dabney, Georg Ostrovski, David Silver, Rémi Munos: Implicit Quantile Networks for Distributional Reinforcement Learning (2018)][will-dabney-deepmind-paper]
@@ -98,6 +100,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [distributional-rl-book]: https://www.distributional-rl.org/
 [will-dabney-deepmind-paper]: https://willdabney.com/publication/iqn/
 [wikidocs]: https://wikidocs.net/175856
+[marc-bellemare-video]: https://youtu.be/ba_l8IKoMvU
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

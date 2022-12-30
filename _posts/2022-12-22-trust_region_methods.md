@@ -21,7 +21,7 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 <center>Image taken from <a href="https://medium.com/analytics-vidhya/trust-region-methods-for-deep-reinforcement-learning-e7e2a8460284">[1]</a>.</center>
 
 
-<!-- <em style="float:right">First draft: 2022-10-22</em><br> -->
+<em style="float:right">First draft: 2022-12-27</em><br>
 
 <!--
 ### Contents

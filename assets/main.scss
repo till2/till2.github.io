@@ -82,58 +82,10 @@ img.home{
   /* box-shadow: 8px 8px 26px -15px rgba(0,0,0,0.5); */
 }
 
-code {
-  background-color: rgba(247,193,224,0.5); /*  #f7c1e0 -> pink, #abf5df a3f7de -> clinical green */
-  /* box-shadow: 5px 3px 18px 3px rgba(247,193,224,0.5); */
-}
-
-pre.highlight code{
-  background-color: #EEEEFF;
-
-  margin: none;
-  padding: 10px;
-
-  border: 5px solid rgba(43, 69, 61, 0.1);
-  backface-visibility: hidden;
-  border-radius: .375rem;
-  border-style: dashed;
-  border-width: .125rem;
-  box-sizing: border-box;
-}
 
 pre.highlight {
-
-    background-repeat: no-repeat;
-    background-size: 300px 100px;
-
-    /* BORDER */
-    /* border: 0px solid #404040; */
-    
-    border-left: 5px solid;
-    border-left-style: solid;
-  
-    /* TEXT COLOR */
-    color: #3e4e5c; /* grey */
-    text-decoration: none !important;
-
-    /* blue shadow */
-    /* box-shadow: rgba(240, 79, 194, 0.4) 3px 3px, rgba(135, 131, 235, 0.3) 6px 6px, rgba(135, 131, 235, 0.1) 9px 9px; */
-    box-shadow: rgba(146, 79, 240, 0.3) 3px 3px, rgba(135, 131, 235, 0.05) 6px 6px;
-  
-    display: grid; /* flex for full screen*/
-
-    /* FONT */
-    font-family: Circular,Helvetica,sans-serif;
-    font-size: 1.125rem;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    line-height: 1.3;
-
-    /* margin: 0; */
-    /* padding: 0; */
-    /* background-color: #F2F2F2 #E3FCFF F2F2F2; */
-    /* color: #fff; */
-    
+    color: black;
+    border: 2px solid rgba(43, 69, 61, 0.1);
 }
 
 .gist {
@@ -154,13 +106,11 @@ div.output {
     border: 5px solid rgba(43, 69, 61, 0.1);
     backface-visibility: hidden;
     border-radius: .375rem;
-    border-style: dashed;
     border-width: .125rem;
     box-sizing: border-box;
 
 
     /* BOX */
-
     background-repeat: no-repeat;
     background-size: 300px 100px;
   
@@ -168,9 +118,6 @@ div.output {
     color: #3e4e5c; /* grey */
     text-decoration: none !important;
 
-    /* blue shadow */
-    /* box-shadow: rgba(240, 79, 194, 0.4) 3px 3px, rgba(135, 131, 235, 0.3) 6px 6px, rgba(135, 131, 235, 0.1) 9px 9px; */
-    box-shadow: rgba(146, 79, 240, 0.3) 3px 3px, rgba(135, 131, 235, 0.05) 6px 6px;
   
     display: grid; /* flex for full screen*/
 
@@ -181,10 +128,6 @@ div.output {
     letter-spacing: -.01em;
     line-height: 1.3;
 
-    /* margin: 0; */
-    /* padding: 0; */
-    /* background-color: #F2F2F2 #E3FCFF F2F2F2; */
-    /* color: #fff; */
     margin-bottom: 25px;
 }
 
