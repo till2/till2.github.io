@@ -256,20 +256,46 @@ The idea is pretty much the exact same as in TD($\lambda$).
 
 - see my [TD($\lambda$) post][td-lambda-post] or this [blogpost about GAE by Jonathan Hui][jonathan-hui-gae] for more details.
 
-$$
-\begin{align*}
-\hat{Q}_t^\text{GAE}  &= (1 - \lambda) (\hat{Q}_t^{(k=1)} + \lambda \hat{Q}_{t}^{(k=2)} + \lambda^2 \hat{Q}_{t}^{(k=3)} + \dots) \\
-                      &= (1 - \lambda) \sum_{k=0}^{T} \lambda^k \hat{Q}_{t}^{(k)}
-\end{align*}
-$$
-
 From the GAE paper:
 <div class="img-block" style="width: 600px;">
     <img src="/images/actor_critic/GAE.webp"/>
 </div>
 
 
-<em>Note: Implementing GAE isn't that easy, so if you just want something that works ok, Mnih et. al. used 5-step rollouts in their [async methods paper][async-methods-mnihetal] (the easiest implementation is of course just using the actual returns, but this has a high variance, as discussed above). </em>
+### Calculating Q(s,a)-returns normally 
+
+- typical values for hyperparams: `gamma = 0.99`
+
+```py
+T = len(ep_rewards)
+returns = torch.zeros(T, n_envs, device=device)
+future_returns = torch.zeros(n_envs, device=device)
+
+# compute the returns
+for t in reversed(range(T)):
+    future_returns = ep_rewards[t] + gamma * masks[t] * future_returns
+    returns[t] = future_returns
+
+print(returns.shape) # torch.Size([256, 3])
+```
+
+### Calculating Q(s,a)-returns using GAE 
+
+- typical values for hyperparams: `gamma = 0.99` and `lam = 0.9`
+
+```py
+T = len(ep_rewards)
+returns = torch.zeros(T, n_envs, device=device)
+
+# compute the returns using GAE ("Generalized Advantage Estimation" paper: https://arxiv.org/abs/1506.02438)
+gae = 0.0
+for t in reversed(range(T-1)):
+    td_error = ep_rewards[t] + gamma * masks[t] * ep_value_preds[t+1] - ep_value_preds[t]
+    gae = td_error + gamma * lam * masks[t] * gae
+    returns[t] = ep_value_preds[t] + gae # Q(s,a) = V(s) + A(s,a)
+
+print(returns.shape) # torch.Size([256, 3])
+```
 
 
 ### Async Advantage Actor Critic (A3C)
@@ -465,6 +491,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 8. [PyTorch docs: HuberLoss][torch-huber-loss]
 9. [Mnih et. al. : Asynchronous Methods for Deep Reinforcement Learning][async-methods-mnihetal]
 10. [Jonathan Hui: GAE][jonathan-hui-gae]
+11. [John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel: High-Dimensional Continuous Control Using Generalized Advantage Estimation][gae-paper] (GAE paper)
 
 
 ### Pointers to other ressources
@@ -498,6 +525,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [async-methods-mnihetal]: https://arxiv.org/abs/1602.01783
 [jonathan-hui-gae]: https://jonathan-hui.medium.com/rl-actor-critic-methods-a3c-gae-ddpg-q-prop-e1c41f268541
 [phil-multicore-a3c]: https://www.youtube.com/watch?v=OcIx_TBu90Q
+[gae-paper]: https://arxiv.org/abs/1506.02438
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
