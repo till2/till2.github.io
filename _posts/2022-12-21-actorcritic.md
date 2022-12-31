@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Actor Critics (and A2C)"
+title:  "Actor Critics"
 author: "Till Zemann"
 date:   2022-12-21 00:32:41 +0200
 categories: jekyll update
@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, psychology]
+tags: [reinforcement learning, psychology, long read]
 thumbnail: "/images/robot-2.png"
 ---
 
@@ -438,13 +438,20 @@ $$
 
 The following image shows the corresponding structures in mammalian brains and how they interact.
 
-<div class="img-block" style="width: 500px;">
+<div class="img-block" style="width: 600px;">
     <img src="/images/actor_critic/reinforcement_learning_model_free_active_actor_critic_neural_implementation.png"/>
 </div>
 <center>Illustration from Massimiliano Patacchiola's blog [9]</center>
+<br>
+
+<div class="img-block" style="width: 600px;">
+    <img src="/images/actor_critic/brian.jpg"/>
+</div>
+<center>Dopaminergic circuit with labels for the corresponding Actor-Critic components <br> (Picture taken by me)</center>
+<br>
 
 Experiments show that when the dopamine signal from the critic is distorted, e.g. by the use of cocaine, the subject was not able to learn the task (because the dopamine/error signal for the actor is too noisy).
-
+<p class="vspace"></p>
 
 ### Final remark: Clean formalism
 
