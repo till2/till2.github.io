@@ -23,25 +23,14 @@ thumbnail: "/images/robot-2.png"
 <em style="float:right">Second draft: 2022-12-12</em><br>
 <em style="float:right">Third draft: 2022-12-15</em><br>
 <em style="float:right">Implementation: 2022-12-20</em><br>
+<em style="float:right">GAE: 2022-12-30</em><br>
+
 
 <!--
 ### Contents
 * TOC
 {:toc}
 -->
-
-### TODO
-
-- sample implementation for actor critic: https://github.com/higgsfield/RL-Adventure-2/blob/master/1.actor-critic.ipynb
-- sample implementation for GAE: https://github.com/higgsfield/RL-Adventure-2/blob/master/2.gae.ipynb
-
-- read through the post to check for any errors (and compare to [Vanilla Policy Gradient - Pieter Abbeel](https://www.youtube.com/watch?v=KjWF8VIMGiY&list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0&index=4))
-- how would it work for continuous action spaces?
-- A2C implementation with vectorized environments (on GPU; average over losses) -> gymnasium tutorial
-- k-step returns implementation
-- GAE implementation
-- A3C implementation with multiprocessing
-
 
 ### Introduction
 
@@ -74,7 +63,7 @@ The policy gradient theorem (for the episodic case) states that:
 
 $$
 \begin{align*}
-\nabla_{\theta} J(\theta) &\propto \sum_s \mu(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta) \\
+\nabla \mathcal{J}(\theta) &\propto \sum_s \mu(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta) \\
                           &= \mathbb{E_\pi}[ \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta) ]
 \end{align*}
 $$
@@ -87,7 +76,7 @@ We can extend the formula further by multiplying and deviding by <strong style="
 Performing all of the steps above:
 
 $$
-\nabla_{\theta} J(\theta)   \propto \mathbb{E_\pi}[ \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta)]
+\nabla \mathcal{J}(\theta)   \propto \mathbb{E_\pi}[ \sum_a Q^\pi(s,a) \nabla \pi(a|s,\theta)]
 $$
 
 <center>
@@ -257,14 +246,19 @@ The idea is pretty much the exact same as in TD($\lambda$).
 - see my [TD($\lambda$) post][td-lambda-post] or this [blogpost about GAE by Jonathan Hui][jonathan-hui-gae] for more details.
 
 From the GAE paper:
-<div class="img-block" style="width: 600px;">
+<div class="img-block" style="width: 650px;">
     <img src="/images/actor_critic/GAE.webp"/>
 </div>
 
 
 ### Calculating Q(s,a)-returns normally 
 
-- typical values for hyperparams: `gamma = 0.99`
+- for info, the ep_rewards and ep_value_preds tensors look like this (for one environment):<br>
+`ep_rewards` = [$r_1, \dots$] <br>
+`ep_value_preds` = [$V(s_0), \dots$]<br>
+(for multiple envs, $r_1$ would be a row with _n\_envs_ entries $\rightarrow$ shape=[n\_steps\_per\_update, n\_envs])
+
+- hyperparameters used: `gamma=0.999`
 
 ```py
 T = len(ep_rewards)
@@ -281,7 +275,7 @@ print(returns.shape) # torch.Size([256, 3])
 
 ### Calculating Q(s,a)-returns using GAE 
 
-- typical values for hyperparams: `gamma = 0.99` and `lam = 0.9`
+- hyperparameters used: `gamma=0.999` and `lam=0.9`
 
 ```py
 T = len(ep_rewards)
@@ -296,7 +290,13 @@ for t in reversed(range(T-1)):
 
 print(returns.shape) # torch.Size([256, 3])
 ```
+Here we are calculating the returns by using the following decomposition for the Q-values:
 
+$$
+Q(s,a) = V(s) + A(s,a)
+$$
+
+You can also leave out adding `ep_value_preds[t]` at the end and just save your generalized advantage estimates (`gae`) in an advantages tensor: `advantages[t] = gae`.
 
 ### Async Advantage Actor Critic (A3C)
 
@@ -309,7 +309,7 @@ print(returns.shape) # torch.Size([256, 3])
 
 - use python's `multiprocessing` library to have multiple workers (each one running on a thread) collect episodes, calculate the loss and update the master (global) network, before downloading the new updated parameters
 - Phil has a good tutorial video [here][phil-multicore-a3c]
-- will probably not implement this one, because A2C with vectorized environments is just as good.
+- will probably not implement this one, because A2C with vectorized environments has been empirically shown to bea just as good.
 
 
 ### Implementation
@@ -357,21 +357,38 @@ $$
 \end{align*}
 $$
 
-And lastly, we can divide both losses by the length of the episode to get the average loss of the episode.
 
-<!--
-### Actor Critic Code
+#### Vectorized Environments
 
-<details>
-  <summary style="cursor: pointer">A2C Class</summary>
-  <script src="https://gist.github.com/till2/1ece94e7fe15f78a1de5a00968c0f20b.js"></script>
-</details>
+In practice, we want to use vectorized environments to get less variance for the loss and thus speed up training
+(See: [Gymnasium docs for vectorized envs][gymnasium-vectorized-envs]).
+With vectorized environments, we can play `k` steps with `n` environments in parallel and just use the mean loss of each sample phase (update every `k` steps).
 
-<details>
-  <summary style="cursor: pointer">A2C training loop</summary>
-  <script src="https://gist.github.com/till2/bca3cf6e4499b43b08f88d7082101bcc.js"></script>
-</details>
--->
+If you want to be fancy or use your agent that was trained in simulation in the real world (`Sim2Real` paradigm), you can also randomize the parameters of your environments to make your agent a little bit more generally capable (`domain randomization` - see other ressources [[11]][domain-randomization-paper]). This is not difficult to code up (also see gymnasium docs). Be careful though to have enough environments so that your agent doesn't overfit to certain parameter settings (or create new environments with new parameters every couple of sampling phases).
+
+Example code for domain randomization in the LunarLander-v2 environment:
+
+```py
+n_envs = 5
+randomize_domain = True
+
+if randomize_domain:
+    envs = gym.vector.AsyncVectorEnv([
+        lambda: gym.make(
+            'LunarLander-v2',
+            gravity=np.clip(np.random.normal(loc=-10.0, scale=2.0), a_min=-11.99, a_max=-0.01),
+            enable_wind=np.random.choice([True,False]),
+            wind_power=np.clip(np.random.normal(loc=15.0, scale=2.0), a_min=0.01, a_max=1.99),
+            turbulence_power=np.clip(np.random.normal(loc=1.5, scale=1.0), a_min=0.01, a_max=1.99),
+            max_episode_steps=600
+        ) for i in range(n_envs)
+    ])
+    
+else:
+    envs = gym.vector.make('LunarLander-v2', num_envs=n_envs, max_episode_steps=600)
+```
+
+<em>Note: We have to clip the randomly generated parameters at a min and max point to match the recommended bounds (environment specific). The mean of the gaussians used for generation of the parameters matches the predefined values of the normal gymnasium environment. You can change the scale (variance) to vary the degree of randomization.</em>
 
 <p class="vspace"></p>
 
@@ -385,12 +402,12 @@ And lastly, we can divide both losses by the length of the episode to get the av
 
 #### Learned policy showcase (in the LunarLander-v2 environment)
 
-Watch the learned policy (using the A2C implementation) playing:
+Watch the learned policy (using the A2C implementation) land the spacecraft (you can imagine that it fires real boosters; it's just easier to show a couple of particles firing, but the physics is the same as if it were real, of course simplified here):
 <div class="img-block" style="width: 800px;">
     <img src="/images/actor_critic/a2c_lunar_lander.gif"/>
 </div>
 
-You can actually try to play it yourself, just copy and paste [these three lines](https://gist.github.com/till2/2febfa43ac167fe55b84e63e015243e5). I tried and it is actually way harder than it looks. One reason is that you can only perform one action at a time. This is me trying to land it:
+You can actually try to play it yourself, just copy and paste [these three lines](https://gist.github.com/till2/2febfa43ac167fe55b84e63e015243e5). I tried and it is actually way harder than it looks. One reason is that you can only fire one booster per timestep -- the agent flickers the boosters to gain more balance, but for me that seems pretty hard to do. This is me trying to land it:
 
 <div class="img-block" style="width: 800px;">
     <img src="/images/actor_critic/me_lunar_lander.gif"/>
@@ -491,7 +508,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 8. [PyTorch docs: HuberLoss][torch-huber-loss]
 9. [Mnih et. al. : Asynchronous Methods for Deep Reinforcement Learning][async-methods-mnihetal]
 10. [Jonathan Hui: GAE][jonathan-hui-gae]
-11. [John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel: High-Dimensional Continuous Control Using Generalized Advantage Estimation][gae-paper] (GAE paper)
+11. [higgsfield's "RL-Adventure-2: Policy Gradients" GitHub repository][gae-a2c-implementation] (Actor-Critic, GAE, PPO, ACER, DDPG, TD3, SAC, GAIL, HER) -- took this as reference for writing the GAE calculation
+12. [John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel: High-Dimensional Continuous Control Using Generalized Advantage Estimation][gae-paper] (GAE paper)
 
 
 ### Pointers to other ressources
@@ -505,6 +523,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 8. Nice ressource on A2C (1-step and n-step) with code [here][datahubbs-a2c].
 9. [Massimiliano Patacchiola: Dissecting Reinforcement Learning-Part.4: Actor-Critic (AC) methods][awesome-well-written-rl-blog-series] (+ Correlations to Neuroanatomy)
 10. [Machine Learning with Phil:  Multicore Deep Reinforcement Learning - Asynchronous Advantage Actor Critic (A3C) Tutorial (PYTORCH)][phil-multicore-a3c]
+11. [Josh Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, Pieter Abbeel: Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World][domain-randomization-paper]
 
 <!-- Ressources -->
 [datahubbs-pic-link]: https://www.datahubbs.com/two-headed-a2c-network-in-pytorch/
@@ -525,7 +544,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [async-methods-mnihetal]: https://arxiv.org/abs/1602.01783
 [jonathan-hui-gae]: https://jonathan-hui.medium.com/rl-actor-critic-methods-a3c-gae-ddpg-q-prop-e1c41f268541
 [phil-multicore-a3c]: https://www.youtube.com/watch?v=OcIx_TBu90Q
+[gae-a2c-implementation]: https://github.com/higgsfield/RL-Adventure-2
 [gae-paper]: https://arxiv.org/abs/1506.02438
+[gymnasium-vectorized-envs]: https://www.gymlibrary.dev/content/vectorising/
+[domain-randomization-paper]: https://arxiv.org/abs/1703.06907
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
