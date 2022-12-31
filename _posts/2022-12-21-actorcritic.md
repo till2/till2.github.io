@@ -48,6 +48,8 @@ The Actor-Critic algorithm is an extension of the REINFORCE algorithm that uses 
   <div class="column1">
     <img src="/images/actor_critic/venn-simple.jpg" style="width:100%">
   </div>
+  <center>Venn diagram taken from: <a href="https://www.davidsilver.uk/wp-content/uploads/2020/03/pg.pdf">David Silver, Lecture 7: Policy Gradient</a></center>
+
   <!--
   <div class="column2">
     <img src="/images/actor_critic/venn-diagram-rl-algos-detailed.png" style="width:100%">
@@ -517,6 +519,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 10. [Jonathan Hui: GAE][jonathan-hui-gae]
 11. [higgsfield's "RL-Adventure-2: Policy Gradients" GitHub repository][gae-a2c-implementation] (Actor-Critic, GAE, PPO, ACER, DDPG, TD3, SAC, GAIL, HER) -- took this as reference for writing the GAE calculation
 12. [John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel: High-Dimensional Continuous Control Using Generalized Advantage Estimation][gae-paper] (GAE paper)
+13. [David Silver, Lecture 7: Policy Gradient][davidsilver-lecture-slides] (lecture slides)
 
 
 ### Pointers to other ressources
@@ -555,6 +558,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [gae-paper]: https://arxiv.org/abs/1506.02438
 [gymnasium-vectorized-envs]: https://www.gymlibrary.dev/content/vectorising/
 [domain-randomization-paper]: https://arxiv.org/abs/1703.06907
+[davidsilver-lecture-slides]: https://www.davidsilver.uk/wp-content/uploads/2020/03/pg.pdf
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
