@@ -450,7 +450,7 @@ The following image shows the corresponding structures in mammalian brains and h
 <div class="img-block" style="width: 600px;">
     <img src="/images/actor_critic/brian.jpg"/>
 </div>
-<center>Dopaminergic circuit with labels for the corresponding Actor-Critic components <br> (Picture taken by me)</center>
+<center>Dopaminergic circuit with labels for the corresponding Actor-Critic components</center>
 <br>
 
 Experiments show that when the dopamine signal from the critic is distorted, e.g. by the use of cocaine, the subject was not able to learn the task (because the dopamine/error signal for the actor is too noisy).
@@ -521,6 +521,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 11. [higgsfield's "RL-Adventure-2: Policy Gradients" GitHub repository][gae-a2c-implementation] (Actor-Critic, GAE, PPO, ACER, DDPG, TD3, SAC, GAIL, HER) -- took this as reference for writing the GAE calculation
 12. [John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel: High-Dimensional Continuous Control Using Generalized Advantage Estimation][gae-paper] (GAE paper)
 13. [David Silver, Lecture 7: Policy Gradient][davidsilver-lecture-slides] (lecture slides)
+14. [Stable Baselines3: A2C][sb3-a2c] (implementation used for reference for the entropy bonus and to check if my GAE implementation is correct)
 
 
 ### Pointers to other ressources
@@ -560,6 +561,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 [gymnasium-vectorized-envs]: https://www.gymlibrary.dev/content/vectorising/
 [domain-randomization-paper]: https://arxiv.org/abs/1703.06907
 [davidsilver-lecture-slides]: https://www.davidsilver.uk/wp-content/uploads/2020/03/pg.pdf
+[sb3-a2c]: https://github.com/DLR-RM/stable-baselines3/blob/master/stable_baselines3/a2c/a2c.py
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
