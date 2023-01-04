@@ -33,6 +33,11 @@ thumbnail: "/images/robot-2.png"
 {:toc}
 -->
 
+<em> If you are looking for the code.. </em>
+
+I have written a tutorial for the gymnasium docs on how to use vectorized environments using an Advantage Actor-Critic (A2C).
+You can find the tutorial [here](https://gymnasium.farama.org/main/tutorials/vector_envs_tutorial/).
+
 ### Introduction
 
 The Actor Critic is a powerful and beautiful method of learning, with surprising similarities to our dopaminergic learning circuits.
@@ -306,7 +311,7 @@ You can also leave out adding `ep_value_preds[t]` at the end and just save your 
 <div class="img-block" style="width: 500px;">
     <img src="/images/actor_critic/a3c.png"/>
 </div>
-<center>Picture taken from<a href="https://arxiv.org/pdf/1803.02912v1.pdf"> this </a>paper.</center>
+<center>Picture taken from<a href="https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2"> this blogpost</a>.</center>
 <br>
 
 

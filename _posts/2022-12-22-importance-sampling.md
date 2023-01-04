@@ -97,7 +97,7 @@ Note that the `importance sampling ratio` (the first fraction) is also often wri
 - check if math is correct
 - implement an example for a coin toss or better yet a die (one with fair and one with unfair probs)
 - copy the example from "Phil Winder, Ph.D. -- Reinforcement Learning: Industrial Applications of Intelligent Agents" to check if my solution is correct.
-
+- https://rl-book.com/learn/statistics/importance_sampling/
 
 <!-- In-Text Citing -->
 <!-- 

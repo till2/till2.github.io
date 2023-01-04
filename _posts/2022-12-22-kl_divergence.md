@@ -44,6 +44,7 @@ $$
 ### Approximating KL Trick
 
 - was in some blog, let me see...
+- found it! URL: http://joschu.net/blog/kl-approx.html
 
 
 <!-- In-Text Citing -->
