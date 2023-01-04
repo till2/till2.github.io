@@ -427,7 +427,7 @@ You can actually try to play it yourself, just copy and paste [these three lines
 - `loss = a * loss1 + b * loss2` and then just `loss.backward()` works to update both networks and the shared body at the same time
 - having a shared network is (at least in my implementation) pretty unstable
 - Hubert loss (less weight on outliers) is a nice idea in theory, but didn't really make it better in practice (at least for the environments i tried, here MSE was better)
-- it works faster on CPU - at least for the realatively small Neural Nets that i tested (probably because data structures are constantly moving between CPU-GPU if you use a GPU.) 
+- it works faster on CPU - at least for the small Neural Nets that i tested (probably because data structures are constantly moving between CPU-GPU if you use a GPU.) 
 
 
 ### Corresponding neuroanatomic structures to Actor and Critic
