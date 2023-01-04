@@ -39,6 +39,8 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 - Clip is easier to implement
 - Show clip plots
 
+- tips for implementing PPO: https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/
+- code for the post above: https://github.com/vwxyzjn/ppo-implementation-details/blob/main/ppo.py
 
 
 ### Derivation of the Surrogate Loss Function
