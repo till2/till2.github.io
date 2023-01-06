@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [machine learning, nlp, 🟢 not finished]
+tags: [machine learning, nlp, not finished yet]
 thumbnail: "/images/transformers/transformer.png"
 ---
 
@@ -18,12 +18,6 @@ thumbnail: "/images/transformers/transformer.png"
 * TOC
 {:toc}
 -->
-
-<!-- builder image -->
-<div class="img-block" style="width: 450px;">
-    <img src="/images/builder_one.png"/>
-</div>
-<center>Site under construction. 👷</center>
 
 ### Introduction
 
@@ -36,7 +30,7 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 
 ### Architecture
 
-<div class="img-block" style="width: 1000px;">
+<div class="img-block" style="width: 800px;">
     <img src="/images/transformers/transformer.png"/>
 </div>
 

@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, stochastics, 🟢 not finished, research]
+tags: [reinforcement learning, stochastics, not finished yet, research]
 thumbnail: "/images/distributional_rl/Fig_00.png"
 ---
 

@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [interests]
+tags: [interests, not finished yet]
 thumbnail: "/images/philosophies/garden.png"
 ---
 

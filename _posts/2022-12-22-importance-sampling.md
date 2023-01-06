@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, stochastics, 🟢 not finished]
+tags: [reinforcement learning, stochastics, not finished yet]
 thumbnail: "/images/importance_sampling/thumbnail.png"
 ---
 
@@ -62,16 +62,109 @@ Rewriting the expectation with respect to another function (from target $g$ to s
 $$
 \begin{align*}
 \mathbb{E}_g [x]    &\dot{=} \sum_x g(x) x \\
-                    &= \sum_x \frac{ g(x) }{ f(x) } x f(x)          \;\; (\text{multiply with} \frac{f(x)}{f(x)}) \\
-                    &= \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \\
+                    &= \sum_x f(x) \frac{ g(x) }{ f(x) } x          \;\; (\text{multiply with} \frac{f(x)}{f(x)}) \\
+                    &= \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \\ \\
 \end{align*}
 $$
 
-Now we have rewritten the expectation into an expectation with respect to $f$, the _behavior (sampling) policy_. We can estimate this expectation as usual:
+This results in the importance sampling formula.
 
 $$
-\mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{n} \sum_{i=1}{n} \frac{g(x_i)}{f(x_i)} x
+\Rightarrow \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] = \mathbb{E}_g \left[ x \right]
 $$
+
+Now that we have rewritten the expectation with respect to $f$ (_the behavior/ sampling policy_), we can just estimate this expectation using $N$ samples:
+
+$$
+\mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} \frac{g(x_i)}{f(x_i)} x_i
+$$
+
+<p class="vspace"></p>
+
+
+### Implementation
+
+First we define our values, which are the sides of a normal 6-sided die.
+
+```py
+import numpy as np
+
+# values
+x = np.arange(1,7)
+```
+
+Then we define the probability functions $f$ and $g$.
+
+```py
+# define f
+f_probs = np.array([1 / len(x) for x_i in x]) # uniform (fair) distribution
+print(f_probs)
+```
+
+<div class="output">
+array([0.16666667, 0.16666667, 0.16666667, 0.16666667, 0.16666667,
+       0.16666667])
+</div>
+
+```py
+# define g
+g_probs = np.array([x_i / len(x) for x_i in x]) # biased (unfair) distribution
+g_probs /= sum(g_probs)
+print(g_probs)
+```
+
+<div class="output">
+array([0.04761905, 0.0952381 , 0.14285714, 0.19047619, 0.23809524,
+       0.28571429])
+</div>
+
+Let's start by approximating the mean of a fair die with $N=5000$ samples.
+
+$$
+\mathbb{E}_f [x] \approx \frac{1}{N} \sum_{i=1}^{N} x_i
+$$
+
+```py
+N_samples = 5000
+
+# get the samples using a pseudo-random generator
+fair_die_samples = np.random.choice(x, size=N_samples, p=f_probs)
+
+# calculate the mean of the samples for the fair die
+approx_fair_die_mean = 1 / N_samples * np.sum(fair_die_samples)
+
+# print the mean
+print(f'approx_fair_die_mean: {approx_fair_die_mean:.3f}')
+```
+
+<div class="output">
+approx_fair_die_mean: 3.501
+</div>
+
+Now comes the importance sampling part to estimate $\mathbb{E}_g[x]$ by sampling from $f$.
+
+$$
+\mathbb{E}_g \left[ x \right] = \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} \frac{g(x_i)}{f(x_i)} x_i
+$$
+
+```py
+# calculate the mean of the samples for the biased die using importance sampling
+approx_biased_die_mean = 0.0
+
+for i in range(N_samples):
+    x_i = np.random.choice(x, p=f_probs)
+    approx_biased_die_mean += (g_probs[x_i-1] / f_probs[x_i-1]) * x_i
+    
+approx_biased_die_mean /= N_samples
+
+# print the mean
+print(f'approx_biased_die_mean: {approx_biased_die_mean:.3f}')
+```
+
+<div class="output">
+approx_biased_die_mean: 4.336
+</div>
+
 
 <!-- MIGHT BE WRONG!
 
@@ -91,13 +184,6 @@ $$
 Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ where $r$ stands for ratio.
 -->
 
-
-### TODO
-
-- check if math is correct
-- implement an example for a coin toss or better yet a die (one with fair and one with unfair probs)
-- copy the example from "Phil Winder, Ph.D. -- Reinforcement Learning: Industrial Applications of Intelligent Agents" to check if my solution is correct.
-- https://rl-book.com/learn/statistics/importance_sampling/
 
 <!-- In-Text Citing -->
 <!-- 
@@ -147,11 +233,12 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 ### References
 
 1. Phil Winder, Ph.D. - Reinforcement Learning: Industrial Applications of Intelligent Agents
-2. Thumbnail taken from [Sequential importance sampling for low-probability and high-dimensional SRAM yield analysis][thumbnail].
+2. [Phil Winder - Importance Sampling Notebook][phil-winder-notebook]
+3. Thumbnail taken from [Sequential importance sampling for low-probability and high-dimensional SRAM yield analysis][thumbnail].
 
 <!-- Ressources -->
 [thumbnail]: https://www.semanticscholar.org/paper/Sequential-importance-sampling-for-low-probability-Katayama-Hagiwara/7e8ad118a0c1de96d29147aa58518a2ca161c48e
-
+[phil-winder-notebook]: https://rl-book.com/learn/statistics/importance_sampling/
 
 <!-- Optional Comment Section-->
 {% if page.comments %}

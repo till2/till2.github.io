@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, 🟢 not finished]
+tags: [reinforcement learning, not finished yet]
 thumbnail: "/images/kl_divergence/2018-12-27-learning.png"
 ---
 
