@@ -19,7 +19,7 @@ thumbnail: "/images/philosophies/garden.png"
 </div>
 
 
-<!-- <em style="float:right">First draft: 2022-10-22</em><br> -->
+<em style="float:right">First draft: 2023-01-05</em><br>
 
 <!--
 ### Contents
