@@ -37,9 +37,26 @@ thumbnail: "/images/distributional_rl/Fig_00.png"
 - [WikiDocs: Distributional RL (overview) blogpost][wikidocs]
 
 
+### Collection of ressources
+
+
+From: https://arxiv.org/pdf/1905.09855.pdf:
+
+Distributional RL: Recent interest in distributional methods for RL has grown with the introduction
+of deep RL approaches for learning the distribution of the return. Bellemare et al. [2017] presented
+the C51-DQN which partitions the possible values [−vmax, vmax] into a fixed number of bins and
+estimates the p.d.f. of the return over this discrete set. Dabney et al. [2017] extended this work by
+representing the c.d.f. using a fixed number of quantiles. Finally, Dabney et al. [2018a] extended the
+QR-DQN to represent the entire distribution using the Implicit Quantile Network (IQN). In addition
+to the empirical line of work, Qu et al. [2018] and Rowland et al. [2018] have provided fundamental
+theoretical results for this framework.
+
+
+https://mtomassoli.github.io/2017/12/08/distributional%5Frl/
+
 ### Benefits
 
-- safe Reinforcement Learning (?)
+- safe Reinforcement Learning (how exactly?)
 
 
 <!-- In-Text Citing -->
@@ -105,7 +122,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/">Share your thoughts</a> <!-- role="button"  -->
 {% endif %}
 
 <!-- Optional Back to Top Button -->

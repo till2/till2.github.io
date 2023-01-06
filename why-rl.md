@@ -23,6 +23,12 @@ Another reason that reinforcement learning is so cool is that it has the potenti
 
 As hinted above, the potential of RL extends to creative solutions that can emerge for example through a combined approach of self-play with reinforcement learning. When an agent is given the freedom to explore and experiment with different actions and strategies in order to achieve a goal, typically in a competetive setting where it is playing against itself, the learning can lead to innovative, original and clever solutions, that even the builders of the system didn't anticipate.
 
+Last but not least, i also believe that we understand a great deal of stuff about our brains in the process of building AI systems. I'll leave you with this quote from Richard Feynman, which sums it up nicely.
+
+<center><q>What I cannot create, I do not understand.</q></center>
+
+
+
 <p class="vspace"></p>
 
 ### __A few examples of creative solutions <br> that emerged through RL:__
