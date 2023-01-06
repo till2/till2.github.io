@@ -14,7 +14,7 @@ thumbnail: "/images/philosophies/garden.png"
 ---
 
 
-<div class="img-block" style="width: 400px;">
+<div class="img-block" style="width: 350px;">
     <img src="/images/philosophies/garden.png"/>
 </div>
 

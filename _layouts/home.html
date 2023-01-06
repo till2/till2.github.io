@@ -25,14 +25,57 @@ layout: default
 -->
 
 <!-- info notice for mobile users -->
+<!--
 <script>
   // Check if the device is a mobile device
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    // Display the info notice
-    alert("This site is best viewed on a desktop computer and some text might not be displayed correctly on phones.");
+    // Check if the 'mobileInfoDisplayed' cookie exists
+    if (!document.cookie.includes('mobileInfoDisplayed=true')) {
+      // Display the info notice
+      alert("This site is best viewed on a desktop computer. Some features may not be fully functional on mobile devices.");
+
+      // Set the 'mobileInfoDisplayed' cookie
+      document.cookie = "mobileInfoDisplayed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    }
   }
 </script>
+-->
 
+<style>
+  /* Add some styles for the info icon */
+  .info-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    background-image: url(info-icon.png);
+    background-size: contain;
+    margin-right: 0.5em;
+  }
+</style>
+
+<script>
+  // Check if the device is a mobile device
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    // Check if the 'mobileInfoDisplayed' cookie exists
+    if (!document.cookie.includes('mobileInfoDisplayed=true')) {
+      // Create the info notice element
+      var notice = document.createElement("div");
+      notice.innerHTML = '<div class="info-icon"></div>This site is written for desktop computers. Some text might be displayed incorrectly on your phone.';
+      notice.style.backgroundColor = "#eee";
+      notice.style.border = "1px solid #ccc";
+      notice.style.padding = "0.5em";
+      notice.style.margin = "0.5em";
+      notice.style.fontSize = "0.8em";
+
+      // Add the info notice to the page
+      document.body.appendChild(notice);
+
+      // Set the 'mobileInfoDisplayed' cookie
+      document.cookie = "mobileInfoDisplayed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    }
+  }
+</script>
 
 <!-- post overview site -->
 
