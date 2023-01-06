@@ -25,16 +25,21 @@ layout: default
 -->
 
 <!-- info notice for mobile users -->
+This site is written for desktop computers. (Some text might poorly formatted on your phone)
+
+<!-- Include the Font Awesome library in the head of the HTML file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <style>
   /* Add some styles for the info icon */
-  .info-icon {
+  .info-icon:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f05a";
     display: inline-block;
     vertical-align: middle;
     width: 1em;
     height: 1em;
-    background-image: url(info-icon.png);
-    background-size: contain;
     margin-right: 0.5em;
   }
 </style>
@@ -42,26 +47,19 @@ layout: default
 <script>
   // Check if the device is a mobile device
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    // Check if the 'mobileInfoDisplayed' cookie exists
-    if (!document.cookie.includes('mobileInfoDisplayed=true')) {
-      // Create the info notice element
-      var notice = document.createElement("div");
-      notice.innerHTML = '<div class="info-icon"></div>This site is written for desktop computers. Some text might be displayed incorrectly on your phone.';
-      notice.style.backgroundColor = "#eee";
-      notice.style.border = "1px solid #ccc";
-      notice.style.padding = "0.5em";
-      notice.style.margin = "0.5em";
-      notice.style.fontSize = "0.8em";
+    // Create the info notice element
+    var notice = document.createElement("div");
+    notice.innerHTML = '<div class="info-icon"></div>This site is best viewed on a desktop computer. Some features may not be fully functional on mobile devices.';
+    notice.style.backgroundColor = "#eee";
+    notice.style.border = "1px solid #ccc";
+    notice.style.padding = "0.5em";
+    notice.style.margin = "0.5em";
+    notice.style.fontSize = "0.8em";
 
-      // Add the info notice to the top of the page
-      document.body.insertBefore(notice, document.body.firstChild);
-
-      // Set the 'mobileInfoDisplayed' cookie
-      document.cookie = "mobileInfoDisplayed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-    }
+    // Add the info notice to the top of the page
+    document.body.insertBefore(notice, document.body.firstChild);
   }
 </script>
-
 
 
 <!-- post overview site -->
