@@ -2,7 +2,7 @@
 layout: post
 title:  "My Philosophies"
 author: "Till Zemann"
-date:   2022-12-26 20:31:41 +0200
+date:   2023-01-05 20:31:41 +0200
 categories: jekyll update
 comments: true
 back_to_top_button: true
