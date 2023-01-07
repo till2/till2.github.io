@@ -30,9 +30,9 @@ thumbnail: "/images/importance_sampling/thumbnail.png"
 
 ### Introduction
 
-This blogpost describes the mathematical background for off-policy policy gradient methods. 
+This blogpost describes the mathematical background for off-policy policy gradient methods.
 
-Importance Sampling is a tool for estimating the expectation of a random variable that we can not sample from. It is applicable when the following preconditions are met:
+Importance sampling is a statistics tool for estimating the expectation of a random variable that we can not sample from. It is applicable when the following preconditions are met:
 
 - we can't sample from the random variable of interest, maybe because it's too expensive <br> (otherwise just sample from it)
 - but we know the probabilities of the individual values of this random variable
@@ -84,13 +84,15 @@ $$
 
 ### Implementation
 
-First we define our values, which are the sides of a normal 6-sided die.
+I used the example (the two dice with the given probabilities) from [2] so that I'm able to validate my results.
+
+First we define our values, which are the face values of a normal 6-faced die.
 
 ```py
 import numpy as np
 
 # values
-x = np.arange(1,7)
+x = np.arange(1,7) # 1-6
 ```
 
 Then we define the probability functions $f$ and $g$.
@@ -166,11 +168,20 @@ approx_biased_die_mean: 4.336
 </div>
 
 
-<!-- MIGHT BE WRONG!
+For reference, the theoretical expected values are:
+
+$$
+\mathbb{E}_f [x] = 3.5 \\
+\mathbb{E}_g [x] = 4.\bar{3}
+$$
+
+<p class="vspace"></p>
+
+
 
 ### Application to off-policy policy gradient methods
 
-- application for example in PPO (to update from a minibatch of samples) and Actor Critics with Experience Replay (ACER)
+- application for example in PPO (to update on a minibatch of samples)
 
 Using importance sampling to estimate the policy gradient:
 
@@ -182,7 +193,7 @@ $$
 $$
 
 Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ where $r$ stands for ratio.
--->
+
 
 
 <!-- In-Text Citing -->

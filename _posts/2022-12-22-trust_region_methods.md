@@ -45,14 +45,33 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 
 ### Derivation of the Surrogate Loss Function
 
-We are starting with the policy gradient (more details in my <a href="/blog/2022/12/20/actorcritic">Actor Critic blogpost</a>), that we want to maximize. Next, we use the log-trick (for more details I also refer to the Actor Critic blogpost), which gets us the policy ratio multiplied with the advantage (I'm not sure why we can use an old policy and get the correct expectation here; researching this further...):
+We are starting with the objective of maximizing the Advantage, but you could also maximize some other metrics, like the state-value, state-action-value, ... (the policy gradient variations are listed in my <a href="/blog/2022/12/20/actorcritic">Actor Critic blogpost</a>). Then we rewrite the formula using importance sampling to get the surrogate loss (that we want to maximize, I'm not sure why it's called a loss..). 
+
+Surrogate 
+$$
+\begin{align*}
+J(\theta) = \mathbb{E}_{\pi_{\theta}} \left[ \hat{A}(s,a) \right]
+&= \sum_{s,a \sim \pi_{\theta_{\text{old}}}} \pi_{\theta}(a|s) \hat{A}^{\theta_{\text{old}}}(s,a) \\
+&= \sum_{s,a \sim \pi_{\theta_{\text{old}}}} \pi_{\theta_{\text{old}}}(a|s) \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\theta_{\text{old}}}(s,a)\\
+&= \mathbb{E}_{s,a \sim \pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\theta_{\text{old}}}(s,a) \right] \; (\text{surrogate objective}) \\ \\
+\Rightarrow \nabla J(\theta) &= \mathbb{E}_{s,a \sim \pi_{\theta_{\text{old}}}} \left[ \frac{\nabla \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\theta_{\text{old}}}(s,a) \right]
+\end{align*}
+$$
+
+My derivation from the policy gradient:
 
 $$
 \begin{align*}
-\nabla J(\theta)	&= \mathbb{E}_{\pi_{\theta}} \left[ \nabla \log \pi_{\theta}(a|s) A_{\text{w}}(s,a) \right] \\
-					&=^{why?} \mathbb{E}_{\pi_{\theta}} \left[ \frac{\nabla \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\text{w}}(s,a) \right] \\
+\nabla J(\theta) 
+&= \mathbb{E}_{\pi_{\theta}} \left[ \nabla \log \pi_{\theta}(a|s) \hat{A}^{\theta_{\text{old}}}(s,a) \right] \\
+&= \mathbb{E}_{\pi_{\theta}} \left[ \pi_{\theta_{\text{old}}}(a|s) \frac{\nabla \log \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\theta_{\text{old}}}(s,a) \right] \\
+&= \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \frac{\nabla \log \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\theta_{\text{old}}}(s,a) \right]\\
 \end{align*}
 $$
+
+### TODO
+- check if the derivations are correct
+- wrote Phil Winder and Pieter Abbeel
 
 Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ ($r$ stands for ratio).
 
@@ -62,6 +81,10 @@ Now we can extract a loss function (that gets minimized!):
 $$
 \Rightarrow \mathcal{L}_{\text{actor}} = - \frac{\nabla \pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\text{w}}(s,a)
 $$
+
+PPO, Actor-Critic style, uses either a shared network for policy and value function, or two seperate networks.
+
+
 
 
 <!--
@@ -78,6 +101,8 @@ This constraint is controlled by a hyperparameter called epsilon, which determin
 
 
 ### PPO
+
+
 
 
 ### TODO

@@ -29,7 +29,7 @@ thumbnail: "/images/philosophies/garden.png"
 
 ### Introduction
 
-This post is a collection of thoughts and guidelines that I believe could be valueable to someone reading this, so I chose to publish it even though it took some internal convincing. Feel free to ask questions if something is unclear.
+This post is a collection of thoughts and guidelines that I believe could be valueable to someone reading this, so I chose to publish it even though it took some internal convincing. Feel free to ask questions and/ or discuss the content.
 
 ### Be a producer rather than a consumer - it's way more fulfilling
 
