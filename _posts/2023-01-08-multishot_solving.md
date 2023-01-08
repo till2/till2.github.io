@@ -107,9 +107,12 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 ### References 
 1. Thumbnail taken from [here][thumbnail].
+2. [Martin Gebser, Roland Kaminski, Benjamin Kaufmann and Torsten Schaub: Multi-shot ASP solving with Clingo][multishot-solving-paper]
+
 
 <!-- Ressources -->
 [thumbnail]: https://static.tvtropes.org/pmwiki/pub/images/robinhoodmultishot_5559.jpg
+[multishot-solving-paper]: https://arxiv.org/pdf/1705.09811.pdf
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
