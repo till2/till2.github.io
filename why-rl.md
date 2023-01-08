@@ -159,3 +159,16 @@ Ressources:
 [tea-talk-with-richard-sutton]: https://youtu.be/iS7dRTge8Z8?t=305
 [robotic-manipulation]: https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html
 [chatgpt]: https://openai.com/blog/chatgpt/
+
+
+<!-- Comment Section-->
+<p class="vspace"></p>
+<a class="commentlink" role="button" href="/comments/">Share your thoughts.</a> <!-- role="button"  -->
+
+<!-- Back to Top Button -->
+<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop({
+  diameter: 40,
+  backgroundColor: 'rgb(255, 255, 255, 0.7)', /* 30,144,255, 0.7 */
+  textColor: '#4a4946'
+})</script>
