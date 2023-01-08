@@ -47,7 +47,7 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 
 We are starting with the objective of maximizing the Advantage, but you could also maximize some other metrics, like the state-value, state-action-value, ... (the policy gradient variations are listed in my <a href="/blog/2022/12/20/actorcritic">Actor Critic blogpost</a>). Then we rewrite the formula using importance sampling to get the surrogate loss (that we want to maximize, I'm not sure why it's called a loss..). 
 
-Surrogate 
+ 
 $$
 \begin{align*}
 J(\theta) = \mathbb{E}_{\pi_{\theta}} \left[ \hat{A}(s,a) \right]
@@ -72,6 +72,8 @@ $$
 ### TODO
 - check if the derivations are correct
 - wrote Phil Winder and Pieter Abbeel
+
+- blogpost about PPO: https://towardsdatascience.com/proximal-policy-optimization-ppo-explained-abed1952457b
 
 Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ ($r$ stands for ratio).
 

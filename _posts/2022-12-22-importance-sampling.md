@@ -178,24 +178,6 @@ $$
 <p class="vspace"></p>
 
 
-
-### Application to off-policy policy gradient methods
-
-- application for example in PPO (to update on a minibatch of samples)
-
-Using importance sampling to estimate the policy gradient:
-
-$$
-\begin{align*}
-\nabla J(\pi_\text{target})  &= \mathbb{E}_{\pi_{\text{target}}} \left[ \nabla \log \pi_\text{target}(a|s) A_\text{target}(s,a) \right] \\
-&= \mathbb{E}_{\pi_{\text{behavior}}} \left[ \frac{\pi_\text{target}(a|s)}{\pi_\text{behavior}(a|s)} \nabla \log \pi_\text{behavior}(a|s) A_\text{behavior}(s,a) \right]
-\end{align*}
-$$
-
-Note that the `importance sampling ratio` (the first fraction) is also often written abbreviated, for example as $r(\theta) \dot{=} \frac{\pi_{\theta} (a\|s)}{\pi_{\theta_\text{old}} (a\|s)}$ where $r$ stands for ratio.
-
-
-
 <!-- In-Text Citing -->
 <!-- 
 You can...

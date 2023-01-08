@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [interests, not finished yet]
+tags: [interests]
 thumbnail: "/images/philosophies/garden.png"
 ---
 
@@ -26,6 +26,10 @@ thumbnail: "/images/philosophies/garden.png"
 * TOC
 {:toc}
 -->
+
+### TODO
+
+- check 16 personalities texts (free value)
 
 ### Introduction
 
