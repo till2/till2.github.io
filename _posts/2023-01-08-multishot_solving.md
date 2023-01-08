@@ -33,7 +33,24 @@ thumbnail: "/images/multishot_solving/robinhoodmultishot_5559.webp"
 
 
 
+
 ### Iterative multishot solving
+
+The idea is to only ground the base once (at the beginning) and then only ground the things that change with the horizon $t$ at each step to save some time on grounding. The base and step groundings are then combined to get the program for horizon $t$:
+
+<svg width="800" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="247.5" cy="57.5" rx="70" ry="30"/>
+	<text x="192.5" y="63.5" font-family="Times New Roman" font-size="20">grounded base</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="515.5" cy="57.5" rx="70" ry="30"/>
+	<text x="450.5" y="63.5" font-family="Times New Roman" font-size="20">grounded step(t)</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="377.5" cy="151.5" rx="145" ry="30"/>
+	<text x="259.5" y="157.5" font-family="Times New Roman" font-size="20">combined grounded program</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="377.5" cy="151.5" rx="150" ry="35"/>
+	<polygon stroke="black" stroke-width="1" points="271.811,75.078 353.189,133.922"/>
+	<polygon fill="black" stroke-width="1" points="353.189,133.922 349.636,125.182 343.777,133.286"/>
+	<polygon stroke="black" stroke-width="1" points="490.706,74.389 402.294,134.611"/>
+	<polygon fill="black" stroke-width="1" points="402.294,134.611 411.721,134.24 406.091,125.975"/>
+</svg>
 
 
 ### Parallel multishot solving
