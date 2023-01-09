@@ -26,6 +26,8 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 
 ### Attention
 
+- https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html
+
 ### Positional encoding
 
 ### Architecture
