@@ -29,6 +29,8 @@ thumbnail: "/images/philosophies/garden.png"
 
 ### TODO
 
+- doesn't feel authentic yet, redo the post.
+
 - check 16 personalities texts (free value)
 
 ### Introduction

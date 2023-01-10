@@ -31,6 +31,170 @@ thumbnail: "/images/multishot_solving/robinhoodmultishot_5559.webp"
 
 ### Introduction
 
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+
+### Metaprogramming
+
+Our `meta-telingo.lp` encoding gets a reified instance or program (_.lp file_) as input. Reification represents the truth of logical statements as an atom, rather than just assigning it a boolean value. We can then use these reified atoms to do all kinds of stuff (e.g. write our own temporal operators) with the statement.
+
+To achieve the reification, we use the predicates `holds/2` and `true/1`.  
+
+
+
+### meta-telingo
+
+To use the meta-telingo.lp encoding, first go to the directory.
+```bash
+cd ~/Desktop/GitHub/telingo-wise22-23-themetaprogrammers/meta
+```
+
+To test it, reify a test instance using clingo and pipe it into meta-telingo. 
+This is our tiny test instance:
+
+```c
+b :- finally.
+until(a,b).
+
+% solution: 
+% 0: a
+% 1: a
+% 2: b
+
+#external initially.
+#external finally.
+#external until(a,b).
+#show show(a).
+#show show(b).
+```
+
+
+To understand the _meta-programming_ process a little better, here is the output of the reification process of our `simple_test.lp` program:
+
+<div class="output">
+atom_tuple(0). <br>
+atom_tuple(0,1). <br>
+literal_tuple(0). <br>
+rule(disjunction(0),normal(0)). <br>
+external(1,false). <br>
+external(2,false). <br>
+external(3,false). <br>
+atom_tuple(1). <br>
+atom_tuple(1,4). <br>
+literal_tuple(1). <br>
+literal_tuple(1,2). <br>
+rule(disjunction(1),normal(1)). <br>
+output(finally,1). <br>
+literal_tuple(2). <br>
+literal_tuple(2,4). <br>
+output(b,2). <br>
+literal_tuple(3). <br>
+literal_tuple(3,3). <br>
+output(initially,3). <br>
+output(until(a,b),0). <br>
+literal_tuple(4). <br>
+literal_tuple(4,-5). <br>
+output(show(b),4). <br>
+output(show(a),4). <br>
+</div>
+
+
+
+Now we can clingo to solve the `simple_test.lp` program. To do that, we are using the parameters `horizon=2` (which solves this instance) and set the number of models as `0`, which is a special case to show all models. The pipe (`|`) gives the atoms that are generated in the reification to the `meta-telingo.lp` encoding, which in return solves the temporal program.
+
+```bash
+clingo simple_test.lp --output=reify | clingo - meta-telingo.lp -c horizon=2 0
+```
+
+<div class="output">
+clingo version 5.4.1 <br>
+Reading from - ...<br>
+Solving...<br>
+Answer: 1<br>
+(b,2) (a,0) (a,1)<br>
+SATISFIABLE<br>
+<p class="vspace"></p>
+Models       : 1<br>
+Calls        : 1<br>
+Time         : 0.015s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)<br>
+CPU Time     : 0.013s<br>
+</div>
+
+Great! Now let's try that with our iterative solving. To do this, we first need to convert our python script into a clingo file, so that clingo can use it. This can be simply done by adding `#script (python)` at the beginning and `#end.` at the end of the script.
+
+But before we use the more complex script, we are going to start simple with a really small script to make debugging easier.
+
+Here is the script:
+
+```c
+#script (python)
+
+from clingo import Function, Number
+
+def main(prg):
+    prg.ground([("base", [])])
+    prg.solve()
+
+    step = 42
+    parts = []
+    parts.append(("step", [Number(step)]))
+    prg.ground(parts)
+    prg.solve()
+#end.
+
+#program base.
+
+a.
+
+#program step(t).
+
+b(t).
+
+#program check(t).
+```
+
+The program needs some input, so to run it we can just pipe a `test.` atom into it using `echo test.`:
+
+```bash
+echo test. | clingo - incremental_solver.lp -c horizon=2 0
+```
+<div class="output">
+clingo version 5.4.1 <br>
+Reading from - ... <br>
+<p class="vspace"></p>
+Solving... <br>
+Answer: 1 <br>
+a test <br>
+<p class="vspace"></p>
+Solving... <br>
+Answer: 1 <br>
+a test b(10) <br>
+SATISFIABLE <br>
+<p class="vspace"></p>
+Models       : 2 <br>
+Calls        : 2 <br>
+Time         : 0.009s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s) <br>
+CPU Time     : 0.009s <br>
+</div>
+
+
+
+
+
+
+
+
+
+<hr><p class="vspace"></p>
+
+More advanced stuff starts here (this is not finished yet!).
+
+```bash
+clingo simple_test.lp --output=reify | clingo - incremental_solver.lp -c horizon=2 0
+``` 
+
+
+You can find a more complete guide on the clingo API with examples [here](https://potassco.org/clingo/python-api/current/clingo/) (this should help when writing the python script).
 
 
 
@@ -57,7 +221,9 @@ The idea is to only ground the base once (at the beginning) and then only ground
 
 
 
+### Todo
 
+- write a section on the meta-programming paradigm
 
 
 <!-- In-Text Citing -->
