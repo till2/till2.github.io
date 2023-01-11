@@ -31,7 +31,7 @@ thumbnail: "/images/multishot_solving/robinhoodmultishot_5559.webp"
 
 ### Introduction
 
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ABC
 
 
 ### Metaprogramming
@@ -178,8 +178,8 @@ CPU Time     : 0.009s <br>
 </div>
 
 
-
-
+- https://arxiv.org/pdf/1705.09811.pdf
+- https://potassco.org/clingo/python-api/current/clingo/
 
 
 
