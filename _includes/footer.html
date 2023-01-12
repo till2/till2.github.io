@@ -5,10 +5,12 @@
     <div class="wrapper">
   
       <h2 class="footer-heading">{{ site.title | escape }}</h2>
-  
+
+
       <div class="footer-col-wrapper">
         <div class="footer-col footer-col-1">
           <ul class="contact-list">
+            Till H.L. Zemann
             <li class="p-name">
               </li>
               {%- if site.email -%}
@@ -16,16 +18,26 @@
               {%- endif -%}
           </ul>
         </div>
-  
+
+
         <div class="footer-col footer-col-2">
+          <!-- github & linkedin -->
           {%- include social.html -%}
         </div>
-  
+
+
         <div class="footer-col footer-col-3">
-          <p>{{- site.description | escape -}}</p>
+          <ul class="contact-list">
+            If you'd like to share book recommendations:
+            <li class="p-name">
+              </li>
+              <!-- Goodreads -->
+              <img src="/images/assets/goodreads.png" style="width: 20px;"/>
+              <a href=" https://www.goodreads.com/till2 ">goodreads.com/till2</a><br>
+          </ul>
         </div>
+
+
       </div>
-  
     </div>
-  
 </footer>
