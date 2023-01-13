@@ -415,7 +415,7 @@ Best of fun!
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/">Share your thoughts.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
 {% endif %}
 
 <!-- Optional Back to Top Button -->

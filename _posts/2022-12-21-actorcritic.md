@@ -314,7 +314,7 @@ You can also leave out adding `ep_value_preds[t]` at the end and just save your 
 
 - use python's `multiprocessing` library to have multiple workers (each one running on a thread) collect episodes, calculate the loss and update the master (global) network, before downloading the new updated parameters
 - Phil has a good tutorial video [here][phil-multicore-a3c]
-- will probably not implement this one, because A2C with vectorized environments has been empirically shown to bea just as good.
+- will probably not implement this one, because A2C with vectorized environments has been empirically shown to be just as good.
 
 
 ### Implementation
@@ -437,7 +437,7 @@ The functions of the two parts of the stratum (dorsal stratum -> action selectio
 $$
 \begin{align*}
 \text{TD-Error} \; \delta \; &\hat{=} \; \text{Activation pattern of dopamine neurons} \\
-                             &\hat{=} \; \text{experience - expectated experience}
+                             &\hat{=} \; \text{experience - expected experience}
 \end{align*}
 $$
 
@@ -568,7 +568,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/">Share your thoughts.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
 {% endif %}
 
 <!-- Optional Back to Top Button -->

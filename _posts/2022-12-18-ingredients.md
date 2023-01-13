@@ -76,8 +76,8 @@ where $\Upsilon(\pi)$ measures the universal intelligence of an agent with polic
           <td>(Prioritized) Experience Replay</td>
         </tr>
         <tr>
-          <td>Planning</td>
-          <td>Thinking ahead how trajectories will play out and using this information to select better actions.</td>
+          <td>World models & planning</td>
+          <td>World models enable experiences in an imaginary world and if the world model is good, we can enable sample efficient learning because we don't need to interact with the real environment as much anymore. Planning means thinking ahead how trajectories will play out and using this information to select better actions. Planning is also only possible if we have a model of the world, so that we can look to see what might happen.</td>
           <td>Model-based RL</td>
         </tr>
         <tr>
@@ -98,7 +98,7 @@ where $\Upsilon(\pi)$ measures the universal intelligence of an agent with polic
 - add pointers to research papers for each ingredient
 
 - Curiosity: https://pathak22.github.io/noreward-rl/
-
+- DreamerV3 (Model-based): https://arxiv.org/abs/2301.04104v1
 
 
 <!-- working gist: <script src="https://gist.github.com/till2/ace2a6cfd60c52994afa9536c412f8e5.js"></script> -->
@@ -164,7 +164,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 <!-- Optional Comment Section-->
 {% if page.comments %}
 <p class="vspace"></p>
-<a class="commentlink" role="button" href="/comments/">Share your thoughts.</a> <!-- role="button"  -->
+<a class="commentlink" role="button" href="/comments/">Post a comment.</a> <!-- role="button"  -->
 {% endif %}
 
 <!-- Optional Back to Top Button -->
