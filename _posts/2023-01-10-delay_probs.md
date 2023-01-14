@@ -82,12 +82,40 @@ Prohibited Conflicts:
 
 #### Fully Synchronized Policies
 
+- robust
 
 #### Minimal Communication Policies
 
+- robust
 - partial order (?)
 - agent $a_j$ sends message to all other agents when it reaches a new local state
 - _transitive reduction_ (?) minimizes the number of edges in the directed graph -> this means it minimizes the number of messages between agents 
+
+
+
+### Example
+
+<p class="vspace"></p>
+Example MAPF-DP instance:
+<div class="img-block" style="width: 500px;">
+    <img src="/images/delay_probs/fig_1.png"/>
+</div>
+<p class="vspace"></p>
+
+Partial order (fig2) and transitive reduction for minimal communication policies (fig3): 
+<div class="img-block" style="width: 500px;">
+    <img src="/images/delay_probs/fig_2_3.png"/>
+</div>
+
+- evtl. animiert auf die Folie (mit Schritten die agents bewegen und daneben die Graphen revealen) - CS50AI :)
+
+
+
+### Approximate Minimization in Expectation (AME) MAPF-DP solver
+
+- use the AME solver to generate valid MAPF-DP plans and feed the plans to Minimal Communication Policies (MCPs) to get results with small Makespans
+
+- needs to approximate the average Makespan (for execution) so it can generate a good plan (with a low average Makespan) 
 
 
 <!-- include graphs -->

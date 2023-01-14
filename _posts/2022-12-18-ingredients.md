@@ -31,7 +31,7 @@ thumbnail: "/images/pillars/intelligence-coverart.png"
 
 I recognize that the title sounds catchy, but being catchy is not the intention of this post. This is supposed to be a serious list of directions for future research (you can also just treat it as an overview).
 
-This post includes what I believe is a somewhat comprehensive recipe for building intelligent systems, but surely some important ingredients are missing. Of course this list will be updated when I notice that an important concept is not included. 
+This post includes what I think might be a somewhat comprehensive recipe for building intelligent systems, but I am sure that some important ingredients are probably missing. Of course this list will be updated when I notice that an important concept is not included. 
 
 
 ### Definition
