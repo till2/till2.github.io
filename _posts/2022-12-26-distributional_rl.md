@@ -36,6 +36,11 @@ thumbnail: "/images/distributional_rl/Fig_00.png"
 - [Will Dabney, Georg Ostrovski, David Silver, Rémi Munos: Implicit Quantile Networks for Distributional Reinforcement Learning (2018)][will-dabney-deepmind-paper]
 - [WikiDocs: Distributional RL (overview) blogpost][wikidocs]
 
+read:
+- https://www.deepmind.com/blog/dopamine-and-temporal-difference-learning-a-fruitful-relationship-between-neuroscience-and-ai (this one is nice)
+
+- https://www.deepmind.com/publications/a-distributional-code-for-value-in-dopamine-based-reinforcement-learning (this is meh..)
+
 
 ### Collection of ressources
 
