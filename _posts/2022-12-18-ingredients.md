@@ -27,6 +27,10 @@ thumbnail: "/images/pillars/intelligence-coverart.png"
 {:toc}
 -->
 
+### TODO
+
+- read [Shane Legg: Machine Super Intelligence](https://www.vetta.org/documents/Machine_Super_Intelligence.pdf)
+
 ### Introduction
 
 I recognize that the title sounds catchy, but being catchy is not the intention of this post. This is supposed to be a serious list of directions for future research (you can also just treat it as an overview).
