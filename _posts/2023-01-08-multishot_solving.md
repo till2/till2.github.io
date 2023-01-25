@@ -28,10 +28,95 @@ thumbnail: "/images/multishot_solving/robinhoodmultishot_5559.webp"
 {:toc}
 -->
 
+### A simple ExampleApp
 
-### Introduction
+`instance.lp`
+```py
+num(1).
+result(@my_func(N)) :- num(N).
+```
 
-ABC
+`clingo_script.py`
+```py
+from clingo.symbol import Number
+from clingo.control import Control
+
+class ExampleApp:
+    @staticmethod           # removes the self argument from my_func
+    def my_func(x):
+        x = x.number        # convert the input to an int
+        return Number(x+2)
+    
+    def run(self):
+        ctl = Control()
+        ctl.load("instance.lp")
+        ctl.ground(
+            [
+                ("base", [])
+            ],
+            context=self)
+        ctl.solve(on_model=print)
+
+if __name__ == "__main__":
+    app = ExampleApp()
+    app.run()
+```
+
+We can execute it via:
+```bash
+python clingo_script.py
+```
+
+<div class="output">
+num(1) result(3)
+</div>
+
+### A clingo application
+
+`clingo_app.py`
+```py
+import sys
+from clingo.symbol import Number
+from clingo.application import Application, clingo_main
+
+class ExampleApp(Application):
+    program_name = "example"
+    version = "1.0"
+
+    @staticmethod
+    def my_func(x):
+        x = x.number        # convert the input to an int
+        return Number(x+2)
+    
+    def main(self, ctl, files):
+
+        # load files into the clingo object
+        for path in files:
+            ctl.load(path)
+        if not files:
+            ctl.load("-")
+        
+        ctl.ground(
+            [
+                ("base", [])
+            ],
+            context=self)
+        ctl.solve()
+
+if __name__ == "__main__":
+    app = ExampleApp()
+    files = sys.argv[1:]
+    clingo_main(app, files)
+```
+
+We can execute it via:
+```bash
+python clingo_app.py instance.lp
+```
+
+<div class="output">
+num(1) result(3)
+</div>
 
 
 ### Metaprogramming
