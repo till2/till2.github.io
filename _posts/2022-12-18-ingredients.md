@@ -62,7 +62,7 @@ where $\Upsilon(\pi)$ measures the universal intelligence of an agent with polic
         <tr>
             <td><strong>Ingredient</strong></td>
             <td><strong>Purpose</strong></td>
-            <td><strong>Implementation</strong></td>
+            <td><strong>Implementation Candidates</strong></td>
         </tr>
         <tr>
           <td>Learning <br><em>(the most important one!)</em></td>
@@ -77,7 +77,7 @@ where $\Upsilon(\pi)$ measures the universal intelligence of an agent with polic
         <tr>
           <td>Dreaming</td>
           <td>Recalling past experiences for consolidation into long-term memory and quicker learning.</td>
-          <td>(Prioritized) Experience Replay</td>
+          <td>(Prioritized) Experience Replay, Forward-Forward Algorithm</td>
         </tr>
         <tr>
           <td>World models & planning</td>
