@@ -26,6 +26,7 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 
 ### Attention
 
+- GPT from Scratch: https://www.youtube.com/watch?v=kCc8FmEb1nY&t=490s
 - https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html
 
 ### Positional encoding
