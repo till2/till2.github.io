@@ -26,10 +26,11 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 
 ### Attention
 
-- GPT from Scratch: https://www.youtube.com/watch?v=kCc8FmEb1nY&t=490s
-- https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html
+
 
 ### Positional encoding
+
+
 
 ### Architecture
 
@@ -44,6 +45,10 @@ Transformers are one of the coolest inventions of recent years in Natural Langua
 1. [11-785 Deep Learning Recitation 11: Transformers Part 1](https://www.youtube.com/watch?v=X2nUH6fXfbc) <- implementation
 2. [Attention (Aleksa Gordić)](https://www.youtube.com/watch?v=n9sLZPLOxG8) <- this is part 1
 3. [Transformer (Aleksa Gordić)](https://www.youtube.com/watch?v=cbYxHkgkSVs) <- and part 2
+
+
+- GPT from Scratch: https://www.youtube.com/watch?v=kCc8FmEb1nY&t=490s
+- https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html
 
 - https://blog.tensorflow.org/2019/05/transformer-chatbot-tutorial-with-tensorflow-2.html
 

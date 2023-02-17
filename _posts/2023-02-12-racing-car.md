@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Racing Car"
+title:  "World Models"
 author: "Till Zemann"
 date:   2023-02-12 20:31:41 +0200
 categories: jekyll update
@@ -9,13 +9,13 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [reinforcement learning, machine learning, bachelor thesis]
-thumbnail: "/images/racing-car/ferrari-inspired.jpeg"
+tags: [reinforcement learning, machine learning]
+thumbnail: "/images/racing-car/worldmodels.png"
 ---
 
 
-<div class="img-block" style="width: 500px;">
-    <img src="/images/racing-car/ferrari-inspired.jpeg"/>
+<div class="img-block" style="width: 400px;">
+    <img src="/images/racing-car/worldmodels.png"/>
 </div>
 
 
@@ -107,10 +107,10 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 -->
 
 ### References
-1. Thumbnail taken from [Carblog: Autonomous Cars in Racing][thumb-website].
+1. Thumbnail taken from [David Ha and Jürgen Schmidhuber: World Models - Can agents learn inside of their own dreams?][thumb-website].
 
 <!-- Ressources -->
-[thumb-website]: https://www.carblog.co.uk/autonomous-cars-in-racing/
+[thumb-website]: https://worldmodels.github.io/
 
 
 <!-- Optional Comment Section-->
