@@ -84,15 +84,17 @@ $$
 $$
 
 
-### Attention implemented
+### Implementing Attention
 
+
+First, let's create some random vectors for <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong> and <strong style="color: #747a77">V</strong> with shape $5 \times 1$.
 ```py
 Q = torch.rand(5,1)
 K = torch.rand(5,1)
 V = torch.rand(5,1)
 ```
 
-
+We get the logits for the weights by using the scaled query-key matrix multiplication:
 ```py
 d_k = torch.tensor(Q.shape[0]) # 5
 
@@ -109,6 +111,7 @@ tensor([<br>
 [0.0246, 0.1081, 0.0315, 0.0757, 0.0912]])
 </div>
 
+To get the final weight matrix, we apply a softmax on each row (each row sums to 1).
 ```py
 W = F.softmax(W, dim=1)
 W
@@ -123,6 +126,7 @@ tensor([<br>
 [0.1984, 0.2017, 0.1986, 0.2004, 0.2010]])
 </div>
 
+Now we just have to apply our computed weight-matrix to our values to get the final attention output. 
 ```py
 W @ V
 ```
@@ -137,12 +141,16 @@ tensor([<br>
 </div>
 
 
-### Concise Implementation
+#### Concise Implementation of Scaled Dot-Product Attention
 
 Putting it all together, we get:
 
 ```py
 def attention(Q,K,V):
+    """ 
+    Applies scaled dot-product attention
+    between vectors of queries Q, keys K and values V. 
+    """
     d_k = torch.tensor(Q.shape[0])
     W =  F.softmax((Q @ K.T) / torch.sqrt(d_k), dim=1)
     return W @ V
