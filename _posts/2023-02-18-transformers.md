@@ -21,7 +21,7 @@ thumbnail: "/images/transformers/transformer.png"
 
 ### Introduction
 
-The Transformer was invented in the "Attention is all you need" paper in 2017 and has held the state of the art title in Natural Language Processing for the last 5-6 years. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper pretty much still applies today).
+The Transformer was invented in the "Attention is all you need" paper in 2017 and has held the state of the art title in Natural Language Processing for the last 5-6 years. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper still pretty much still applies today).
 
 The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized amazingly well. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are a number of timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
 
@@ -94,7 +94,8 @@ K = torch.rand(5,1)
 V = torch.rand(5,1)
 ```
 
-We get the logits for the weights by using the scaled query-key matrix multiplication:
+We get the logits for the weights by using the scaled query-key matrix multiplication. In PyTorch, we can use the `@`-Symbol to perform a matrix multiplication.
+
 ```py
 d_k = torch.tensor(Q.shape[0]) # 5
 
@@ -155,6 +156,98 @@ def attention(Q,K,V):
     W =  F.softmax((Q @ K.T) / torch.sqrt(d_k), dim=1)
     return W @ V
 ```
+
+
+
+### Multi-Head Attention
+
+
+#### Linear Projection
+
+In multi-headed attention, we perform multiple attention blocks in parallel. To encourage that they learn different concepts, we first apply linear transformation matrices to the <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong>, <strong style="color: #747a77">V</strong> vectors. You can intuitively look at this as viewing the information (vectors) from a different angle.
+
+To get an idea about how this looks, here is a simple linear transformation of the unit vector $v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ in 2D space.
+
+<div style="color:grey;">
+$$
+A = \begin{bmatrix} -0.7 & 1 \\ 1 & -0.2 \end{bmatrix} \\ 
+$$
+</div>
+
+<div style="color:magenta;">
+$$
+v = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \\ 
+$$
+</div>
+
+<div style="color:blue;">
+$$
+Av = \begin{bmatrix} 0.3 \\ 0.8 \end{bmatrix}\\
+$$
+</div>
+
+<div class="img-block" style="width: 400px;">
+    <img src="/images/transformers/linear_proj.png"/>
+</div>
+
+
+We can simply implement these linear projections as a Dense layer without any biases. The weights of the projections can be learned so that the Transformer uses the most useful projections of the Q,K,V vectors. A useful property of these projections is that we can pick the number of dimensions for the space that they are projected into, which usually has a lower dimensionality than the input vectors so that it is computationally feasible to have multiple heads running in parallel (you want to set it so that your GPUs VRAM is maximally utilized).
+
+
+To implement multi-head attention, we first define linear layers for each head and for each Q,K,V vector. We also need a linear layer that combines the output of all parallel attention blocks into one output vector.
+
+```py
+def multi_head_attention(Q,K,V):
+    d_k = torch.tensor(Q.shape[0])
+    d_model = 8 # project in to this space
+    N_heads = 2
+    
+    # linear layers
+    projections = {
+        x: {
+            h: nn.Linear(d_k, d_model, bias=False) for h in range(N_heads)
+        } for x in ["Q", "K", "V"]
+    }
+    
+    # layer to combine the concatenated attention-block output vectors
+    top_layer = nn.Linear(N_heads * d_model, d_k, bias=False)
+    
+    # forward pass
+    result = torch.zeros(N_heads, d_model, 1)
+
+    for h in range(N_heads):
+        result[h] = attention(
+            projections["Q"][h](Q.T).T,
+            projections["K"][h](K.T).T,
+            projections["V"][h](V.T).T
+        )
+    
+    concat_attn_out = result.view(1, N_heads * d_model)
+    return top_layer(concat_attn_out).T
+```
+
+```py
+multi_head_attention(Q,K,V)
+```
+
+<div class="output">
+tensor([<br>
+[-0.0233], <br>
+[ 0.0191],<br>
+[-0.0144],<br>
+[ 0.0373],<br>
+[-0.0110]]) <br>
+</div>
+
+
+### Add and Norm
+
+
+
+
+
+
+
 
 
 
