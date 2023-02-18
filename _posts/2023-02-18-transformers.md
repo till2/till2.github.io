@@ -21,7 +21,7 @@ thumbnail: "/images/transformers/transformer.png"
 
 ### Introduction
 
-The Transformer was invented in the "Attention is all you need" paper in 2017 and has since been holding the state of the art title in Natural Language Processing. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper pretty much still applies today).
+The Transformer was invented in the "Attention is all you need" paper in 2017 and has held the state of the art title in Natural Language Processing for the last 5-6 years. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper pretty much still applies today).
 
 The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized amazingly well. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are a number of timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
 
