@@ -39,8 +39,11 @@ Because we can just use vector products to do this weighting, we can not just ha
     <img src="/images/transformers/key_query_value.png"/>
 </div>
 
+
+#### Scaling
+
 Actually this is not enough to get proper weighting factors, because the weights should sum to 1. To achieve this, we can apply a softmax per row (dim=1).
-In the "Attention is all you need" paper, they also scale the matrix by a factor of $\frac{1}{\sqrt{d_k}}$ because if you don't do that, the gradient of the softmax function becomes really small for large arguments and the entire architecture doesn't learn as quickly. 
+In the "Attention is all you need" paper, they also scale the matrix by a factor of $\frac{1}{\sqrt{d_k}}$. If you don't do that, the gradient for large arguments of the softmax function is tiny and theirfore the entire architecture doesn't learn as quickly without scaling. 
 
 <div class="img-block" style="width: 800px;">
     <img src="/images/transformers/weights.png"/>
@@ -48,7 +51,14 @@ In the "Attention is all you need" paper, they also scale the matrix by a factor
 
 
 The gradient of the softmax function is: <br>
-$\frac{\partial \text{ S}(z_i)}{\partial z_j} = S(z_i)(1-S(z_i)) \text{ if } i=j \text{ and} -S(z_i)S(z_j) \text{ if } i \neq j$.
+
+$$
+\frac{\partial \text{ S}(z_i)}{\partial z_j} = 
+\begin{cases}
+S(z_i)(1-S(z_i)) 	& \text{ if } i=j \\
+-S(z_i)S(z_j) 		& \text{ if } i \neq j\\
+\end{cases}
+$$
 
 To illustrate the difference, I took the gradient $\frac{\partial z}{\partial z_0}$ of the vector $z = [z_0, z_1, z_2, z_3] = [1, 20, 3, 4]$.
 The resulting gradient is already tiny with just one larger number (the 20 at index 1):
@@ -74,7 +84,69 @@ $$
 $$
 
 
+### Attention implemented
 
+```py
+Q = torch.rand(5,1)
+K = torch.rand(5,1)
+V = torch.rand(5,1)
+```
+
+
+```py
+d_k = torch.tensor(Q.shape[0]) # 5
+
+W = (Q @ K.T) / torch.sqrt(d_k)
+W
+```
+
+<div class="output">
+tensor([<br>
+[0.0539, 0.2369, 0.0690, 0.1660, 0.1998],<br>
+[0.0256, 0.1125, 0.0328, 0.0788, 0.0949],<br>
+[0.0198, 0.0870, 0.0254, 0.0610, 0.0734],<br>
+[0.0781, 0.3433, 0.1000, 0.2405, 0.2895],<br>
+[0.0246, 0.1081, 0.0315, 0.0757, 0.0912]])
+</div>
+
+```py
+W = F.softmax(W, dim=1)
+W
+```
+
+<div class="output">
+tensor([<br>
+[0.1964, 0.2037, 0.1970, 0.2007, 0.2021],<br>
+[0.1983, 0.2018, 0.1986, 0.2004, 0.2010],<br>
+[0.1987, 0.2014, 0.1989, 0.2003, 0.2008],<br>
+[0.1949, 0.2055, 0.1956, 0.2010, 0.2030],<br>
+[0.1984, 0.2017, 0.1986, 0.2004, 0.2010]])
+</div>
+
+```py
+W @ V
+```
+
+<div class="output">
+tensor([<br>
+[0.4725],<br>
+[0.4733],<br>
+[0.4734],<br>
+[0.4719],<br>
+[0.4733]])
+</div>
+
+
+### Concise Implementation
+
+Putting it all together, we get:
+
+```py
+def attention(Q,K,V):
+    d_k = torch.tensor(Q.shape[0])
+    W =  F.softmax((Q @ K.T) / torch.sqrt(d_k), dim=1)
+    return W @ V
+```
 
 
 
