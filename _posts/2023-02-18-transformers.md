@@ -19,11 +19,16 @@ thumbnail: "/images/transformers/transformer.png"
 {:toc}
 -->
 
+
+<div class="img-block" style="width: 400px;">
+    <img src="/images/transformers/Attention_is_all_you_need.jpg"/>
+</div>
+
 ### Introduction
 
 The Transformer was invented in the "Attention is all you need" paper in 2017 and has held the state of the art title in Natural Language Processing for the last 5-6 years. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper still pretty much still applies today).
 
-The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized amazingly well. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are a number of timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
+The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention blocks (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized and become super fast. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are multiple timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
 
 
 ### Attention
@@ -32,7 +37,7 @@ The basic idea of the Transformer is to build an architecture around attention-f
 I find attention very intuitive to understand when you look at it from a database perspective:
 You have your <strong style="color: #1E72E7">query (Q)</strong>, <strong style="color: #ED412D">key (K)</strong> and <strong style="color: #747a77">value (V)</strong> vectors and want to weight the values according to how much a query matches with every value. If you have a database lookup with one hit, the query-key pair for the hit would result in a weight of 1 and every other query-key pair would result in a weight equal to 0, so only the value for that matching key gets returned.
 
-Because we can just use vector products to do this weighting, we can not just have one query, but a vector of queries that gets matched against keys to create a weight matrix where row $i$ corresponds to the weights for the corresponding query $q_i$.
+We use vector products to do this weighting, and thus can have more than one query. Actually we can process a vector <strong style="color: #1E72E7">Q</strong> of queries that gets matched against keys to create a weight matrix where row $i$ corresponds to the weights for the corresponding query $q_i$.
 
 
 <div class="img-block" style="width: 800px;">
@@ -72,9 +77,6 @@ Here $d_k = 4$, so we multiply the matrix $X$ by $\frac{1}{\sqrt{4}} = \frac{1}{
 <div class="output">
 [0.0001, -2.7149, -1.1240e-07, -3.0553]
 </div>
-
-You can use this code-snipped to try it out yourself:
-<script src="https://gist.github.com/till2/e1a554b6d41c4d2d4f266180827ffd9a.js"></script>
 
 
 The resulting weight matrix <strong>W</strong> can finally be multiplied with the value vector <strong style="color: #747a77">V</strong> to get the output of one (scaled dot-product) attention unit:
@@ -255,7 +257,7 @@ tensor([<br>
 
 <!-- Architecture -->
 
-<div class="img-block" style="width: 800px;">
+<div class="img-block" style="width: 950px;">
     <img src="/images/transformers/transformer.png"/>
 </div>
 
@@ -302,6 +304,7 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 
 
 ### References
+0. [Thumbnail](https://makeameme.org/meme/attention-please-d7217f13d3)
 1. [Transformer architecture image][transformer-img].
 2. Vaswani et. al: Attention Is All You Need - [Paper][transformer-paper-2017]
 3. Rasa: [Rasa Algorithm Whiteboard - Transformers & Attention 1: Self Attention][rasa-self-attention-video] (This is the first video of a 4-video series about the Transformer, I can highly recommend it!)
