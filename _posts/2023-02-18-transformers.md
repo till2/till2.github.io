@@ -31,6 +31,17 @@ The Transformer was invented in the "Attention is all you need" paper in 2017 an
 The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention blocks (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized and become super fast. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are multiple timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
 
 
+### Token embedding
+
+We use an embedding table to encode each character (token). In production models you would encode words or subwords, but character-encoding is the simplest to implement.
+
+
+### Positional embedding
+
+The position is embedded using a learned second embedding table.
+The token-embedding and position-embedding matrices are added to get the input for the transformer.
+
+
 ### Attention
 
 
@@ -244,13 +255,8 @@ tensor([<br>
 
 ### Add and Norm
 
-
-
-
-
-
-
-
+We use pre-layernorm [(performs bettern than post-layernorm)][pre-ln-paper], which is different from the original transformer.
+What we keep is the residual connections around the multi-head self-attention and around the mlp (simple feed-forward network with 2 dense layers and relu activations).
 
 
 ### Transformer Architecture
@@ -318,17 +324,6 @@ def attention(Q,K,V):
 ```
 
 
-### Positional encoding
-
-
-
-
-
-
-
-
-
-
 <!-- In-Text Citing -->
 <!-- 
 You can...
@@ -378,12 +373,15 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 8. [11-785 Deep Learning Recitation 11: Transformers Part 1](https://www.youtube.com/watch?v=X2nUH6fXfbc) (Implementation)
 9. [TensorFlow Blog: A Transformer Chatbot Tutorial with TensorFlow 2.0](https://blog.tensorflow.org/2019/05/transformer-chatbot-tutorial-with-tensorflow-2.html)
 10. [Kaduri's blog: From N-grams to CodeX (Part 2-NMT, Attention, Transformer)](https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html)
+11. [AI Coffee Break with Letitia: Positional embeddings in transformers EXPLAINED | Demystifying positional encodings.](https://youtu.be/1biZfFLPRSY)
+12. [Ruibin Xiong et. al: On Layer Normalization in the Transformer Architecture][pre-ln-paper] (pre-ln paper)
 
 <!-- Ressources -->
 [transformer-img]: https://deepfrench.gitlab.io/deep-learning-project/resources/transformer.png
 [transformer-paper-2017]: https://arxiv.org/pdf/1706.03762.pdf
 [the-annotated-transformer]: https://nlp.seas.harvard.edu/2018/04/03/attention.html
 [rasa-self-attention-video]: https://youtu.be/yGTUuEx3GkA
+[pre-ln-paper]: https://arxiv.org/pdf/2002.04745.pdf
 
 <!-- Optional Comment Section-->
 {% if page.comments %}
