@@ -263,6 +263,59 @@ tensor([<br>
 
 
 
+
+### Masking
+
+We want a position to only attent to the past in the decoder block, because they won't have future tokens available yet and thus can't learn to attent to the future. Each token can only attent to it's own position and all past positions in the given context sequence.
+To mask all attention connections to the future out, we use a lower triangular matrix (_note: tril means triangular-lower_).
+
+```py
+T = 10
+tril = torch.tril(torch.ones((T,T)))
+plt.imshow(tril)
+```
+
+<div class="img-block" style="width: 400px;">
+    <img src="/images/transformers/mask.png"/>
+</div>
+<center>The yellow is all 1s and the purple all 0s (0 means that the connection is not allowed).</center>
+
+<p class="vspace"></p>
+
+```py
+W = torch.rand((T,T)) # there will be real data here
+
+# mask out forbidden connections
+W = W.masked_fill(tril==0, float("-inf")) # set everywhere where tril is 0 to -inf (upper right)
+
+W = F.softmax(W, dim=-1)
+plt.imshow(W)
+```
+<div class="img-block" style="width: 400px;">
+    <img src="/images/transformers/mask2.png"/>
+</div>
+
+Masked Attention:
+
+```py
+def attention(Q,K,V):
+    """ 
+    Applies masked scaled dot-product attention
+    between vectors of queries Q, keys K and values V. 
+    """
+    d_k = torch.tensor(Q.shape[0])
+    W = (Q @ K.T) / torch.sqrt(d_k)
+    
+    # mask out forbidden connections
+    tril = torch.tril(torch.ones((d_k, d_k)))
+    W = W.masked_fill(tril==0, float("-inf"))
+    
+    W = F.softmax(W, dim=1)
+    
+    return W @ V
+```
+
+
 ### Positional encoding
 
 
