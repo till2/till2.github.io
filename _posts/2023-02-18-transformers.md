@@ -278,8 +278,8 @@ plt.imshow(tril)
 <div class="img-block" style="width: 400px;">
     <img src="/images/transformers/mask.png"/>
 </div>
-<center>The yellow is all 1s and the purple all 0s (0 means that the connection is not allowed).</center>
 
+<center>The yellow is all 1s and the purple all 0s (0 means that the connection is not allowed).</center>
 <p class="vspace"></p>
 
 ```py
@@ -291,9 +291,11 @@ W = W.masked_fill(tril==0, float("-inf")) # set everywhere where tril is 0 to -i
 W = F.softmax(W, dim=-1)
 plt.imshow(W)
 ```
+
 <div class="img-block" style="width: 400px;">
     <img src="/images/transformers/mask2.png"/>
 </div>
+
 
 Masked Attention:
 
@@ -317,6 +319,14 @@ def attention(Q,K,V):
 
 
 ### Positional encoding
+
+
+
+
+
+
+
+
 
 
 <!-- In-Text Citing -->
