@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The Transformer"
+title:  "Transformers"
 author: "Till Zemann"
 date:   2023-02-18 01:09:41 +0200
 categories: jekyll update
@@ -31,12 +31,28 @@ The Transformer was invented in the "Attention is all you need" paper in 2017 an
 The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention blocks (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized and become super fast. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are multiple timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
 
 
-### Token embedding
+### Goal of this blogpost
 
-We use an embedding table to encode each character (token). In production models you would encode words or subwords, but character-encoding is the simplest to implement.
+The goal for this post is to build a decoder-only transformer. The left side of the transformer in the picture is the encoder, which you would use for tasks that require additional information that first needs to be encoded, an example would be a translation task, where you first have to encode the sentence in the original language using the encoder. Then you can use the decoder to process the growing sequence of tokens in the target language.
+
+We'll only use the decoder part, because we just want to have a text-block as context (prompt) and complete it (meaning we can generate more text that fits the given prompt).
+
+<!-- Architecture -->
+
+<div class="img-block" style="width: 950px;">
+    <img src="/images/transformers/transformer.png"/>
+</div>
 
 
-### Positional embedding
+
+### Embeddings
+
+#### Token embedding
+
+We use an embedding table to encode each character (token). In production models you would encode words or subwords, but character-encoding is the simplest to implement, so we'll use it for now.
+
+
+#### Positional embedding
 
 The position is embedded using a learned second embedding table.
 The token-embedding and position-embedding matrices are added to get the input for the transformer.
@@ -76,15 +92,19 @@ S(z_i)(1-S(z_i)) 	& \text{ if } i=j \\
 \end{cases}
 $$
 
-To illustrate the difference, I took the gradient $\frac{\partial z}{\partial z_0}$ of the vector $z = [z_0, z_1, z_2, z_3] = [1, 20, 3, 4]$.
+<p class="vspace"></p>
+
+To illustrate the difference that scaling the weight-logits has on the gradient, I took the gradient $\frac{\partial z}{\partial z_0}$ of the vector $z = [z_0, z_1, z_2, z_3] = [1, 20, 3, 4]$.
 The resulting gradient is already tiny with just one larger number (the 20 at index 1):
 
+__Tiny gradient without scaling:__
 <div class="output">
 [5.6e-09, -5.6e-09, -2.3e-16, -6.3e-16]
 </div>
 
-Here $d_k = 4$, so we multiply the matrix $X$ by $\frac{1}{\sqrt{4}} = \frac{1}{2}$ to get the scaled $X$. In our example $d_k = 4$, so we multiply X by $\frac{1}{\sqrt{4}} = \frac{1}{2}$. If we take the gradient now, it's not as small as the previous gradient. This way our network can learn quicker.
+Here $d_k = 4$, so we multiply the matrix $X$ by the scaling factor $\frac{1}{\sqrt{4}}$ to get the scaled $X$. If we take the gradient now, it's not as small as the previous gradient. This way our network can learn quicker.
 
+__Better gradient via scaling:__
 <div class="output">
 [0.0001, -2.7149, -1.1240e-07, -3.0553]
 </div>
@@ -96,6 +116,7 @@ $$
 \text{Attention}(Q,K,V) = WV = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
 $$
 
+<p class="vspace"></p>
 
 ### Implementing Attention
 
@@ -107,12 +128,12 @@ K = torch.rand(5,1)
 V = torch.rand(5,1)
 ```
 
-We get the logits for the weights by using the scaled query-key matrix multiplication. In PyTorch, we can use the `@`-Symbol to perform a matrix multiplication.
+We get the logits for the weight matrix by using the scaled query-key matrix multiplication. In PyTorch, we can use the `@`-Symbol to perform a matrix multiplication.
 
 ```py
-d_k = torch.tensor(Q.shape[0]) # 5
+C, B = Q.shape # Channels and Batch-Size
 
-W = (Q @ K.T) / torch.sqrt(d_k)
+W = (Q @ K.T) / torch.sqrt(torch.tensor(C))
 W
 ```
 
@@ -125,7 +146,7 @@ tensor([<br>
 [0.0246, 0.1081, 0.0315, 0.0757, 0.0912]])
 </div>
 
-To get the final weight matrix, we apply a softmax on each row (each row sums to 1).
+To get the final weight matrix, we apply a softmax on each row. Each row now sums up to 1.
 ```py
 W = F.softmax(W, dim=1)
 W
@@ -170,107 +191,43 @@ def attention(Q,K,V):
     return W @ V
 ```
 
-
-
-### Multi-Head Attention
-
-
-#### Linear Projection
-
-In multi-headed attention, we perform multiple attention blocks in parallel. To encourage that they learn different concepts, we first apply linear transformation matrices to the <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong>, <strong style="color: #747a77">V</strong> vectors. You can intuitively look at this as viewing the information (vectors) from a different angle.
-
-To get an idea about how this looks, here is a simple linear transformation of the unit vector $v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ in 2D space.
-
-<div style="color:grey;">
-$$
-A = \begin{bmatrix} -0.7 & 1 \\ 1 & -0.2 \end{bmatrix} \\ 
-$$
-</div>
-
-<div style="color:magenta;">
-$$
-v = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \\ 
-$$
-</div>
-
-<div style="color:blue;">
-$$
-Av = \begin{bmatrix} 0.3 \\ 0.8 \end{bmatrix}\\
-$$
-</div>
-
-<div class="img-block" style="width: 400px;">
-    <img src="/images/transformers/linear_proj.png"/>
-</div>
-
-
-We can simply implement these linear projections as a Dense layer without any biases. The weights of the projections can be learned so that the Transformer uses the most useful projections of the Q,K,V vectors. A useful property of these projections is that we can pick the number of dimensions for the space that they are projected into, which usually has a lower dimensionality than the input vectors so that it is computationally feasible to have multiple heads running in parallel (you want to set it so that your GPUs VRAM is maximally utilized).
-
-
-To implement multi-head attention, we first define linear layers for each head and for each Q,K,V vector. We also need a linear layer that combines the output of all parallel attention blocks into one output vector.
-
+In our actual implementation we use the attention head as a class which also already includes the linear projections for the query, key and value vectors:
 ```py
-def multi_head_attention(Q,K,V):
-    d_k = torch.tensor(Q.shape[0])
-    d_model = 8 # project in to this space
-    N_heads = 2
+class SelfAttentionHead(nn.Module):
     
-    # linear layers
-    projections = {
-        x: {
-            h: nn.Linear(d_k, d_model, bias=False) for h in range(N_heads)
-        } for x in ["Q", "K", "V"]
-    }
+    def __init__(self):
+        super().__init__()
+        self.proj_q = nn.Linear(embed_dims, head_size, bias=False)
+        self.proj_k = nn.Linear(embed_dims, head_size, bias=False)
+        self.proj_v = nn.Linear(embed_dims, head_size, bias=False)
+        self.dropout = nn.Dropout(dropout)
     
-    # layer to combine the concatenated attention-block output vectors
-    top_layer = nn.Linear(N_heads * d_model, d_k, bias=False)
-    
-    # forward pass
-    result = torch.zeros(N_heads, d_model, 1)
+    def forward(self, x):
+        """ 
+        Applies masked scaled dot-product attention
+        between vectors of queries Q, keys K and values V. 
+        """
+        B,T,C = x.shape
+        
+        Q = self.proj_q(x)
+        K = self.proj_k(x)
+        V = self.proj_v(x)
 
-    for h in range(N_heads):
-        result[h] = attention(
-            projections["Q"][h](Q.T).T,
-            projections["K"][h](K.T).T,
-            projections["V"][h](V.T).T
-        )
-    
-    concat_attn_out = result.view(1, N_heads * d_model)
-    return top_layer(concat_attn_out).T
+        W = (Q @ K.transpose(-1,-2)) # (B, T, C) @ (B, C, T) ==> (B,T,T)
+        W /= torch.sqrt(torch.tensor(head_size))
+        
+        # mask out forbidden connections
+        tril = torch.tril(torch.ones((block_size, block_size), device=device))
+        W = W.masked_fill(tril[:T, :T]==0, float("-inf")) # make smaller so it fits if context < block_size
+        W = F.softmax(W, dim=1)
+        W = self.dropout(W)
+        
+        out = W @ V
+        return out # (B,T,C=head_size)
 ```
-
-```py
-multi_head_attention(Q,K,V)
-```
-
-<div class="output">
-tensor([<br>
-[-0.0233], <br>
-[ 0.0191],<br>
-[-0.0144],<br>
-[ 0.0373],<br>
-[-0.0110]]) <br>
-</div>
-
-
-### Add and Norm
-
-We use pre-layernorm [(performs bettern than post-layernorm)][pre-ln-paper], which is different from the original transformer.
-What we keep is the residual connections around the multi-head self-attention and around the mlp (simple feed-forward network with 2 dense layers and relu activations).
-
-
-### Transformer Architecture
-
-<!-- Architecture -->
-
-<div class="img-block" style="width: 950px;">
-    <img src="/images/transformers/transformer.png"/>
-</div>
-
-
-
-
 ### Masking
+
+Notice that a self-attention head masks its inputs.
 
 We want a position to only attent to the past in the decoder block, because they won't have future tokens available yet and thus can't learn to attent to the future. Each token can only attent to it's own position and all past positions in the given context sequence.
 To mask all attention connections to the future out, we use a lower triangular matrix (_note: tril means triangular-lower_).
@@ -303,24 +260,107 @@ plt.imshow(W)
 </div>
 
 
-Masked Attention:
+### Multi-Head Attention
+
+
+#### Linear Projection
+
+In multi-headed attention, we perform multiple attention blocks in parallel. To encourage that they learn different concepts, we first apply linear transformation matrices to the <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong>, <strong style="color: #747a77">V</strong> vectors. You can intuitively look at this as viewing the information (vectors) from a different angle.
+
+To get an idea about how this looks, here is a simple linear transformation of the unit vector $v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ in 2D space.
+
+<table style="background-color: green;">
+  <tr>
+    <th>
+<div style="color:#505050;">
+$$
+A = \begin{bmatrix} -0.7 & 1 \\ 1 & -0.2 \end{bmatrix} \\ 
+$$
+</div>
+    </th>
+    <th>
+<div style="color:magenta;">
+$$
+v = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \\ 
+$$
+</div>
+    </th>
+    <th>
+<div style="color:blue;">
+$$
+Av = \begin{bmatrix} 0.3 \\ 0.8 \end{bmatrix}\\
+$$
+</div>
+    </th>
+  </tr>
+
+</table> 
+
+<div class="img-block" style="width: 400px; ">
+    <img src="/images/transformers/linear_proj.png"/>
+</div>
+
+
+
+We can simply implement these linear projections as a Dense layer without any biases. The weights of the projections can be learned so that the Transformer uses the most useful projections of the Q,K,V vectors. A useful property of these projections is that we can pick the number of dimensions for the space that they are projected into, which usually has a lower dimensionality than the input vectors so that it is computationally feasible to have multiple heads running in parallel (you want to set it so that your GPUs VRAM is maximally utilized).
+
+
+To implement multi-head attention, we first define linear layers for each head and for each Q,K,V vector. We also need a linear layer that combines the output of all parallel attention blocks into one output vector.
 
 ```py
-def attention(Q,K,V):
-    """ 
-    Applies masked scaled dot-product attention
-    between vectors of queries Q, keys K and values V. 
-    """
-    d_k = torch.tensor(Q.shape[0])
-    W = (Q @ K.T) / torch.sqrt(d_k)
+class MultiHeadAttention(nn.Module):
     
-    # mask out forbidden connections
-    tril = torch.tril(torch.ones((d_k, d_k)))
-    W = W.masked_fill(tril==0, float("-inf"))
+    def __init__(self):
+        super().__init__()
+
+        self.heads = nn.ModuleList([SelfAttentionHead() for i in range(n_heads)])
+        self.proj = nn.Linear(embed_dims, embed_dims, bias=False) # embed_dims = n_heads * head_size
+        self.dropout = nn.Dropout(dropout)
     
-    W = F.softmax(W, dim=1)
+    def forward(self, x):
+        
+        out = torch.cat([attn_head(x) for attn_head in self.heads], dim=-1)
+        out = self.dropout(self.proj(out))
+        return out
+```
+
+
+### Add & Norm and Residual Connections
+
+We use pre-layernorm [(performs bettern than post-layernorm)][pre-ln-paper], which is different from the original transformer.
+What we keep is the residual connections around the multi-head self-attention and around the mlp (simple feed-forward network with 2 dense layers and relu activations).
+
+A transformer block also includes a feed forward network, so that it follows these two stages:
+
+1. Communicate via self-attention
+2. Process the results using the MLP
+
+
+```py
+class Block(nn.Module):
     
-    return W @ V
+    def __init__(self):
+        super().__init__()
+        self.attn = MultiHeadAttention()
+        self.ln1 = nn.LayerNorm(embed_dims)
+        self.ln2 = nn.LayerNorm(embed_dims)
+        
+        self.mlp = nn.Sequential(
+            nn.Linear(embed_dims, 4*embed_dims), # following attention-is-all-you-need paper for num hidden units
+            nn.ReLU(),
+            nn.Linear(4*embed_dims, embed_dims),
+            nn.Dropout(dropout),
+        )
+    
+    def forward(self, x):
+        
+        # Applies layernorm before self-attention.
+        # In the attention-is-all-you-need paper they apply it afterwards, 
+        # but apparently pre-ln performs better. pre-ln paper: https://arxiv.org/pdf/2002.04745.pdf
+        
+        x = x + self.attn(self.ln1(x)) # (B,embed_dims)
+        x = x + self.mlp(self.ln2(x))
+        return x
 ```
 
 
@@ -373,8 +413,8 @@ The <strong style="color: #ED412D">marginal distribution</strong> on the other h
 8. [11-785 Deep Learning Recitation 11: Transformers Part 1](https://www.youtube.com/watch?v=X2nUH6fXfbc) (Implementation)
 9. [TensorFlow Blog: A Transformer Chatbot Tutorial with TensorFlow 2.0](https://blog.tensorflow.org/2019/05/transformer-chatbot-tutorial-with-tensorflow-2.html)
 10. [Kaduri's blog: From N-grams to CodeX (Part 2-NMT, Attention, Transformer)](https://omrikaduri.github.io/2022/10/22/From-N-grams-to-CodeX-Part-2.html)
-11. [AI Coffee Break with Letitia: Positional embeddings in transformers EXPLAINED | Demystifying positional encodings.](https://youtu.be/1biZfFLPRSY)
-12. [Ruibin Xiong et. al: On Layer Normalization in the Transformer Architecture][pre-ln-paper] (pre-ln paper)
+11. [AI Coffee Break with Letitia: Positional embeddings in transformers EXPLAINED - Demystifying positional encodings.](https://youtu.be/1biZfFLPRSY)
+12. [Ruibin Xiong et. al: On Layer Normalization in the Transformer Architecture][pre-ln-paper] (Pre-LayerNorm paper)
 
 <!-- Ressources -->
 [transformer-img]: https://deepfrench.gitlab.io/deep-learning-project/resources/transformer.png
