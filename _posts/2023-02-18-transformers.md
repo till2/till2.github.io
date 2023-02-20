@@ -9,7 +9,7 @@ back_to_top_button: true
 math: true
 positive_reward: true
 reward: 2
-tags: [machine learning, nlp, not finished yet]
+tags: [machine learning, nlp]
 thumbnail: "/images/transformers/transformer.png"
 ---
 
@@ -19,10 +19,11 @@ thumbnail: "/images/transformers/transformer.png"
 {:toc}
 -->
 
-
 <div class="img-block" style="width: 400px;">
     <img src="/images/transformers/Attention_is_all_you_need.jpg"/>
 </div>
+
+<em style="float:right">First draft: 2023-02-20</em><br>
 
 ### Introduction
 
