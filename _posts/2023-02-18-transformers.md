@@ -10,7 +10,7 @@ math: true
 positive_reward: true
 reward: 2
 tags: [machine learning, nlp]
-thumbnail: "/images/transformers/transformer.png"
+thumbnail: "/images/transformers/architecture.png"
 ---
 
 <!--
@@ -25,11 +25,18 @@ thumbnail: "/images/transformers/transformer.png"
 
 <em style="float:right">First draft: 2023-02-20</em><br>
 
+
 ### Introduction
 
 The Transformer was invented in the "Attention is all you need" paper in 2017 and has held the state of the art title in Natural Language Processing for the last 5-6 years. It can be applied to any kind of sequential task and is successful in a lot of domains and with many variations (although the architecture presented in the 2017 paper still pretty much still applies today).
 
 The basic idea of the Transformer is to build an architecture around attention-functions. Multiplicative attention blocks (where the weighting factors of the values are calculated by a dot-product between queries and keys) can be parallelized and become super fast. This is one of the major advantages over all types of RNNs, where the input has to be processed sequentially. Another advantage is the number of processing steps between inputs that are multiple timesteps apart: for RNNs capturing long-range dependencies is really difficult and with Transformers, the inputs are related in a constant number of processing steps and theirfore even long-range dependencies can be captured pretty easily using attention.
+
+<center>
+	The code for this post is available at <a href="https://github.com/till2/GPT_from_scratch">https://github.com/till2/GPT_from_scratch.</a>
+</center>
+<p class="vspace"></p>
+
 
 
 ### Goal of this blogpost
@@ -42,6 +49,15 @@ We'll only use the decoder part, because we just want to have a text-block as co
 
 <div class="img-block" style="width: 950px;">
     <img src="/images/transformers/transformer.png"/>
+</div>
+
+
+### Architecture
+
+For reference how each part that we'll talk about is integrated, here is a complete view of the decoder-only transformer architecture:
+
+<div class="img-block" style="width: 800px;">
+    <img src="/images/transformers/architecture.png"/>
 </div>
 
 
@@ -266,7 +282,7 @@ plt.imshow(W)
 
 #### Linear Projection
 
-In multi-headed attention, we perform multiple attention blocks in parallel. To encourage that they learn different concepts, we first apply linear transformation matrices to the <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong>, <strong style="color: #747a77">V</strong> vectors. You can intuitively look at this as viewing the information (vectors) from a different angle.
+In multi-headed attention, we apply multiple attention blocks in parallel. To encourage that they learn different concepts, we first apply linear transformation matrices to the <strong style="color: #1E72E7">Q</strong>, <strong style="color: #ED412D">K</strong>, <strong style="color: #747a77">V</strong> vectors. You can intuitively look at this as viewing the information (vectors) from a different angle.
 
 To get an idea about how this looks, here is a simple linear transformation of the unit vector $v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ in 2D space.
 
@@ -363,6 +379,14 @@ class Block(nn.Module):
         x = x + self.mlp(self.ln2(x))
         return x
 ```
+
+
+
+### Training
+
+<div class="img-block" style="width: 600px;">
+    <img src="/images/transformers/training_plot1.png"/>
+</div>
 
 
 <!-- In-Text Citing -->
