@@ -33,7 +33,7 @@ thumbnail: "/images/robot-2.png"
 {:toc}
 -->
 
-<p class="firstletter"> If you are looking for code ...</p>  I also wrote a tutorial implementing the theory presented in this blogpost for the gymnasium docs. The tutorial shows an implementation of an Advantage Actor-Critic (A2C) and also includes some notes on _performance analysis, vectorized environments and domain randomization_. You can find it [here](https://gymnasium.farama.org/main/tutorials/vector_envs_tutorial/).
+<p class="firstletter"> If you are looking for code ...</p>  I also wrote a tutorial implementing the theory presented in this blogpost for the gymnasium docs. The tutorial shows the implementation of an Advantage Actor-Critic (A2C) and also includes some notes on _performance analysis, vectorized environments and domain randomization_. You can find it [here](https://gymnasium.farama.org/tutorials/gymnasium_basics/vector_envs_tutorial/).
 
 ### Introduction
 
