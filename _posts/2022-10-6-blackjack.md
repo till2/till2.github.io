@@ -29,7 +29,7 @@ thumbnail: "/images/rl_loop.jpg"
 In this tutorial, we’ll explore and solve the *Blackjack-v1* environment \
 (this means we'll have an agent learn an optimal policy).
 
-This tutorial is part of the [`Gymnasium` documentation](https://gymnasium.farama.org/tutorials/blackjack_tutorial/). A more detailed version with training plots can be found on the Gymnasium website.
+This tutorial is part of the [`Gymnasium` documentation](https://gymnasium.farama.org/tutorials/training_agents/blackjack_tutorial/). A more detailed version with training plots can be found on the Gymnasium website.
 
 The documentation for the blackjack environment is available [here](https://gymnasium.farama.org/environments/toy_text/blackjack/).
  

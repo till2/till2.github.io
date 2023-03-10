@@ -22,7 +22,7 @@ permalink: /about/
 ```
 @Misc{zemann2022,
   author = {Till Zemann},
-  title = {Till's Notebook},
+  title = {Till's Blog},
   howpublished = {\url{https://till2.github.io}},
   year = {2022},
 }
