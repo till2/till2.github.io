@@ -41,20 +41,21 @@ The basic idea of the Transformer is to build an architecture around attention-f
 
 ### Goal of this blogpost
 
-The goal for this post is to build a decoder-only transformer. The left side of the transformer in the picture is the encoder, which you would use for tasks that require additional information that first needs to be encoded, an example would be a translation task, where you first have to encode the sentence in the original language using the encoder. Then you can use the decoder to process the growing sequence of tokens in the target language.
+The goal for this post is to build a encoder-only transformer. The left side of the transformer in the picture is the encoder, which you would use for tasks that require additional information that first needs to be encoded, an example would be a translation task, where you first have to encode the sentence in the original language using the encoder. Then you can use the decoder to process the growing sequence of tokens in the target language.
 
-We'll only use the decoder part, because we just want to have a text-block as context (prompt) and complete it (meaning we can generate more text that fits the given prompt).
+We'll only use the encoder part with self-attention, because we just want to have a text-block as context (prompt) and complete it (meaning we can generate more text that fits the given prompt) and theirfore don't need both parts.
 
 <!-- Architecture -->
 
+<!--
 <div class="img-block" style="width: 950px;">
     <img src="/images/transformers/transformer.png"/>
 </div>
-
+-->
 
 ### Architecture
 
-For reference how each part that we'll talk about is integrated, here is a complete view of the decoder-only transformer architecture:
+For reference how each part that we'll talk about is integrated, here is a complete view of the encoder-only transformer architecture:
 
 <div class="img-block" style="width: 800px;">
     <img src="/images/transformers/architecture.png"/>

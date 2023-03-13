@@ -29,7 +29,7 @@ thumbnail: "/images/racing-car/worldmodels.png"
 
 ### Introduction
 
-
+- RL Basics: https://www.davidsilver.uk/teaching/
 
 ### State of the art
 
