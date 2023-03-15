@@ -63,21 +63,38 @@ For reference how each part that we'll talk about is integrated, here is a compl
 
 
 
+### Encodings
+
+#### Character-level Encoding
+
+Character-encoding just maps every unique character in the text corpus to an integer. With punctuation, digits, letters (including some chinese I believe) the Lex Fridman podcast turns out to include around 150 unique characters. As you probably can imagine, this is the easiest form of tokenization to implement.
+
+
+#### Byte-Pair Encoding (BPE)
+
+BPE is used very commonly in practice, for example for the GPT models by OpenAI. It is a form of sub-word tokenization and combines the advantages of giving the model easier access to common sub-words (the byte pairs), which should make it easier to generate comprehensive language, as well as the ability to also understand uncommon words more intuitively through their sub-words (as you can split them into their prefixes, suffixes etc., which should be more common sub-words).
+
+
+Here are the 150 (approximately) most common byte pairs from my dataset: 
+<div class="output">
+t , e , m, th, , an, ,, in, s , ou, d , ve, l , the , at , er, li, y , g , es, so, r , to, xes, I , . , ma, ive, you, ri, f , you , be, me, that , in, to , in , I', do, wh, ll, you', er , ing , ch, k , mo, t c, what , iver, ves, pe, ow, out , ro, , es , ere , 's , . A, le , us, of , t's , fo, d the , t in, rs, mag, co, n , st, re, ing to , per, now, ant, and , y o, an , , you , ke, do , , you k, cou, me , ink , ha, stu, pro, mat, ke , foo, ry , , and , of the , d to , you w, don, ver , he , men, go, ? , jus, mati, have, n a, wi, gove, res, ros, bu, lly , 're , some, . An, , and , use , on , we , on the , . H, ? , I w, t to , s that , ion , ll , be , with, No, pet, t of , perso, sou, . And , mbe, the w, . He , have , tog, just , re p, ment, les, like , going , you're , mod
+</div>
+
+
+
 ### Embeddings
 
 #### Token embedding
 
-We use an embedding table to encode each character (token). In production models you would encode words or subwords, but character-encoding is the simplest to implement, so we'll use it for now.
+Every token has a learned embedding in the token embedding table.
 
-
-#### Positional embedding
+### Positional embedding
 
 The position is embedded using a learned second embedding table.
 The token-embedding and position-embedding matrices are added to get the input for the transformer.
 
 
 ### Attention
-
 
 I find attention very intuitive to understand when you look at it from a database perspective:
 You have your <strong style="color: #1E72E7">query (Q)</strong>, <strong style="color: #ED412D">key (K)</strong> and <strong style="color: #747a77">value (V)</strong> vectors and want to weight the values according to how much a query matches with every value. If you have a database lookup with one hit, the query-key pair for the hit would result in a weight of 1 and every other query-key pair would result in a weight equal to 0, so only the value for that matching key gets returned.
