@@ -72,7 +72,7 @@ Character-encoding just maps every unique character in the text corpus to an int
 
 #### Byte-Pair Encoding (BPE)
 
-BPE is used very commonly in practice, for example for the GPT models by OpenAI. It is a form of sub-word tokenization and combines the advantages of giving the model easier access to common sub-words (the byte pairs), which should make it easier to generate comprehensive language, as well as the ability to also understand uncommon words more intuitively through their sub-words (as you can split them into their prefixes, suffixes etc., which should be more common sub-words).
+BPE is used very commonly in practice, for example for the GPT models by OpenAI. It is a form of sub-word tokenization and combines the advantages of giving the model easier access to common sub-words (the byte pairs), which should make it easier to generate comprehensive language, as well as the ability to also understand uncommon words more intuitively through their sub-words (as you can split them into their prefixes, suffixes etc., which should be more common than the combined word).
 
 
 Here are the 150 (approximately) most common byte pairs from my dataset: 
@@ -88,7 +88,7 @@ t , e , m, th, , an, ,, in, s , ou, d , ve, l , the , at , er, li, y , g , es, s
 
 Every token has a learned embedding in the token embedding table.
 
-### Positional embedding
+#### Positional embedding
 
 The position is embedded using a learned second embedding table.
 The token-embedding and position-embedding matrices are added to get the input for the transformer.
