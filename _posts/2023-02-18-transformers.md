@@ -10,7 +10,7 @@ math: true
 positive_reward: true
 reward: 2
 tags: [machine learning, nlp]
-thumbnail: "/images/transformers/architecture.png"
+thumbnail: "/images/transformers/thumb.png"
 ---
 
 <!--
@@ -19,8 +19,8 @@ thumbnail: "/images/transformers/architecture.png"
 {:toc}
 -->
 
-<div class="img-block" style="width: 400px;">
-    <img src="/images/transformers/Attention_is_all_you_need.jpg"/>
+<div class="img-block" style="width: 300px;">
+    <img src="/images/transformers/thumb.png"/>
 </div>
 
 <em style="float:right">First draft: 2023-02-20</em><br>

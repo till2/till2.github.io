@@ -75,7 +75,7 @@ def kernel_fn(x1,x2):
     return np.exp(-0.5 * sigma**2 * np.dot(x1-x2, x1-x2))
 ```
 
-If we plot the RBF kernel function for a scalar variable x as the first argument and 0 as the second argument, we observe that it indeed has a global maximum at 0 ($\rightarrow$ positive-definite ✅) and it drops off towards 0 as the x values get further apart.
+If we plot the RBF kernel function for a scalar variable x as the first argument and 0 as the second argument, we observe that it indeed has a global maximum at $x=0$ ($\rightarrow$ positive-definite ✅) and it drops off towards 0 as the x values get further apart.
 
 <div class="img-block" style="width: 400px;">
     <img src="/images/gaussian_processes/radial_basis_function_kernel.png"/>
@@ -90,7 +90,7 @@ $$
 \Sigma = \mathbb{E}[ (X-\mu_X) (Y-\mu_Y)^T ] \; \text{ with } \; \Sigma_{ij} = cov(X_i, Y_i)
 $$
 
-With the RBF kernel, the visualized covariance matrix $\Sigma$ for a $9 \times 9$ looks like this:
+With the RBF kernel, the visualized $9 \times 9$ covariance matrix $\Sigma$ looks like this:
 
 <div class="img-block" style="width: 300px;">
     <img src="/images/gaussian_processes/cov_matrix_9.png"/>
