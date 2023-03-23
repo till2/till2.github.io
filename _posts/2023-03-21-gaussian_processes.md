@@ -14,7 +14,7 @@ thumbnail: "/images/gaussian_processes/GP_regression.png"
 ---
 
 
-<div class="img-block" style="width: 600px;">
+<div class="img-block" style="width: 700px;">
     <img src="/images/gaussian_processes/GP_regression.png"/>
 </div>
 
@@ -110,7 +110,7 @@ Just notice that for the two covariance matrices above, the kernel yields higher
 We use the $GP$ (which includes some assumptions in our kernel choice) as a prior and create a posterior distribution using our data. 
 Using the posterior, we can predict the mean and variance of function values $\mathbf{y}_2$ for new data samples $X_2$. 
 
-<div class="img-block" style="width: 600px;">
+<div class="img-block" style="width: 700px;">
     <img src="/images/gaussian_processes/GP_regression.png"/>
 </div>
 
