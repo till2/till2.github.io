@@ -53,12 +53,12 @@ In the gaussian process, the mean and covariance are correlated with the other i
 We use a kernel function to model the covariance of two data points. By picking a specific kernel function, we put prior information into the model (e.g. how smooth the function is).
 
 
-### Covariance kernel function
+### Kernel function
 
-In our gaussian process model, we assume that if two x values are close to each other, their corresponding y values with y=f(x) are also similar. Using this assumption, we can model the covariance using a kernel function.
+In our gaussian process model, we assume that if two x values are close to each other, their corresponding y values with y=f(x) are also similar. Using this assumption, we can model the covariance (matrix) using a kernel function.
 This function has to be positive-definite, which means among other things that it has a global maximum at $x=0  \implies \forall x. f(0) \geq f(x)$. This property must be satisfied because the covariance of two identical x has to be maximal.
 
-One popular choice for a kernel is to use a radial basis function (RBF), which looks like this:
+One popular choice for the kernel is to use a __radial basis function (RBF)__, which looks like this:
 
 $$
 k(x,x') = \exp(-\frac{1}{2 \sigma^2} ||x-x'||^2) = 
