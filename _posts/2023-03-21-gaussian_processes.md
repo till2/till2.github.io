@@ -211,6 +211,13 @@ $$
 and the hyperparameter $a$ for exploration (higher $a$ means more exploration). <br>
 A common default value is $a = 0.01$ [[7]](http://krasserm.github.io/2018/03/21/bayesian-optimization/).
 
+
+
+### Example for an Application
+
+Bayesian optimization was used for hyperparameter tuning in the AlphaGo system, more details can be found in the [dedicated paper](https://arxiv.org/pdf/1812.06855.pdf). 
+
+
 <!-- In-Text Citing -->
 <!-- 
 You can...
