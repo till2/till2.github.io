@@ -26,7 +26,6 @@ thumbnail: "/images/gaussian_processes/GP_regression.png"
 <em style="float:right">First draft: 2023-02-20</em><br>
 -->
 
-
 ### Goal
 
 In bayesian optimization, we want to optimize a target function $f$, which is costly to probe. A typical setting for this is hyperparameter optimization. Here, $f$ yields the empirical risk (average loss) of the model after training for a number of steps. 
