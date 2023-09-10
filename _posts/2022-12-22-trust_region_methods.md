@@ -29,7 +29,24 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 {:toc}
 -->
 
+
+### New Content!
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Introduction
+
+Hi!
 
 - Trust region methods: TRPO and PPO
 - bad policy leads to bad data

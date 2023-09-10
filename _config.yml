@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: My blog 📔 🪛 # 🤠 🌀 🔱 🪛 📒 📔 📘 📖
+title: Till's blog # 📖 📔 🪛 🤠 🌀 🔱 🪛 📒 📔 📘 📖
 email: zemanntill@gmail.com
 author: Till Zemann
 

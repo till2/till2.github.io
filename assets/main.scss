@@ -281,9 +281,18 @@ div.output:before {
 
 /* CSS */
 a.post-link {
-    font-family: "wigendatypewrite-bold";
+    font-family: Helvetica; /* "wigendatypewrite-bold" */
+    font-size: 25px;
+    font-weight: semi-bold;
+    color: rgba(34, 93, 212, 0.94);
 }
 
+/* NEW */
+.post-title {
+  font-family: Helvetica;
+  font-size: 30px;
+  color: rgba(66, 135, 245, 1);
+}
 
 a.commentlink {
 

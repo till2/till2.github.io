@@ -73,11 +73,13 @@ $$
 \Rightarrow \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] = \mathbb{E}_g \left[ x \right]
 $$
 
+<!--
 Now that we have rewritten the expectation with respect to $f$ (_the behavior/ sampling policy_), we can just estimate this expectation using $N$ samples:
 
 $$
-\mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} \frac{g(x_i)}{f(x_i)} x_i
+\mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} x_i
 $$
+-->
 
 <p class="vspace"></p>
 
@@ -146,7 +148,7 @@ approx_fair_die_mean: 3.501
 Now comes the importance sampling part to estimate $\mathbb{E}_g[x]$ by sampling from $f$.
 
 $$
-\mathbb{E}_g \left[ x \right] = \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} \frac{g(x_i)}{f(x_i)} x_i
+\mathbb{E}_g \left[ x \right] = \mathbb{E}_f \left[ \frac{g(x) }{ f(x) } x \right] \approx \frac{1}{N} \sum_{i=1}^{N} \frac{g(x_i)}{f(x_i)} x_i \; \Big| \; x_i \sim f
 $$
 
 ```py
