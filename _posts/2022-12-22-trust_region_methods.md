@@ -32,17 +32,47 @@ thumbnail: "/images/trust_region_methods/0 DAKbTuPaiGXOUd_e.webp"
 
 ### New Content!
 
+<!-- <img style="width: 12px;" src="/images/checkmarks/checkmark.png"/> -->
 
+<!--
+<div style="text-align: center; margin-bottom: -27px">
+    <img style="width: 10px; vertical-align: middle;" src="/images/checkmarks/checkmark.png"/>
+</div>
 
+$$
+a = b
+$$
+-->
 
+Proof of relative policy performance identity:
 
+$$
+\begin{align*}
+\max_{\pi_{\theta}} J(\pi_{\theta})
+&= \max_{\pi_{\theta}} J(\pi_{\theta}) - J(\pi_{\theta_{\text{old}}}) \\
+&= \max_{\pi_{\theta}} \mathbb{E}_{a_t \sim \pi_{\theta}} \left[ A_{\pi_{\theta}}(s,a) \right] \; \text{// Proof: [1]} \\
+&= \max_{\pi_{\theta}} \mathbb{E}_{a_t \sim \pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\pi_{\theta}}(s,a) \right] \; \text{// Importance Sampling} \\
+\end{align*}
+$$
 
+<!--
+$$
+\usepackage{xcolor}
+\begin{align*}
+\max_{\pi_{\theta}} J(\pi_{\theta})
+&= \max_{\pi_{\theta}} J(\pi_{\theta}) - J(\pi_{\theta_{\text{old}}}) \\
+&= \max_{\pi_{\theta}} \mathbb{E}_{a_t \sim \pi_{\theta}} \left[ A_{\pi_{\theta}}(s,a) \right] \; \text{\color{cyan}// Proof: [1]} \\
+&= \max_{\pi_{\theta}} \mathbb{E}_{a_t \sim \pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} A_{\pi_{\theta}}(s,a) \right] \; \text{\color{cyan} // Importance Sampling} \\
+\end{align*}
+$$
+-->
 
+[1] Proof of relative policy performance identity: Joshua Achiam (2017) "Advanced Policy Gradient Methods", UC Berkeley, OpenAI. Link: http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_13_advanced_pg.pdf (slide 12)
 
-
-
-
-
+<!--
+\pi_{\theta_{\text{old}}}
+\pi_{\theta}
+-->
 
 ### Introduction
 
@@ -64,7 +94,7 @@ Hi!
 
 We are starting with the objective of maximizing the Advantage, but you could also maximize some other metrics, like the state-value, state-action-value, ... (the policy gradient variations are listed in my <a href="/blog/2022/12/20/actorcritics">Actor Critic blogpost</a>). Then we rewrite the formula using importance sampling to get the surrogate loss (that we want to maximize, I'm not sure why it's called a loss..). 
 
- 
+
 $$
 \begin{align*}
 J(\theta) = \mathbb{E}_{\pi_{\theta}} \left[ \hat{A}(s,a) \right]

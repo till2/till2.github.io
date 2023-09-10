@@ -5,15 +5,55 @@ comments: true
 permalink: /comments/
 ---
 
+<div class="container">
+    <div class="img-block" style="width: 25px; text-align: right; margin-right: 30px;">
+        <img src="/images/cozy-wall.png" style="max-width: 30%; height: auto;">
+    </div>
+    <div class="img-block" style="font-size: 24px; color: gray">
+        Constructive criticism, ideas, and general comments are always welcome.
+    </div>
+</div>
 
-### <em> Constructive critism, ideas, and other comments are always welcome :) </em>
-<!-- This is the place for suggestions, questions, exchange of ideas and more. -->
+<!-- Write a comment -->
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffgbz62IXFH2LeJq0TMwksW2PREpnzJEo2S9UqT_Zf-tuQBg/viewform?embedded=true" width="750" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading comment form...</iframe>
+
 
 <!--
-<div class="img-block" style="width: 300px;">
+<div class="img-block" style="width: 100px;">
     <img src="/images/cozy-wall.png"/>
 </div>
+
+<div class="img-block" style="font-size: 20px">
+Constructive critism, ideas, and general comments are always welcome. 
+</div>
 -->
+
+
+
+<style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .img-block {
+        flex: 1;
+        text-align: left; /* Center the text horizontally within the column */
+    }
+</style>
+
+
+
+<!--
+    font-family: Helvetica; /* "wigendatypewrite-bold" */
+    font-size: 25px;
+    font-weight: semi-bold;
+    color: rgba(34, 93, 212, 0.94);
+-->
+
+<!-- This is the place for suggestions, questions, exchange of ideas and more. -->
+
 
 <br>
 
@@ -24,8 +64,6 @@ permalink: /comments/
 
 <!-- google form comment system-->
 
-<!-- Write a comment -->
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffgbz62IXFH2LeJq0TMwksW2PREpnzJEo2S9UqT_Zf-tuQBg/viewform?embedded=true" width="750" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading comment form...</iframe>
 
 <!-- Show comments -->
 <!--
