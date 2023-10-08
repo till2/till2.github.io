@@ -8,12 +8,12 @@ permalink: /about/
 
 <!-- ### <em> Hi there!</em> -->
 
-<div class="img-block" style="width: 250px;">
-    <img src="/images/about/pb.jpeg"/> <!-- sunny.jpg -->
+<div class="img-block" style="width: 170px;">
+    <img src="/images/about/sunny.jpg"> <!-- sunny.jpg pb.jpeg -->
 </div>
 
 
-#### I'm Till, a computer science undergrad with a passion for [reinforcement learning (RL)][why-rl]. You can find my projects on [GitHub][github] and contact me via [LinkedIn][linkedin]! 
+I'm Till, 21 and persuing a MS in Data Engineering. My passion is [reinforcement learning (RL)][why-rl]. If you'd like to learn more, you can find me on [LinkedIn][linkedin] and view my projects on [GitHub][github]. 
 <!-- This blog is mainly for personal use, but feel to join me along the journey. -->
 
 <br>
