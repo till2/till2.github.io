@@ -13,7 +13,7 @@ permalink: /about/
 </div>
 
 
-I'm Till, 21 and persuing a MS in Data Engineering. My passion is [reinforcement learning (RL)][why-rl]. If you'd like to learn more, you can find me on [LinkedIn][linkedin] and view my projects on [GitHub][github]. 
+I'm Till, 21 and persuing a MS in Data Engineering. My passion projects are typically in the field of data analytics with machine learning, deep learning and [reinforcement learning][why-rl], however I also enjoy exploring adjacent topics like psychology, statistics or data engineering. If you'd like to learn more, you can find me on [LinkedIn][linkedin] and view my projects on [GitHub][github]. 
 <!-- This blog is mainly for personal use, but feel to join me along the journey. -->
 
 <br>
