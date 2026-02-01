@@ -89,35 +89,20 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}" onclick="updateAccReward({{post.reward}})"> <!--onclick: update reward-->
+          <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
           </a>
         </h3>
 
-        <!-- tags/ reward -->
+        <!-- tags -->
 
         <div class="post-categories" style="width: 100%; margin:10px; margin-left: 120px">
 
           {% if post %}
             {% assign tags = post.tags %}
-            {% assign reward = post.reward %}
-            {% assign positive_reward = post.positive_reward %}
           {% else %}
             {% assign tags = page.tags %}
-            {% assign reward = page.reward %}
-            {% assign positive_reward = post.positive_reward %}
           {% endif %}
-
-          <!-- display post reward -->
-          <!--
-          {% if post.reward %}
-            {% if post.positive_reward %}
-            <a class="positive_reward" href="{{site.baseurl}}/mdp">reward: {{reward}}&nbsp;</a>
-            {% else %}
-            <a class="negative_reward" href="{{site.baseurl}}/mdp">reward: {{reward}}&nbsp;</a>
-            {% endif %}
-          {% endif %}
-        -->
 
           <!-- display post tags -->
 

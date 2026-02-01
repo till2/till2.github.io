@@ -7,8 +7,6 @@ categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
-positive_reward: true
-reward: 1
 tags: [reinforcement learning, tutorial, long read]
 thumbnail: "/images/rl_loop.jpg"
 ---

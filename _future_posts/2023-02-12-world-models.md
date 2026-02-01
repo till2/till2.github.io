@@ -7,8 +7,6 @@ categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
-positive_reward: true
-reward: 2
 tags: [reinforcement learning, machine learning]
 thumbnail: "/images/racing-car/worldmodels.png"
 ---

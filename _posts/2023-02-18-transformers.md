@@ -7,8 +7,6 @@ categories: jekyll update
 comments: true
 back_to_top_button: true
 math: true
-positive_reward: true
-reward: 2
 tags: [machine learning, nlp]
 thumbnail: "/images/transformers/thumb.png"
 ---
