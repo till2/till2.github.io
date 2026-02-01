@@ -12,7 +12,7 @@ thumbnail: "/images/about/ghpb1.png"
 ---
 
 
-<div class="img-block" style="width: 700px;">
+<div class="img-block" style="width: 300px;">
     <img src="/images/about/ghpb1.png"/>
 </div>
 
