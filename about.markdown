@@ -8,12 +8,13 @@ permalink: /about/
 
 <!-- ### <em> Hi there!</em> -->
 
-<div class="img-block" style="width: 170px;">
-    <img src="/images/about/sunny.jpg"> <!-- sunny.jpg pb.jpeg -->
+<div class="img-block" style="width: 200px;">
+    <img src="/images/about/gradient_ascent.jpg"> <!-- sunny.jpg pb.jpeg -->
+    <figcaption>Manual gradient ascent <br>(aka hiking).</figcaption>
 </div>
 
 
-I'm Till, 21 and persuing a MS in Data Engineering. My passion projects are typically in the field of data analytics with machine learning, deep learning and [reinforcement learning][why-rl], however I also enjoy exploring adjacent topics like psychology, statistics or data engineering. If you'd like to learn more, you can find me on [LinkedIn][linkedin] and view my projects on [GitHub][github]. 
+I'm Till, 23 and finishing a MSc in Data Engineering. My passion projects are typically in the field of machine learning, deep learning and [reinforcement learning][why-rl]. This includes everything from deep neural network architectures, optimizers, training paradigms and from toy examples aimed at understanding a problem to larger scale projects. However I also enjoy exploring adjacent topics like psychology, statistics or data engineering. If you'd like to learn more, you can find me on [LinkedIn][linkedin] and view my projects on [GitHub][github]. 
 <!-- This blog is mainly for personal use, but feel to join me along the journey. -->
 
 <br>
